@@ -216,7 +216,7 @@ class Ui_MainWindow(object):
         self.dateLabel.setText(_translate("MainWindow", "Da&te"))
         self.dateEdit.setDisplayFormat(_translate("MainWindow", "dd-MM-yyyy"))
         self.newButton.setText(_translate("MainWindow", "&New"))
-        self.saveButton.setText(_translate("MainWindow", "&Save"))
+        self.saveButton.setText(_translate("MainWindow", "Sa&ve"))
         self.removeButton.setText(_translate("MainWindow", "&Remove"))
         self.menu_edit.setTitle(_translate("MainWindow", "Edit"))
         self.menuDownload.setTitle(_translate("MainWindow", "Download all entries"))
