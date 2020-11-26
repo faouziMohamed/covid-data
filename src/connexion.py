@@ -10,29 +10,32 @@ from PyQt5.QtCore import (QTranslator)
 class DbConnexion:
     def __init__(self, data_frame: pd.DataFrame, db_name: str):
         self.df = data_frame
-        self.db_name = db_name
-        self.config_database()
+        self.__db_name = db_name
+        self._continents = None
+        self._countries = None
+        self._cases = None
+        self.__config_database()
 
-    def config_database(self):
-        db_exists = os.path.exists(self.db_name)
+    def __config_database(self):
+        db_exists = os.path.exists(self.__db_name)
         db = QSqlDatabase.addDatabase("QSQLITE")
-        db.setDatabaseName(self.db_name)
+        db.setDatabaseName(self.__db_name)
 
         if not db.open():
-            self.show_warning()
+            self.__show_warning()
         if not db_exists:
-            self.create_new_db()
-        self.insert_data_for_first_time()
+            self.__create_new_db()
+        self.__insert_data_for_first_time()
 
     @staticmethod
-    def show_warning():
+    def __show_warning():
         tr = QTranslator.tr
         message = "Unable to establish a database connection.\n" \
                   "This example needs SQLite support.\n\n Click Cancel to exit."
         QMessageBox.critical(QWidget(), tr(QWidget(), "Cannot open database"),
                              tr(QWidget(), message))
 
-    def create_new_db(self):
+    def __create_new_db(self):
         QSqlQuery('''PRAGMA foreign_keys = ON;''')
         QSqlQuery('''CREATE TABLE continents(
                     idc INTEGER PRIMARY KEY,
@@ -54,28 +57,32 @@ class DbConnexion:
                     new_tests FLOAT NOT NULL,
                     new_cases FLOAT NOT NULL,
                     new_deaths FLOAT NOT NULL,
+                    total_tests FLOAT NOT NULL,
+                    total_cases FLOAT NOT NULL,
                     total_deaths FLOAT NOT NULL,
                     FOREIGN KEY (idl) 
                         REFERENCES countries(idl)
                         ON DELETE RESTRICT 
                         ON UPDATE CASCADE);''')
 
-    def insert_data_for_first_time(self):
+    def __insert_data_for_first_time(self):
         """
         Inserting data for the first time using the sqlalchemy API,
         then insert using the PyQt5 API
         """
-        db_name = self.db_name
-        continents = self.create_continents_table()
-        countries = self.create_countries_table(continent=continents)
-        cases = self.create_cases_table(countries=countries)
+        db_name = self.__db_name
+        self._continents = self.__create_continents_table()
+        self._countries = self.__create_countries_table(self._continents)
+        self._cases = self.__create_cases_table(countries=self._countries)
 
+        os.remove(db_name)
         engine = sqlalchemy.create_engine('sqlite:///' + db_name, echo=False)
-        continents.to_sql('continents', con=engine, if_exists='append')
-        countries.to_sql('countries', con=engine, if_exists='append')
+        self._continents.to_sql('continents', con=engine, if_exists='append')
+        self._countries.to_sql('countries', con=engine, if_exists='append')
+        cases = self._cases
         cases.to_sql('cases', con=engine, if_exists='append', chunksize=1000)
 
-    def create_table_for(self, col_name: str, id_name='id') -> pd.DataFrame:
+    def __create_table_for(self, col_name: str, id_name='id') -> pd.DataFrame:
         df = self.df
         data = df[col_name].unique()
         table = pd.DataFrame(data)
@@ -85,21 +92,21 @@ class DbConnexion:
         table.index.name = id_name
         return table
 
-    def create_continents_table(self) -> pd.DataFrame:
-        continent = self.create_table_for('continent', id_name='idc')
+    def __create_continents_table(self) -> pd.DataFrame:
+        continent = self.__create_table_for('continent', id_name='idc')
         return continent
 
     # DtFrame is pd.DataFrame
 
-    def get_countries_by_continent(self, cols: [str]) -> pd.DataFrame:
+    def __get_countries_by_continent(self, cols: [str]) -> pd.DataFrame:
         countries = self.df[cols]
         countries = countries.set_index(cols)
         unique_rows = list(countries.index.unique())
         return pd.DataFrame(unique_rows, columns=cols)
 
-    def create_countries_table(self, continent: pd.DataFrame) -> pd.DataFrame:
+    def __create_countries_table(self, continent: pd.DataFrame) -> pd.DataFrame:
         index_name, columns = 'idl', ['location', 'continent']
-        countries = self.get_countries_by_continent(columns)
+        countries = self.__get_countries_by_continent(columns)
 
         # creating index (the id of the relational table)
         index_id_location = sorted(countries.location.argsort())
@@ -111,11 +118,26 @@ class DbConnexion:
         countries = countries.replace(cont, continent.index)
         return countries
 
-    def create_cases_table(self, countries: pd.DataFrame) -> pd.DataFrame:
-        columns = ['location', 'date', 'new_tests', 'new_cases',
-                   'new_deaths', 'total_tests', 'total_deaths']
+    def __create_cases_table(self, countries: pd.DataFrame) -> pd.DataFrame:
+        columns = ['location', 'date', 'new_tests', 'new_cases', 'new_deaths',
+                   'total_tests', 'total_cases', 'total_deaths']
         cases = self.df[columns]
-        cases = cases.replace(list(countries.location), countries.idc)
+        cases = cases.replace(list(countries.location), countries.index)
         cases = cases.rename(columns={'location': 'idl', 'date': 'dates'})
+        cases = cases.sort_values(['dates', 'total_cases', 'total_deaths'],
+                                  ascending=False)
+        cases = cases.reset_index(drop=True)
         cases.index.name = 'id'
         return cases
+
+    @property
+    def continents(self):
+        return self._continents
+
+    @property
+    def countries(self):
+        return self._countries
+
+    @property
+    def cases(self):
+        return self._cases
