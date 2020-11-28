@@ -51,6 +51,7 @@ class DbConnexion:
         if not db_exists:
             self.__create_new_db()
         self.__insert_data_for_first_time()
+        self.create_data_view()
 
     def __create_new_db(self):
         self._engine = create_database(self._db_name)
@@ -70,15 +71,9 @@ class DbConnexion:
                 WHERE cases.idl = countries.idl AND 
                       countries.idc = continents.idc
                 ORDER BY dates, total_cases, total_deaths DESC;
-        """)
-
-        # self._view = pd.DataFrame(data=record,
-        #                           columns=['dates', 'continent', 'location',
-        #                                    'new_tests', 'new_cases',
-        #                                    'new_deaths', 'total_tests',
-        #                                    'total_cases',
-        #                                    'total_deaths'])
-        # self._view.loc[len(self._view.index)] = record
+                """)
+        self._view = pd.read_sql_query('SELECT * FROM model_view', con=self._engine)
+        return self.view
 
     def __insert_data_for_first_time(self):
         """
@@ -95,8 +90,6 @@ class DbConnexion:
         self._continents.to_sql('continents', con=engine, if_exists='append')
         self._countries.to_sql('countries', con=engine, if_exists='append')
         self._cases.to_sql('cases', con=engine, if_exists='append')
-
-        self.create_data_view()
 
     def __create_table_for(self, col_name: str, id_name='id') -> pd.DataFrame:
         df = self._df

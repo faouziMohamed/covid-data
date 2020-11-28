@@ -23,15 +23,15 @@ class ModelCovidData(QAbstractTableModel):
 
     def data(self, index: QModelIndex, role: int = ...) -> [QVariant, str]:
         if (role == Qt.DisplayRole) and index.isValid():
-            data = self._db.cases.iloc[index.row(), index.column()]
+            data = self._db.view.iloc[index.row(), index.column()]
             return str(data)
         return QVariant()
 
     def columnCount(self, parent: QModelIndex = ...) -> int:
-        return self._db.cases.shape[1]
+        return self._db.view.shape[1]
 
     def rowCount(self, parent: QModelIndex = ...) -> int:
-        return self._db.cases.shape[0]
+        return self._db.view.shape[0]
 
     @property
     def db(self):
