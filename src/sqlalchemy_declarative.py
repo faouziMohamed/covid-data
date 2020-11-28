@@ -1,6 +1,6 @@
 import sqlalchemy
 from sqlalchemy import (Column, VARCHAR, ForeignKey, Date, Float, Integer,
-                        create_engine)
+                        create_engine, Text)
 from sqlalchemy.engine import base
 from sqlalchemy.ext.declarative import (declarative_base)
 
@@ -28,7 +28,7 @@ class Cases(Base):
     idl = Column('idl', ForeignKey('countries.idl', ondelete='RESTRICT',
                                    onupdate='CASCADE'),
                  nullable=False)
-    dates = Column('dates', Date, nullable=False)
+    dates = Column('dates', Text, nullable=False)
     new_tests = Column('new_tests', Float, nullable=False)
     new_cases = Column('new_cases', Float, nullable=False)
     new_deaths = Column('new_deaths', Float, nullable=False)

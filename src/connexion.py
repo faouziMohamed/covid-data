@@ -1,8 +1,9 @@
 import os
+from time import localtime
 
 import pandas as pd
 import sqlalchemy
-from sqlalchemy import (create_engine, MetaData, Table)
+from sqlalchemy import (create_engine, MetaData, Table, select)
 
 from src.constant import (DB_NAME, CSV_FILE, URL_CSV_FILE, SQL_FILE, JSON_FILE,
                           FILE_NAME, DB_PATH)
@@ -33,8 +34,10 @@ class DbConnexion:
     def __prepare_data(self, save_data: bool = True):
         if save_data:
             self.save_data_to_local()
-        self._df = self._df[self.cols].fillna(0)
-        self._df = self._df[self._df.continent != 0]
+        self._df = self._df.fillna(0)
+        row_filter = (self._df.location == 'World') | (self._df.continent != 0)
+        self._df = self._df.loc[row_filter]
+        self._df.loc[self._df.continent == 0, ['continent']] = 'Earth'
         return self.dataframe
 
     def save_data_to_local(self):
@@ -51,18 +54,15 @@ class DbConnexion:
         if not db_exists:
             self.__create_new_db()
         self.__insert_data_for_first_time()
-        self.create_data_view()
+        self.__create_data_view()
 
     def __create_new_db(self):
         self._engine = create_database(self._db_name)
-        # metadata = MetaData()
-        # self._metadata = metadata
-        # continents = self.get_table('continents', metadata)
 
     def get_table(self, t_name: str, meta) -> Table:
         return Table(t_name, meta, autoload=True, autoload_with=self._engine)
 
-    def create_data_view(self):
+    def __create_data_view(self):
         with self._engine.connect() as con:
             con.execute("""CREATE VIEW model_view AS
                 SELECT dates, continent, location, new_tests, new_cases,
@@ -70,9 +70,21 @@ class DbConnexion:
                 FROM continents, countries, cases
                 WHERE cases.idl = countries.idl AND 
                       countries.idc = continents.idc
-                ORDER BY dates, total_cases, total_deaths DESC;
+                ORDER BY 
+                    dates DESC , 
+                    total_cases DESC, 
+                    total_deaths DESC;
                 """)
-        self._view = pd.read_sql_query('SELECT * FROM model_view', con=self._engine)
+            metadata = MetaData()
+            model_view = self.get_table('model_view', metadata)
+            date = localtime()
+            today = f'{date.tm_year}-{date.tm_mon}-{date.tm_mday}'
+            print(today)
+            query = select([model_view])
+            query = query.where(model_view.columns.dates == today)
+            self._view = pd.read_sql_query(query, con=self._engine)
+            # self._view = pd.read_sql_query("select * from model_view",
+            #                              con=self._engine)
         return self.view
 
     def __insert_data_for_first_time(self):
@@ -99,7 +111,7 @@ class DbConnexion:
         table = table.sort_values(col_name)
         table.index = sorted(table[col_name].argsort())
         table.index.name = id_name
-        return table.copy()
+        return table
 
     def __create_continents_table(self) -> pd.DataFrame:
         continent = self.__create_table_for('continent', id_name='idc')
@@ -162,3 +174,4 @@ class DbConnexion:
     @property
     def df(self):
         return self.dataframe
+
