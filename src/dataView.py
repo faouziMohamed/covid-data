@@ -12,3 +12,4 @@ class CovidView(QMainWindow, Ui_MainWindow):
         countries = self.model.db.countries
         self.comboBox.addItems(list(countries.location))
         self.treeView.setModel(self.model)
+        self.treeView.setSortingEnabled(True)
