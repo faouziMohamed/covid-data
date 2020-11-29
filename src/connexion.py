@@ -64,7 +64,8 @@ class DbConnexion:
 
     def __create_data_view(self):
         with self._engine.connect() as con:
-            con.execute("""CREATE VIEW model_view AS
+            con.execute("""
+                CREATE VIEW model_view AS
                 SELECT dates, continent, location, new_tests, new_cases,
                        new_deaths,total_tests, total_cases, total_deaths
                 FROM continents, countries, cases

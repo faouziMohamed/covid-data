@@ -1,3 +1,5 @@
+from PyQt5.QtCore import pyqtSlot
+from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import (QMainWindow)
 
 from src.mainwindow import Ui_MainWindow
@@ -13,3 +15,8 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.comboBox.addItems(list(countries.location))
         self.treeView.setModel(self.model)
         self.treeView.setSortingEnabled(True)
+        self.resize(930, 218)
+
+    def closeEvent(self, a0: QCloseEvent) -> None:
+        a0.accept()
+

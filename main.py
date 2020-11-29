@@ -5,12 +5,8 @@ from PyQt5.QtWidgets import QApplication
 from src.dataView import CovidView
 
 
-def main():
+if __name__ == '__main__':
     app = QApplication(sys.argv)
     view = CovidView()
     view.show()
     sys.exit(app.exec_())
-
-
-if __name__ == '__main__':
-    main()

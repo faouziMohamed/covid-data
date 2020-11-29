@@ -1,5 +1,4 @@
-import sqlalchemy
-from sqlalchemy import (Column, VARCHAR, ForeignKey, Date, Float, Integer,
+from sqlalchemy import (Column, VARCHAR, ForeignKey, Float, Integer,
                         create_engine, Text)
 from sqlalchemy.engine import base
 from sqlalchemy.ext.declarative import (declarative_base)
