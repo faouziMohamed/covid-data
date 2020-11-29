@@ -1,4 +1,5 @@
 import os
+from operator import or_
 from time import localtime
 
 import pandas as pd
@@ -80,9 +81,13 @@ class DbConnexion:
             model_view = self.get_table('model_view', metadata)
             date = localtime()
             today = f'{date.tm_year}-{date.tm_mon}-{date.tm_mday}'
-            print(today)
+            yesterday = f'{date.tm_year}-{date.tm_mon}-{(date.tm_mday-1)%30}'
             query = select([model_view])
-            query = query.where(model_view.columns.dates == today)
+
+            print(f'Today : {today}')
+
+            query = query.where(or_(model_view.columns.dates == today,
+                                    model_view.columns.dates == yesterday))
             self._view = pd.read_sql_query(query, con=self._engine)
             # self._view = pd.read_sql_query("select * from model_view",
             #                              con=self._engine)
