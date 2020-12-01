@@ -69,7 +69,7 @@ case $# in
     0){
         echo -n "You should give me at least a name"
         echo " of ${YELLOW}*.ui${RESET} file Not empty"
-        exit 0
+        exit 1
       };;
 
     1) makeUi_becomePy "$1";;
