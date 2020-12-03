@@ -1,0 +1,3 @@
+QComboBox{
+    combobox-popup:0;
+}
