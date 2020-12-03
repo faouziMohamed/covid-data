@@ -6,6 +6,7 @@ import pandas as pd
 import sqlalchemy
 from sqlalchemy import (create_engine, MetaData, Table, select)
 
+from src import utils
 from src.constant import (DB_NAME, CSV_FILE, URL_CSV_FILE, SQL_FILE, JSON_FILE,
                           FILE_NAME, DB_PATH)
 from src.sqlalchemy_declarative import (create_database)
@@ -79,15 +80,12 @@ class DbConnexion:
                 """)
             metadata = MetaData()
             model_view = self.get_table('model_view', metadata)
-            date = localtime()
-            today = f'{date.tm_year}-{date.tm_mon}-{date.tm_mday}'
-            yesterday = f'{date.tm_year}-{date.tm_mon}-{(date.tm_mday-1)%30}'
+            today = utils.today()
+            yesterday = utils.yesterday()
             query = select([model_view])
 
-            print(f'Today : {today}')
-
-            query = query.where(or_(model_view.columns.dates == today,
-                                    model_view.columns.dates == yesterday))
+            query = query.where(or_(model_view.columns.dates == '2020-09-30',
+                                    model_view.columns.dates == utils.day_after('2020-09-30')))
             self._view = pd.read_sql_query(query, con=self._engine)
             # self._view = pd.read_sql_query("select * from model_view",
             #                              con=self._engine)
@@ -157,6 +155,16 @@ class DbConnexion:
         cases.index.name = 'id'
         return cases
 
+    def get_country_id(self, country: str) -> int:
+        countries = self._countries
+        query = (countries.location == country)
+        return int(countries.loc[query].index[0])
+
+    def get_continent_id(self, continent: str) -> int:
+        continents_df = self._continents
+        query = (continents_df.continent == continent)
+        return int(continents_df.loc[query].index[0])
+
     @property
     def continents(self):
         return self._continents
@@ -181,3 +189,12 @@ class DbConnexion:
     def df(self):
         return self.dataframe
 
+    @property
+    def view_row_with_zeros(self):
+        """
+        This property return a pandas series that contains only zeros
+        and index are the columns of the view table
+        :return: Pandas series containing only zeros values
+        """
+        keys = tuple(self.view.columns)
+        return pd.Series(0, index=keys[3:])
