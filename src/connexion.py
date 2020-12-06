@@ -61,7 +61,7 @@ class DbConnexion:
     def __create_new_db(self):
         self._engine = create_database(self._db_name)
 
-    def get_table(self, t_name: str, meta) -> Table:
+    def get_table(self, t_name: str, meta: MetaData) -> Table:
         return Table(t_name, meta, autoload=True, autoload_with=self._engine)
 
     def __create_data_view(self):
@@ -84,8 +84,9 @@ class DbConnexion:
             yesterday = utils.yesterday()
             query = select([model_view])
 
-            query = query.where(or_(model_view.columns.dates == today,
-                                    model_view.columns.dates == yesterday))
+            query = query.where(or_(model_view.columns.dates == '2020-10-01',
+                                    model_view.columns.dates == utils.day_after(
+                                        '2020-08-02')))
             self._view = pd.read_sql_query(query, con=self._engine)
             # self._view = pd.read_sql_query("select * from model_view",
             #                              con=self._engine)
@@ -93,8 +94,7 @@ class DbConnexion:
 
     def __insert_data_for_first_time(self):
         """
-        Inserting data for the first time using the sqlalchemy API,
-        then insert using the PyQt5 API
+        Inserting data for the first time using the sqlalchemy API
         """
         self._continents = self.__create_continents_table()
         self._countries = self.__create_countries_table(self._continents)
@@ -122,7 +122,6 @@ class DbConnexion:
         return continent
 
     # DtFrame is pd.DataFrame
-
     def __get_countries_by_continent(self, cols: [str]) -> pd.DataFrame:
         countries = self._df.loc[:, cols]
         countries = countries.set_index(cols)
@@ -164,6 +163,13 @@ class DbConnexion:
         continents_df = self._continents
         query = (continents_df.continent == continent)
         return int(continents_df.loc[query].index[0])
+
+    def filter_data_by_date(self, a_date: str) -> pd.DataFrame:
+        metadata = MetaData()
+        model_view = self.get_table('model_view', metadata)
+        query = select([model_view]).where(model_view.columns.dates == a_date)
+        self._view = pd.read_sql_query(query, con=self._engine)
+        return self._view
 
     @property
     def continents(self):
