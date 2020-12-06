@@ -1,6 +1,5 @@
 import os
 from operator import or_
-from time import localtime
 
 import pandas as pd
 import sqlalchemy
@@ -122,13 +121,8 @@ class DbConnexion:
         return continent
 
     # DtFrame is pd.DataFrame
-<<<<<<< HEAD
-    def __get_countries_by_continent(self, cols: [str]) -> pd.DataFrame:
-=======
-
     def __get_countries_by_continent(self) -> pd.DataFrame:
         cols = ['location', 'continent']
->>>>>>> master
         countries = self._df.loc[:, cols]
         countries = countries.set_index(cols)
         unique_rows = list(countries.index.unique())
