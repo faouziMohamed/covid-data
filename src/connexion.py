@@ -5,10 +5,10 @@ import pandas as pd
 import sqlalchemy
 from sqlalchemy import (create_engine, MetaData, Table, select)
 
-from src import utils
-from src.constant import (DB_NAME, CSV_FILE, URL_CSV_FILE, SQL_FILE, JSON_FILE,
-                          FILE_NAME, DB_PATH)
-from src.sqlalchemy_declarative import (create_database)
+from src.ressource import utils
+from src.ressource.constant import (DB_NAME, CSV_FILE, URL_CSV_FILE, SQL_FILE, JSON_FILE,
+                                    FILE_NAME, DB_PATH)
+from src.ressource.sqlalchemy_declarative import (create_database)
 
 
 class DbConnexion:
