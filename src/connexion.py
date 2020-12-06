@@ -122,15 +122,21 @@ class DbConnexion:
         return continent
 
     # DtFrame is pd.DataFrame
+<<<<<<< HEAD
     def __get_countries_by_continent(self, cols: [str]) -> pd.DataFrame:
+=======
+
+    def __get_countries_by_continent(self) -> pd.DataFrame:
+        cols = ['location', 'continent']
+>>>>>>> master
         countries = self._df.loc[:, cols]
         countries = countries.set_index(cols)
         unique_rows = list(countries.index.unique())
         return pd.DataFrame(unique_rows, columns=cols)
 
     def __create_countries_table(self, continent: pd.DataFrame) -> pd.DataFrame:
-        index_name, columns = 'idl', ['location', 'continent']
-        countries = self.__get_countries_by_continent(columns)
+        index_name = 'idl'
+        countries = self.__get_countries_by_continent()
 
         # creating index (the id of the relational table)
         index_id_location = sorted(countries.location.argsort())
