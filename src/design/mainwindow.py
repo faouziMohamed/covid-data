@@ -25,20 +25,68 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         MainWindow.setFont(font)
         MainWindow.setMouseTracking(True)
-        MainWindow.setStyleSheet("QWidget#centralwidget{\n"
-"    background:qlineargradient(x1:0, y1:0.1, x2:0.5, y2:1,\n"
-"                stop: 0 #010716, \n"
-"                stop: 0.5 #000b14,\n"
-"                stop: 0.9 #194850    )\n"
+        MainWindow.setStyleSheet("QTreeView {\n"
+"    show-decoration-selected: 1;\n"
 "}\n"
 "\n"
-"QLabel{\n"
-"    color: #eee;\n"
+"QTreeView::item {\n"
+"    border: 1px solid #d9d9d9;\n"
+"    border-top-color: transparent;\n"
+"    border-bottom-color: transparent;\n"
+"}\n"
+"\n"
+"QTreeView::item:hover {\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e7effd, stop: 1 #cbdaf1);\n"
+"    border: 1px solid #bfcde4;\n"
+"}\n"
+"\n"
+"QTreeView::item:selected {\n"
+"    border: 1px solid #567dbc;\n"
+"}\n"
+"\n"
+"QTreeView::item:selected:active{\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6ea1f1, stop: 1 #567dbc);\n"
+"}\n"
+"\n"
+"QTreeView::item:selected:!active {\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6b9be8, stop: 1 #577fbf);\n"
+"}\n"
+"\n"
+"QPushButton \n"
+"{\n"
+"    border-radius: 17px;\n"
+"    padding: 6px 8px;\n"
+"    border: 1px outset rgb(160, 171, 154);\n"
+"    background-color: qlineargradient(x1: 0, y1: 0.1, x2: 1, y2: 0.5,\n"
+"                                      stop: 0 #f6f7fa, \n"
+"                                    stop: 1 rgb(0, 87, 127));\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    border-color:rgb(141, 141, 70);\n"
+"    background: qlineargradient(x1: 0, y1: 0.1, x2: 1, y2: 0.5,\n"
+"                                      stop: 0 #f6f7fa, \n"
+"                                    stop: 0.8 rgb(42, 135, 71));\n"
+"}\n"
+"\n"
+"QPushButton:pressed\n"
+"{\n"
+"    background-color: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
+"                                    stop: 0 rgb(0, 161, 51),\n"
+"                                      stop: 1 #f6f7fa                                    \n"
+"                                );\n"
+"}\n"
+"\n"
+"QWidget#centralwidget{\n"
+"    background:qlineargradient(x1:0, y1:0.1, x2:0.5, y2:1,\n"
+"                stop: 0 rgb(0, 1, 59), \n"
+"                stop: 0.5 rgba(2, 27, 37, 0.931),\n"
+"                stop: 1 rgb(8, 47, 25));\n"
 "}\n"
 "\n"
 "QGroupBox{\n"
-"    border: 2px solid  rgb(6, 25, 78);\n"
-"    border-radius: 5px;\n"
+"    border: 2px solid  rgb(37, 90, 81);\n"
+"    border-radius: 9px;\n"
 "    margin-top: 10px;\n"
 "    margin-left: 5px;\n"
 "}\n"
@@ -51,18 +99,43 @@ class Ui_MainWindow(object):
 "                                      stop: 0 #00521b, stop: 0.5 #FFFFFF);\n"
 "}\n"
 "\n"
+"\n"
 "QGroupBox > QLabel{\n"
 "    color: #96cccc;\n"
+"}\n"
+"\n"
+"QComboBox{\n"
+"    combobox-popup: 0;\n"
+"    color:rgb(0, 2, 33);\n"
+"    background-color: rgb(166, 167, 176);\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"    border: 1px solid rgb(147, 149, 148);\n"
+"    border-radius:0px 5px;\n"
+"    color:rgb(0, 17, 17);\n"
+"    selection-color: rgb(0, 0, 80);\n"
+"    selection-background-color:rgb(0, 175, 26);\n"
+"    background-color: rgba(151, 181, 177);\n"
+"}\n"
+"\n"
+"QLineEdit, QSpinBox{\n"
+"    selection-color: rgb(0, 0, 80);\n"
+"    selection-background-color:rgb(0, 175, 26);\n"
+"    background-color: rgb(166, 167, 176);\n"
 "}")
         MainWindow.setDocumentMode(True)
-        MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
+        MainWindow.setTabShape(QtWidgets.QTabWidget.Triangular)
         MainWindow.setDockNestingEnabled(False)
+        MainWindow.setDockOptions(QtWidgets.QMainWindow.AllowTabbedDocks|QtWidgets.QMainWindow.AnimatedDocks)
+        MainWindow.setUnifiedTitleAndToolBarOnMac(True)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setContentsMargins(0, -1, -1, -1)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setContentsMargins(6, -1, -1, -1)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.comboBox = QtWidgets.QComboBox(self.centralwidget)
         self.comboBox.setMaximumSize(QtCore.QSize(16777215, 24))
@@ -146,6 +219,11 @@ class Ui_MainWindow(object):
         self.treeView.setFrameShape(QtWidgets.QFrame.WinPanel)
         self.treeView.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.treeView.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.treeView.setAlternatingRowColors(False)
+        self.treeView.setUniformRowHeights(False)
+        self.treeView.setSortingEnabled(True)
+        self.treeView.setAnimated(True)
+        self.treeView.setAllColumnsShowFocus(True)
         self.treeView.setObjectName("treeView")
         self.treeView.header().setCascadingSectionResizes(False)
         self.layoutWidget = QtWidgets.QWidget(self.splitter)
@@ -169,7 +247,7 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         self.filter1Box.setFont(font)
         self.filter1Box.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
-        self.filter1Box.setFlat(True)
+        self.filter1Box.setFlat(False)
         self.filter1Box.setCheckable(False)
         self.filter1Box.setObjectName("filter1Box")
         self.formLayout_4 = QtWidgets.QFormLayout(self.filter1Box)
@@ -186,6 +264,38 @@ class Ui_MainWindow(object):
         self.date_box_2.setFont(font)
         self.date_box_2.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToContents)
         self.date_box_2.setObjectName("date_box_2")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
+        self.date_box_2.addItem("")
         self.date_box_2.addItem("")
         self.date_box_2.addItem("")
         self.date_box_2.addItem("")
@@ -603,11 +713,43 @@ class Ui_MainWindow(object):
         self.country_box.setToolTip(_translate("MainWindow", "Select a country to show details"))
         self.country_box.setCurrentText(_translate("MainWindow", "Select a country"))
         self.country_box.setItemText(0, _translate("MainWindow", "Select a country"))
-        self.filter1Box.setTitle(_translate("MainWindow", "  Date"))
+        self.filter1Box.setTitle(_translate("MainWindow", "Date"))
         self.date_box_2.setItemText(0, _translate("MainWindow", "Select a date"))
         self.date_box_2.setItemText(1, _translate("MainWindow", "Today"))
         self.date_box_2.setItemText(2, _translate("MainWindow", "Yesterday"))
         self.date_box_2.setItemText(3, _translate("MainWindow", "An other day"))
+        self.date_box_2.setItemText(4, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(5, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(6, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(7, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(8, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(9, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(10, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(11, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(12, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(13, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(14, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(15, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(16, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(17, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(18, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(19, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(20, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(21, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(22, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(23, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(24, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(25, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(26, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(27, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(28, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(29, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(30, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(31, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(32, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(33, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(34, _translate("MainWindow", "New Item"))
+        self.date_box_2.setItemText(35, _translate("MainWindow", "New Item"))
         self.dateEdit.setDisplayFormat(_translate("MainWindow", "dd-MM-yyyy"))
         self.dateEdit_text.setDisplayFormat(_translate("MainWindow", "ddd. dd MMM. yyyy"))
         self.queryBox.setTitle(_translate("MainWindow", "Local"))

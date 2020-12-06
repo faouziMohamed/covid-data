@@ -42,15 +42,63 @@
    <string>Covid19 data - Fz</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#centralwidget{
+   <string notr="true">QTreeView {
+    show-decoration-selected: 1;
+}
+
+QTreeView::item {
+    border: 1px solid #d9d9d9;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}
+
+QTreeView::item:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #e7effd, stop: 1 #cbdaf1);
+    border: 1px solid #bfcde4;
+}
+
+QTreeView::item:selected {
+    border: 1px solid #567dbc;
+}
+
+QTreeView::item:selected:active{
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6ea1f1, stop: 1 #567dbc);
+}
+
+QTreeView::item:selected:!active {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6b9be8, stop: 1 #577fbf);
+}
+
+QPushButton 
+{
+	border-radius: 17px;
+	padding: 6px 8px;
+	border: 1px outset rgb(160, 171, 154);
+    background-color: qlineargradient(x1: 0, y1: 0.1, x2: 1, y2: 0.5,
+                                      stop: 0 #f6f7fa, 
+									stop: 1 rgb(0, 87, 127));
+}
+
+QPushButton:hover{
+	border-color:rgb(141, 141, 70);
+	background: qlineargradient(x1: 0, y1: 0.1, x2: 1, y2: 0.5,
+                                      stop: 0 #f6f7fa, 
+									stop: 0.8 rgb(42, 135, 71));
+}
+
+QPushButton:pressed
+{
+    background-color: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,
+									stop: 0 rgb(0, 161, 51),
+                                      stop: 1 #f6f7fa									
+								);
+}
+
+QWidget#centralwidget{
 	background:qlineargradient(x1:0, y1:0.1, x2:0.5, y2:1,
                 stop: 0 rgb(0, 1, 59), 
 			    stop: 0.5 rgba(2, 27, 37, 0.931),
-                stop: 1 rgb(8, 47, 25))
-}
-
-QLabel{
-	color: #eee;
+                stop: 1 rgb(8, 47, 25));
 }
 
 QGroupBox{
@@ -68,15 +116,30 @@ QGroupBox::title{
                                       stop: 0 #00521b, stop: 0.5 #FFFFFF);
 }
 
+
 QGroupBox &gt; QLabel{
 	color: #96cccc;
 }
 
+QComboBox{
+	combobox-popup: 0;
+	color:rgb(0, 2, 33);
+	background-color: rgb(166, 167, 176);
+}
+
 QComboBox QAbstractItemView {
     border: 1px solid rgb(147, 149, 148);
-	background-color: rgb(160, 177, 175);
-	selection-color: rgb(17, 25, 27);
-	selection-background-color: rgb(0, 120, 94);
+	border-radius:0px 5px;
+	color:rgb(0, 17, 17);
+	selection-color: rgb(0, 0, 80);
+	selection-background-color:rgb(0, 175, 26);
+	background-color: rgba(151, 181, 177);
+}
+
+QLineEdit, QSpinBox{
+	selection-color: rgb(0, 0, 80);
+	selection-background-color:rgb(0, 175, 26);
+	background-color: rgb(166, 167, 176);
 }</string>
   </property>
   <property name="documentMode">
@@ -324,6 +387,9 @@ QComboBox QAbstractItemView {
        <property name="sizeAdjustPolicy">
         <enum>QAbstractScrollArea::AdjustToContents</enum>
        </property>
+       <property name="alternatingRowColors">
+        <bool>false</bool>
+       </property>
        <property name="uniformRowHeights">
         <bool>false</bool>
        </property>
@@ -422,6 +488,166 @@ QComboBox QAbstractItemView {
              <item>
               <property name="text">
                <string>An other day</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>New Item</string>
               </property>
              </item>
             </widget>
