@@ -2,6 +2,6 @@
 <RCC version="1.0">
     <qresource>
         <file alias="covid19.sqlite">db/covid19-data.sqlite</file>
-        <file alias="style.qss">style/style.qss</file>
+        <file alias="style.css">style/style.css</file>
     </qresource>
 </RCC>
