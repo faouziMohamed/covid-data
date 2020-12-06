@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'src/mainwindow.ui'
+# Form implementation generated from reading ui file 'src/design/mainwindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.12.3
 #
@@ -25,7 +25,35 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         MainWindow.setFont(font)
         MainWindow.setMouseTracking(True)
-        MainWindow.setStyleSheet("")
+        MainWindow.setStyleSheet("QWidget#centralwidget{\n"
+"    background:qlineargradient(x1:0, y1:0.1, x2:0.5, y2:1,\n"
+"                stop: 0 #010716, \n"
+"                stop: 0.5 #000b14,\n"
+"                stop: 0.9 #194850    )\n"
+"}\n"
+"\n"
+"QLabel{\n"
+"    color: #eee;\n"
+"}\n"
+"\n"
+"QGroupBox{\n"
+"    border: 2px solid  rgb(6, 25, 78);\n"
+"    border-radius: 5px;\n"
+"    margin-top: 10px;\n"
+"    margin-left: 5px;\n"
+"}\n"
+"\n"
+"QGroupBox::title{\n"
+"    subcontrol-origin:margin;\n"
+"    subcontrol-position: top left;\n"
+"    padding:0 5px;\n"
+"    color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                      stop: 0 #00521b, stop: 0.5 #FFFFFF);\n"
+"}\n"
+"\n"
+"QGroupBox > QLabel{\n"
+"    color: #96cccc;\n"
+"}")
         MainWindow.setDocumentMode(True)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         MainWindow.setDockNestingEnabled(False)
@@ -504,7 +532,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.btnHLayout)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 982, 22))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 982, 20))
         self.menubar.setObjectName("menubar")
         self.menu_edit = QtWidgets.QMenu(self.menubar)
         self.menu_edit.setObjectName("menu_edit")

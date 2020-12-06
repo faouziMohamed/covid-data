@@ -42,16 +42,57 @@
    <string>Covid19 data - Fz</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">QWidget#centralwidget{
+	background:qlineargradient(x1:0, y1:0.1, x2:0.5, y2:1,
+                stop: 0 rgb(0, 1, 59), 
+			    stop: 0.5 rgba(2, 27, 37, 0.931),
+                stop: 1 rgb(8, 47, 25))
+}
+
+QLabel{
+	color: #eee;
+}
+
+QGroupBox{
+	border: 2px solid  rgb(37, 90, 81);
+    border-radius: 9px;
+    margin-top: 10px;
+	margin-left: 5px;
+}
+
+QGroupBox::title{
+	subcontrol-origin:margin;
+	subcontrol-position: top left;
+	padding:0 5px;
+	color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #00521b, stop: 0.5 #FFFFFF);
+}
+
+QGroupBox &gt; QLabel{
+	color: #96cccc;
+}
+
+QComboBox QAbstractItemView {
+    border: 1px solid rgb(147, 149, 148);
+	background-color: rgb(160, 177, 175);
+	selection-color: rgb(17, 25, 27);
+	selection-background-color: rgb(0, 120, 94);
+}</string>
   </property>
   <property name="documentMode">
    <bool>true</bool>
   </property>
   <property name="tabShape">
-   <enum>QTabWidget::Rounded</enum>
+   <enum>QTabWidget::Triangular</enum>
   </property>
   <property name="dockNestingEnabled">
    <bool>false</bool>
+  </property>
+  <property name="dockOptions">
+   <set>QMainWindow::AllowTabbedDocks|QMainWindow::AnimatedDocks</set>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -60,6 +101,9 @@
     </property>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="leftMargin">
+       <number>6</number>
+      </property>
       <item>
        <widget class="QComboBox" name="comboBox">
         <property name="maximumSize">
@@ -280,6 +324,18 @@
        <property name="sizeAdjustPolicy">
         <enum>QAbstractScrollArea::AdjustToContents</enum>
        </property>
+       <property name="uniformRowHeights">
+        <bool>false</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+       <property name="animated">
+        <bool>true</bool>
+       </property>
+       <property name="allColumnsShowFocus">
+        <bool>true</bool>
+       </property>
        <attribute name="headerCascadingSectionResizes">
         <bool>false</bool>
        </attribute>
@@ -310,13 +366,13 @@
            </font>
           </property>
           <property name="title">
-           <string>  Date</string>
+           <string>Date</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
           </property>
           <property name="flat">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <property name="checkable">
            <bool>false</bool>
@@ -1153,7 +1209,7 @@
      <x>0</x>
      <y>0</y>
      <width>982</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_edit">

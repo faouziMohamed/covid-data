@@ -1,3 +1,29 @@
+QWidget#centralwidget{
+	background:qlineargradient(x1:0, y1:0.1, x2:0.5, y2:1,
+                stop: 0 rgb(0, 1, 59),
+			    stop: 0.5 rgba(2, 27, 37, 0.931),
+                stop: 1 rgb(8, 47, 25));
+}
+
+QGroupBox{
+	border: 2px solid  rgb(37, 90, 81);
+    border-radius: 9px;
+    margin-top: 10px;
+	margin-left: 5px;
+}
+
+QGroupBox::title{
+	subcontrol-origin:margin;
+	subcontrol-position: top left;
+	padding:0 5px;
+	color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                      stop: 0 #00521b, stop: 0.5 #FFFFFF);
+}
+
+QGroupBox > QLabel{
+	color: #96cccc;
+}
+
 QComboBox{
-    combobox-popup:0;
+    combobox-popup: 0;
 }
