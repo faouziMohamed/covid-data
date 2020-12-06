@@ -10,8 +10,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>984</width>
-    <height>588</height>
+    <width>982</width>
+    <height>589</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -79,17 +79,152 @@
         </property>
         <item>
          <property name="text">
-          <string>By date</string>
+          <string>Filter by date</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>By continent</string>
+          <string>Filter by continent</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>By country</string>
+          <string>Filter by country</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="date_box">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <italic>true</italic>
+          <bold>false</bold>
+          <underline>false</underline>
+         </font>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QComboBox::AdjustToContents</enum>
+        </property>
+        <item>
+         <property name="text">
+          <string>Select a date</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Today</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Yesterday</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>An other day</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="continent_box">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <italic>false</italic>
+          <underline>false</underline>
+         </font>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QComboBox::AdjustToContents</enum>
+        </property>
+        <item>
+         <property name="text">
+          <string>Select a continent</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="country_box">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+          <underline>false</underline>
+         </font>
+        </property>
+        <property name="toolTip">
+         <string>Select a country to show details</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="currentText">
+         <string>Select a country</string>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <property name="maxCount">
+         <number>99999</number>
+        </property>
+        <property name="insertPolicy">
+         <enum>QComboBox::NoInsert</enum>
+        </property>
+        <property name="sizeAdjustPolicy">
+         <enum>QComboBox::AdjustToContents</enum>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <item>
+         <property name="text">
+          <string>Select a country</string>
          </property>
         </item>
        </widget>
@@ -187,12 +322,54 @@
            <bool>false</bool>
           </property>
           <layout class="QFormLayout" name="formLayout_4">
-           <property name="fieldGrowthPolicy">
-            <enum>QFormLayout::ExpandingFieldsGrow</enum>
-           </property>
-           <property name="rowWrapPolicy">
-            <enum>QFormLayout::DontWrapRows</enum>
-           </property>
+           <item row="0" column="0" colspan="2">
+            <widget class="QComboBox" name="date_box_2">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>30</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <weight>50</weight>
+               <italic>true</italic>
+               <bold>false</bold>
+               <underline>false</underline>
+              </font>
+             </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QComboBox::AdjustToContents</enum>
+             </property>
+             <item>
+              <property name="text">
+               <string>Select a date</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Today</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Yesterday</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>An other day</string>
+              </property>
+             </item>
+            </widget>
+           </item>
            <item row="1" column="0" colspan="2">
             <widget class="QDateEdit" name="dateEdit">
              <property name="enabled">
@@ -200,7 +377,7 @@
              </property>
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>170</width>
                <height>30</height>
               </size>
              </property>
@@ -300,54 +477,6 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="0" colspan="2">
-            <widget class="QComboBox" name="date_box">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>true</italic>
-               <bold>false</bold>
-               <underline>false</underline>
-              </font>
-             </property>
-             <property name="sizeAdjustPolicy">
-              <enum>QComboBox::AdjustToContents</enum>
-             </property>
-             <item>
-              <property name="text">
-               <string>Select a date</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Today</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Yesterday</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>An other day</string>
-              </property>
-             </item>
-            </widget>
-           </item>
            <item row="2" column="0" colspan="2">
             <widget class="QDateEdit" name="dateEdit_text">
              <property name="enabled">
@@ -355,7 +484,7 @@
              </property>
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>170</width>
                <height>30</height>
               </size>
              </property>
@@ -424,7 +553,7 @@
         <item>
          <widget class="QGroupBox" name="queryBox">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -469,7 +598,7 @@
               <string>Cou&amp;ntry</string>
              </property>
              <property name="buddy">
-              <cstring>country_box</cstring>
+              <cstring>country_edit</cstring>
              </property>
             </widget>
            </item>
@@ -479,94 +608,36 @@
               <string>Cont&amp;inent</string>
              </property>
              <property name="buddy">
-              <cstring>continent_box</cstring>
+              <cstring>continent_edit</cstring>
              </property>
             </widget>
            </item>
            <item row="1" column="0" colspan="2">
-            <widget class="QComboBox" name="country_box">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
+            <widget class="QLineEdit" name="country_edit">
              <property name="minimumSize">
               <size>
-               <width>0</width>
+               <width>170</width>
                <height>30</height>
               </size>
              </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-               <underline>false</underline>
-              </font>
-             </property>
-             <property name="toolTip">
-              <string>Select a country to show details</string>
-             </property>
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="currentText">
-              <string>Select a country</string>
-             </property>
-             <property name="currentIndex">
-              <number>0</number>
-             </property>
-             <property name="maxCount">
-              <number>99999</number>
-             </property>
-             <property name="insertPolicy">
-              <enum>QComboBox::NoInsert</enum>
-             </property>
-             <property name="sizeAdjustPolicy">
-              <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-             </property>
-             <property name="frame">
+             <property name="readOnly">
               <bool>true</bool>
              </property>
-             <item>
-              <property name="text">
-               <string>Select a country</string>
-              </property>
-             </item>
+             <property name="cursorMoveStyle">
+              <enum>Qt::VisualMoveStyle</enum>
+             </property>
             </widget>
            </item>
            <item row="3" column="0" colspan="2">
             <layout class="QVBoxLayout" name="verticalLayout_2">
              <item>
-              <widget class="QComboBox" name="continent_box">
+              <widget class="QLineEdit" name="continent_edit">
                <property name="minimumSize">
                 <size>
-                 <width>0</width>
+                 <width>170</width>
                  <height>30</height>
                 </size>
                </property>
-               <property name="font">
-                <font>
-                 <italic>false</italic>
-                 <underline>false</underline>
-                </font>
-               </property>
-               <property name="currentIndex">
-                <number>0</number>
-               </property>
-               <item>
-                <property name="text">
-                 <string>Select a continent</string>
-                </property>
-               </item>
               </widget>
              </item>
              <item>
@@ -670,7 +741,7 @@
              <property name="minimumSize">
               <size>
                <width>170</width>
-               <height>30</height>
+               <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -724,7 +795,7 @@
              <property name="minimumSize">
               <size>
                <width>170</width>
-               <height>30</height>
+               <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -775,7 +846,7 @@
              <property name="minimumSize">
               <size>
                <width>170</width>
-               <height>30</height>
+               <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -930,7 +1001,7 @@
              <property name="minimumSize">
               <size>
                <width>170</width>
-               <height>30</height>
+               <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -991,7 +1062,7 @@
              <property name="minimumSize">
               <size>
                <width>170</width>
-               <height>30</height>
+               <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
@@ -1081,7 +1152,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>984</width>
+     <width>982</width>
      <height>22</height>
     </rect>
    </property>
