@@ -1,16 +1,16 @@
 import pandas as pd
 from PyQt5.QtCore import QDate, QModelIndex, QItemSelectionModel
-from PyQt5.QtCore import (QItemSelection)  # pyqtSlot as Slot
+from PyQt5.QtCore import (QItemSelection)
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import (QMainWindow)
 
-from src import utils
-from src.mainwindow import Ui_MainWindow
+from src.ressource import utils
+from src.design.mainwindow import Ui_MainWindow
 from src.model import ModelCovidData
 
 
 class CovidView(QMainWindow, Ui_MainWindow):
-    LAST_ROW, FIRST_ROW = -1, 0,
+    LAST_ROW, FIRST_ROW = -1, 0
     FIRST_OPTION, COLUMNS_COUNT = 0, 0
     TODAY, YESTERDAY, OTHER_DAY = 1, 2, 3
 
@@ -124,7 +124,6 @@ class CovidView(QMainWindow, Ui_MainWindow):
         for field, value in zip(fields, values):
             field.setValue(int(value))
 
-
     def on_dateBox_currentIndexChanged(self, index: int) -> None:
         print(f'Box : Ok changed, new index : {index}, {type(index)}')
 
@@ -142,6 +141,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
     def on_date_edit_dateChanged(self, new_date: QDate):
         self.model.db.filter_data_by_date(new_date.toString('yyyy-MM-dd'))
         self.treeView.setModel(self.model)
+        self.treeView.reset()
         self.initialize_fields(is_first_load=False)
 
     # def on_date_edit_dateChanged(self, new_date: QDate):
