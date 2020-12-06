@@ -83,9 +83,8 @@ class DbConnexion:
             yesterday = utils.yesterday()
             query = select([model_view])
 
-            query = query.where(or_(model_view.columns.dates == '2020-10-01',
-                                    model_view.columns.dates == utils.day_after(
-                                        '2020-08-02')))
+            query = query.where(or_(model_view.columns.dates == today,
+                                    model_view.columns.dates == yesterday))
             self._view = pd.read_sql_query(query, con=self._engine)
             # self._view = pd.read_sql_query("select * from model_view",
             #                              con=self._engine)
