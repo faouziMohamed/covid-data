@@ -2,7 +2,7 @@ import pandas as pd
 from PyQt5.QtCore import QDate, QModelIndex, QItemSelectionModel
 from PyQt5.QtCore import (QItemSelection)
 from PyQt5.QtGui import QCloseEvent
-from PyQt5.QtWidgets import (QMainWindow)
+from PyQt5.QtWidgets import (QMainWindow, QAbstractItemView)
 
 from src.ressource import utils
 from src.design.mainwindow import Ui_MainWindow
@@ -40,11 +40,12 @@ class CovidView(QMainWindow, Ui_MainWindow):
         # handle the case where the view table is empty
         try:
             self.__display_details_about(CovidView.FIRST_ROW)
-            index = self.model.index(0, CovidView.COLUMNS_COUNT, QModelIndex())
+            index = self.model.index(0, CovidView.COLUMNS_COUNT-1, QModelIndex())
             selectionModel = self.treeView.selectionModel()
             selectionModel.select(index,
                                   QItemSelectionModel.ClearAndSelect |
                                   QItemSelectionModel.Rows)
+            # selectionModel.setCurrentIndex(index)
         except IndexError:
             for box in (self.country_box, self.continent_box):
                 box.setCurrentIndex(CovidView.FIRST_OPTION)
@@ -81,7 +82,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.__display_details_about(selected_row)
 
     def __display_details_about(self, row_index: int):
-        print(self.dateEdit_text.text())
+        print('Selected date: '+self.dateEdit_text.text())
         view = self.model.db.view
         row = view.iloc[row_index]
         self.__set_current_country(str(row.location))
@@ -143,5 +144,3 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.treeView.setModel(self.model)
         self.treeView.reset()
         self.initialize_fields(is_first_load=False)
-
-    # def on_date_edit_dateChanged(self, new_date: QDate):
