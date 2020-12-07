@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/faouziMohamed/covid-data)
+
 # Covid19  data
 
 Desktop application that shows data for the Covid 19 (cases, deaths, tests,....)
