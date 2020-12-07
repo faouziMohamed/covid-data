@@ -70,6 +70,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.treeView.setSortingEnabled(True)
         for this_column_number in (0, 1, 3, 4, 5, 6, 7, 8):
             self.treeView.resizeColumnToContents(this_column_number)
+        self.treeView.setAlternatingRowColors(True)
 
     def closeEvent(self, a0: QCloseEvent) -> None:
         a0.accept()
@@ -141,6 +142,6 @@ class CovidView(QMainWindow, Ui_MainWindow):
 
     def on_date_edit_dateChanged(self, new_date: QDate):
         self.model.db.filter_data_by_date(new_date.toString('yyyy-MM-dd'))
-        self.treeView.setModel(self.model)
         self.treeView.reset()
+        self.setup_treeview()
         self.initialize_fields(is_first_load=False)
