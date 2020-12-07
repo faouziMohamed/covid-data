@@ -24,7 +24,7 @@ makeUi_becomePy_args(){
         then
             if (echo "$2" | grep -E "^-[a-zA-Z]") >/dev/null;
             then
-                echo "${YELLOW}ERROR${RESET} in arg ${RED}$2${RESET} unexpected option, just after ${YELLOW}$1${RESET}"
+                echo -e "${YELLOW}ERROR${RESET} in arg ${RED}$2${RESET} unexpected option, just after ${YELLOW}$1${RESET}"
                 exit 1
             fi
             PY_FILE="$2"; shift
@@ -49,13 +49,13 @@ makeUi_becomePy(){
         PY_FILE="${PY_FILE}.py"
 
         if [ ! -e "${UI_FILE}" ]
-        then echo "${RED}Error${RESET}: No such file or directory: ${UI_FILE}"
+        then echo -e "${RED}Error${RESET}: No such file or directory: ${UI_FILE}"
             exit 2
         fi
 
 
         if ! (pyuic5 "${UI_FILE}" -o "${PY_FILE}") then
-            echo -n "${RED}Error${RESET} while " > /dev/stderr
+            echo -ne "${RED}Error${RESET} while " > /dev/stderr
             echo "creating $PY_FILE file !" >/dev/stderr
             exit 1
         fi
@@ -68,7 +68,7 @@ makeUi_becomePy(){
 case $# in
     0){
         echo -n "You should give me at least a name"
-        echo " of ${YELLOW}*.ui${RESET} file Not empty"
+        echo -e " of ${YELLOW}*.ui${RESET} file Not empty"
         exit 1
       };;
 
