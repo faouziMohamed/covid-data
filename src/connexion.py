@@ -195,7 +195,7 @@ class DbConnexion:
         return self.dataframe
 
     @property
-    def view_row_with_zeros(self):
+    def empty_view(self):
         """
         This property return a pandas series that contains only zeros
         and index are the columns of the view table

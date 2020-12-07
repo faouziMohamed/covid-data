@@ -90,7 +90,7 @@ QTreeView {
 
 QTreeView::item {
 	margin-left:0;
-    border: 1px solid rgb(177, 217, 194);
+    border: 1px solid rgba(99, 124, 118, 0.795);
     border-top-color: transparent;
     border-bottom-color: transparent;
 }

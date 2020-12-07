@@ -2,11 +2,11 @@ import pandas as pd
 from PyQt5.QtCore import QDate, QModelIndex, QItemSelectionModel
 from PyQt5.QtCore import (QItemSelection)
 from PyQt5.QtGui import QCloseEvent
-from PyQt5.QtWidgets import (QMainWindow, QAbstractItemView)
+from PyQt5.QtWidgets import (QMainWindow)
 
-from src.ressource import utils
 from src.design.mainwindow import Ui_MainWindow
 from src.model import ModelCovidData
+from src.ressource import utils
 
 
 class CovidView(QMainWindow, Ui_MainWindow):
@@ -18,41 +18,20 @@ class CovidView(QMainWindow, Ui_MainWindow):
         super(CovidView, self).__init__(parent)
         self.setupUi(self)
         self.model = ModelCovidData()
-        CovidView.COLUMNS_COUNT = self.model.columnCount()
-        self.setup_treeview()
-        self.initialize_fields(is_first_load=True)
-        self.setup_event_handler()
-        self.resize(991, 654)
+        self.colsCount = self.model.columnCount()
+        self.__setup_treeview()
+        self.__setup_event_handler()
+        self.__initialize_fields(is_first_load=True)
+        self.resize(1050, 654)
 
-    def initialize_fields(self, is_first_load: bool = True):
-        db = self.model.db
-        if is_first_load:
-            countries = db.countries
-            continents = db.continents
-            today_tuple = utils.today(as_string=False)
-            for date_edit in (self.dateEdit, self.dateEdit_text):
-                date_edit.setMaximumDate(QDate(*today_tuple))
+    def __setup_treeview(self):
+        self.treeView.setModel(self.model)
+        self.treeView.setSortingEnabled(True)
+        for this_column_number in (0, 1, 3, 4, 5, 6, 7, 8):
+            self.treeView.resizeColumnToContents(this_column_number)
+        self.treeView.setAlternatingRowColors(True)
 
-            combo = (self.country_box, self.continent_box)
-            values = (list(countries.location), list(continents.continent))
-            for combo_box, items in zip(combo, values):
-                combo_box.addItems(items)
-        # handle the case where the view table is empty
-        try:
-            self.__display_details_about(CovidView.FIRST_ROW)
-            index = self.model.index(0, CovidView.COLUMNS_COUNT-1, QModelIndex())
-            selectionModel = self.treeView.selectionModel()
-            selectionModel.select(index,
-                                  QItemSelectionModel.ClearAndSelect |
-                                  QItemSelectionModel.Rows)
-            # selectionModel.setCurrentIndex(index)
-        except IndexError:
-            for box in (self.country_box, self.continent_box):
-                box.setCurrentIndex(CovidView.FIRST_OPTION)
-            self.__display_dates_fields(utils.today())
-            self.__display_numerical_fields(db.view_row_with_zeros)
-
-    def setup_event_handler(self):
+    def __setup_event_handler(self):
         selectionChanged = self.treeView.selectionModel().selectionChanged
         selectionChanged.connect(self.on_treeView_selectionChanged)
 
@@ -65,25 +44,31 @@ class CovidView(QMainWindow, Ui_MainWindow):
         date_changed = self.dateEdit.dateChanged
         date_changed.connect(self.on_date_edit_dateChanged)
 
-    def setup_treeview(self):
-        self.treeView.setModel(self.model)
-        self.treeView.setSortingEnabled(True)
-        for this_column_number in (0, 1, 3, 4, 5, 6, 7, 8):
-            self.treeView.resizeColumnToContents(this_column_number)
-        self.treeView.setAlternatingRowColors(True)
+    def __initialize_fields(self, is_first_load: bool = True):
+        if is_first_load:
+            self.__fill_country_continent_combobox()
+        try:  # handle the case where the view table is empty
+            self.__display_details_about(CovidView.FIRST_ROW)
+            self.select_first_row()
+        except IndexError:
+            for box in (self.country_box, self.continent_box):
+                box.setCurrentIndex(CovidView.FIRST_OPTION)
+            self.__display_dates_fields(utils.today())
+            self.__display_numerical_fields(self.model.db.empty_view)
 
-    def closeEvent(self, a0: QCloseEvent) -> None:
-        a0.accept()
+    def __fill_country_continent_combobox(self):
+        countries = self.model.db.countries
+        continents = self.model.db.continents
 
-    def on_treeView_selectionChanged(self, selected: QItemSelection,
-                                     deselected: QItemSelection):
-        if len(selected.indexes()) == 0:
-            return
-        selected_row = selected.indexes()[0].row()
-        self.__display_details_about(selected_row)
+        self.country_box.addItems(list(countries.location))
+        self.continent_box.addItems(list(continents.continent))
+
+        today_tuple = utils.today(as_string=False)
+        self.dateEdit.setMaximumDate(QDate(*today_tuple))
+        self.dateEdit_text.setMaximumDate(QDate(*today_tuple))
 
     def __display_details_about(self, row_index: int):
-        print('Selected date: '+self.dateEdit_text.text())
+        print('Selected date: ' + self.dateEdit_text.text())
         view = self.model.db.view
         row = view.iloc[row_index]
         self.__set_current_country(str(row.location))
@@ -91,25 +76,28 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.__display_dates_fields(str(row.dates))
         self.__display_numerical_fields(row)
 
-    def __set_current_country(self, location: str):
-        country_id = self.model.db.get_country_id(location)
-        self.country_box.setCurrentIndex(country_id + 1)
-        self.country_edit.setText(location)
+    def select_first_row(self):
+        index = self.model.index(
+            CovidView.FIRST_ROW,
+            self.colsCount - 1,
+            QModelIndex()
+        )
+        selectionModel = self.treeView.selectionModel()
+        selectionModel.select(
+            index,
+            QItemSelectionModel.ClearAndSelect |
+            QItemSelectionModel.Rows
+        )
 
-    def __set_current_continent(self, continent: str):
-        continent_id = self.model.db.get_continent_id(continent)
-        self.continent_box.setCurrentIndex(continent_id + 1)
-        self.continent_edit.setText(continent)
-
-    def __display_dates_fields(self, a_date: str):
-        a_date_tuple = utils.year_mon_day(a_date)
+    def __display_dates_fields(self, the_date: str):
+        a_date_tuple = utils.year_mon_day(the_date)
         selected_date = QDate(*a_date_tuple)
         for date_edit in (self.dateEdit, self.dateEdit_text):
             date_edit.setDate(selected_date)
 
-        if a_date == utils.today():
+        if the_date == utils.today():
             day_option = CovidView.TODAY
-        elif a_date == utils.yesterday():
+        elif the_date == utils.yesterday():
             day_option = CovidView.YESTERDAY
         else:
             day_option = CovidView.OTHER_DAY
@@ -126,6 +114,17 @@ class CovidView(QMainWindow, Ui_MainWindow):
         for field, value in zip(fields, values):
             field.setValue(int(value))
 
+    def __set_current_country(self, location: str):
+        country_id = self.model.db.get_country_id(location)
+        self.country_box.setCurrentIndex(country_id + 1)
+        self.country_edit.setText(location)
+
+    def __set_current_continent(self, continent: str):
+        continent_id = self.model.db.get_continent_id(continent)
+        self.continent_box.setCurrentIndex(continent_id + 1)
+        self.continent_edit.setText(continent)
+
+    # Reimplemented functions and event handler
     def on_dateBox_currentIndexChanged(self, index: int) -> None:
         print(f'Box : Ok changed, new index : {index}, {type(index)}')
 
@@ -143,5 +142,15 @@ class CovidView(QMainWindow, Ui_MainWindow):
     def on_date_edit_dateChanged(self, new_date: QDate):
         self.model.db.filter_data_by_date(new_date.toString('yyyy-MM-dd'))
         self.treeView.reset()
-        self.setup_treeview()
-        self.initialize_fields(is_first_load=False)
+        self.__setup_treeview()
+        self.__initialize_fields(is_first_load=False)
+
+    def on_treeView_selectionChanged(self, selected: QItemSelection,
+                                     deselected: QItemSelection):
+        if len(selected.indexes()) == 0:
+            return
+        selected_row = selected.indexes()[0].row()
+        self.__display_details_about(selected_row)
+
+    def closeEvent(self, a0: QCloseEvent) -> None:
+        a0.accept()
