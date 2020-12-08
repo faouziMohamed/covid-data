@@ -4,7 +4,7 @@ from PyQt5.QtCore import (QItemSelection)
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import (QMainWindow)
 
-from src.design.mainwindow import Ui_MainWindow
+from src.generated.mainwindow import Ui_MainWindow
 from src.model import ModelCovidData
 from src.ressource import utils
 
@@ -82,8 +82,8 @@ class CovidView(QMainWindow, Ui_MainWindow):
             self.colsCount - 1,
             QModelIndex()
         )
-        selectionModel = self.treeView.selectionModel()
-        selectionModel.select(
+        selection_model = self.treeView.selectionModel()
+        selection_model.select(
             index,
             QItemSelectionModel.ClearAndSelect |
             QItemSelectionModel.Rows
@@ -124,7 +124,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.continent_box.setCurrentIndex(continent_id + 1)
         self.continent_edit.setText(continent)
 
-    # Reimplemented functions and event handler
+    # Reimplemented functions and event handlers
     def on_dateBox_currentIndexChanged(self, index: int) -> None:
         print(f'Box : Ok changed, new index : {index}, {type(index)}')
 
