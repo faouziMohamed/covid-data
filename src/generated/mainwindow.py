@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'src/design/mainwindow.ui'
+# Form implementation generated from reading ui file 'assets/mainwindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.9.2
 #
@@ -42,8 +42,8 @@ class Ui_MainWindow(object):
 "\n"
 "QComboBox::down-arrow,\n"
 "QDateEdit::drop-down {\n"
-"    image: url(\"C:/Users/Faouzi_Mohamed/PycharmProjects/covid-data/assets/arrow_down.svg\");\n"
-"    width: 11px;\n"
+"    image: url(\"assets/icons/arrow_down.svg\");\n"
+"    width: 10px;\n"
 "}\n"
 "\n"
 "QComboBox::down-arrow:on,\n"

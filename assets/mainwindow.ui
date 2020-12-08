@@ -61,7 +61,7 @@ QDateEdit::drop-down
 
 QComboBox::down-arrow,
 QDateEdit::drop-down {
-	image: url(&quot;assets/icons/arrow_down.svg&quot;);
+	image: url(&quot;:/arrow_down.svg&quot;);
 	width: 10px;
 }
 
@@ -1233,7 +1233,6 @@ QTreeView::item:selected:!active {
     <addaction name="separator"/>
     <addaction name="separator"/>
     <addaction name="menuDownload"/>
-    <addaction name="actionSaveChanges"/>
     <addaction name="separator"/>
     <addaction name="closeAction"/>
    </widget>
@@ -1307,6 +1306,8 @@ QTreeView::item:selected:!active {
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="ressources.qrc"/>
+ </resources>
  <connections/>
 </ui>
