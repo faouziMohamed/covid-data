@@ -2,13 +2,11 @@
 
 # Form implementation generated from reading ui file 'src/design/mainwindow.ui'
 #
-# Created by: PyQt5 UI code generator 5.12.3
+# Created by: PyQt5 UI code generator 5.9.2
 #
 # WARNING! All changes made in this file will be lost!
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -18,14 +16,125 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QtCore.QSize(0, 0))
         MainWindow.setMaximumSize(QtCore.QSize(10000, 1000))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         MainWindow.setFont(font)
         MainWindow.setMouseTracking(True)
-        MainWindow.setStyleSheet("")
+        MainWindow.setStyleSheet("QWidget {\n"
+"    font-size: 14px;\n"
+"}\n"
+"\n"
+"QWidget#centralwidget {\n"
+"    background: qlineargradient(x1:0, y1:0.1, x2:0.5, y2:1,\n"
+"            stop: 0 rgb(0, 1, 59),\n"
+"            stop: 0.5 rgba(2, 27, 37, 0.931),\n"
+"            stop: 1 rgb(8, 47, 25));\n"
+"}\n"
+"\n"
+"QGroupBox {\n"
+"    border: 2px solid rgb(37, 90, 81);\n"
+"    border-radius: 9px;\n"
+"    margin-top: 10px;\n"
+"    margin-left: 5px;\n"
+"}\n"
+"\n"
+"QGroupBox::title {\n"
+"    subcontrol-origin: margin;\n"
+"    subcontrol-position: top left;\n"
+"    padding: 0 5px;\n"
+"    color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"            stop: 0 #00521b,\n"
+"            stop: 0.5 #FFFFFF);\n"
+"}\n"
+"\n"
+"QGroupBox>QLabel {\n"
+"    color: #96cccc;\n"
+"}\n"
+"\n"
+"QComboBox {\n"
+"    combobox-popup: 0;\n"
+"    /*Qt does not provide a better way to resize the pop menu*/\n"
+"    color: rgb(0, 2, 33);\n"
+"    background-color: rgb(166, 167, 176);\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"    border: 1px solid rgb(147, 149, 148);\n"
+"    border-radius: 0px 5px;\n"
+"    color: rgb(0, 17, 17);\n"
+"    selection-color: rgb(0, 0, 80);\n"
+"    selection-background-color: rgb(0, 175, 26);\n"
+"    background-color: rgba(151, 181, 177);\n"
+"}\n"
+"\n"
+"QLineEdit,\n"
+"QSpinBox {\n"
+"    selection-color: rgb(0, 0, 80);\n"
+"    selection-background-color: rgb(0, 175, 26);\n"
+"    background-color: rgb(166, 167, 176);\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"    border-radius: 17px;\n"
+"    padding: 6px 8px;\n"
+"    border: 1px outset rgb(160, 171, 154);\n"
+"    background: qlineargradient(x1: 0, y1: 0.1, x2: 1, y2: 0.5,\n"
+"            stop: 0 #f6f7fa,\n"
+"            stop: 1 rgb(0, 87, 127));\n"
+"}\n"
+"\n"
+"/*Style for QPushButton*/\n"
+"QPushButton:hover {\n"
+"    border-color: rgb(141, 141, 70);\n"
+"    background: qlineargradient(x1: 0, y1: 0.1, x2: 1, y2: 0.5,\n"
+"            stop: 0 #f6f7fa,\n"
+"            stop: 0.8 rgb(42, 135, 71));\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
+"            stop: 0 rgb(0, 161, 51),\n"
+"            stop: 1 #f6f7fa);\n"
+"}\n"
+"\n"
+"/*Style for QQTreeView*/\n"
+"QTreeView {\n"
+"    show-decoration-selected: 1;\n"
+"    background-color: rgb(182, 182, 182);\n"
+"    alternate-background-color: rgb(154, 154, 154);\n"
+"}\n"
+"\n"
+"QTreeView::item {\n"
+"    margin-left: 0;\n"
+"    border: 1px solid rgba(99, 124, 118, 0.795);\n"
+"    border-top-color: transparent;\n"
+"    border-bottom-color: transparent;\n"
+"}\n"
+"\n"
+"\n"
+"QTreeView::item:hover {\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"            stop: 0 #8ab6ce,\n"
+"            stop: 0.9 #b2c0c2);\n"
+"    border: 1px solid #bfcde4;\n"
+"}\n"
+"\n"
+"QTreeView::item:selected {\n"
+"    border: 1px solid #567dbc;\n"
+"    selection-background-color: #3374ff;\n"
+"    color: rgb(0, 12, 12);\n"
+"}\n"
+"\n"
+"QTreeView::item:selected:active {\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"            stop: 0 #6ea1f1,\n"
+"            stop: 1 #567dbc);\n"
+"}\n"
+"\n"
+"QTreeView::item:selected:!active {\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"            stop: 0 #6b9be8,\n"
+"            stop: 1 #577fbf);\n"
+"}")
         MainWindow.setDocumentMode(True)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Triangular)
         MainWindow.setDockNestingEnabled(False)
@@ -52,11 +161,7 @@ class Ui_MainWindow(object):
         self.date_box.setMinimumSize(QtCore.QSize(0, 0))
         self.date_box.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(True)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.date_box.setFont(font)
         self.date_box.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToContents)
         self.date_box.setObjectName("date_box")
@@ -68,8 +173,7 @@ class Ui_MainWindow(object):
         self.continent_box = QtWidgets.QComboBox(self.centralwidget)
         self.continent_box.setMinimumSize(QtCore.QSize(0, 0))
         font = QtGui.QFont()
-        font.setItalic(False)
-        font.setUnderline(False)
+        font.setPointSize(-1)
         self.continent_box.setFont(font)
         self.continent_box.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToContents)
         self.continent_box.setObjectName("continent_box")
@@ -84,11 +188,7 @@ class Ui_MainWindow(object):
         self.country_box.setMinimumSize(QtCore.QSize(0, 0))
         self.country_box.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.country_box.setFont(font)
         self.country_box.setStyleSheet("")
         self.country_box.setMaxCount(99999)
@@ -112,11 +212,7 @@ class Ui_MainWindow(object):
         self.treeView.setSizePolicy(sizePolicy)
         self.treeView.setMinimumSize(QtCore.QSize(0, 225))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.treeView.setFont(font)
         self.treeView.setFrameShape(QtWidgets.QFrame.WinPanel)
         self.treeView.setFrameShadow(QtWidgets.QFrame.Sunken)
@@ -142,11 +238,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.filter1Box.sizePolicy().hasHeightForWidth())
         self.filter1Box.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(True)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.filter1Box.setFont(font)
         self.filter1Box.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.filter1Box.setFlat(False)
@@ -158,11 +250,7 @@ class Ui_MainWindow(object):
         self.date_box_2.setMinimumSize(QtCore.QSize(0, 30))
         self.date_box_2.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(True)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.date_box_2.setFont(font)
         self.date_box_2.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToContents)
         self.date_box_2.setObjectName("date_box_2")
@@ -176,11 +264,7 @@ class Ui_MainWindow(object):
         self.dateEdit.setMinimumSize(QtCore.QSize(170, 30))
         self.dateEdit.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(True)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.dateEdit.setFont(font)
         self.dateEdit.setMouseTracking(True)
         self.dateEdit.setAutoFillBackground(True)
@@ -208,11 +292,7 @@ class Ui_MainWindow(object):
         self.dateEdit_text.setMinimumSize(QtCore.QSize(170, 30))
         self.dateEdit_text.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(True)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.dateEdit_text.setFont(font)
         self.dateEdit_text.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.dateEdit_text.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
@@ -235,22 +315,14 @@ class Ui_MainWindow(object):
         self.queryBox.setMinimumSize(QtCore.QSize(0, 0))
         self.queryBox.setMaximumSize(QtCore.QSize(9999999, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(True)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.queryBox.setFont(font)
         self.queryBox.setObjectName("queryBox")
         self.formLayout = QtWidgets.QFormLayout(self.queryBox)
         self.formLayout.setObjectName("formLayout")
         self.countryLabel = QtWidgets.QLabel(self.queryBox)
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.countryLabel.setFont(font)
         self.countryLabel.setObjectName("countryLabel")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.countryLabel)
@@ -282,42 +354,26 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.dailyBox.sizePolicy().hasHeightForWidth())
         self.dailyBox.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(True)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.dailyBox.setFont(font)
         self.dailyBox.setObjectName("dailyBox")
         self.formLayout_2 = QtWidgets.QFormLayout(self.dailyBox)
         self.formLayout_2.setObjectName("formLayout_2")
         self.tests_label = QtWidgets.QLabel(self.dailyBox)
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.tests_label.setFont(font)
         self.tests_label.setObjectName("tests_label")
         self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.tests_label)
         self.cases_label = QtWidgets.QLabel(self.dailyBox)
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.cases_label.setFont(font)
         self.cases_label.setObjectName("cases_label")
         self.formLayout_2.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.cases_label)
         self.deaths_label = QtWidgets.QLabel(self.dailyBox)
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.deaths_label.setFont(font)
         self.deaths_label.setObjectName("deaths_label")
         self.formLayout_2.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.deaths_label)
@@ -325,13 +381,7 @@ class Ui_MainWindow(object):
         self.newTest_spin.setMinimumSize(QtCore.QSize(170, 0))
         self.newTest_spin.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
-        font.setStrikeOut(False)
-        font.setKerning(True)
+        font.setPointSize(-1)
         self.newTest_spin.setFont(font)
         self.newTest_spin.setWrapping(False)
         self.newTest_spin.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
@@ -341,20 +391,13 @@ class Ui_MainWindow(object):
         self.newTest_spin.setCorrectionMode(QtWidgets.QAbstractSpinBox.CorrectToPreviousValue)
         self.newTest_spin.setProperty("showGroupSeparator", True)
         self.newTest_spin.setMaximum(999999999)
-        self.newTest_spin.setStepType(QtWidgets.QAbstractSpinBox.DefaultStepType)
         self.newTest_spin.setObjectName("newTest_spin")
         self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.SpanningRole, self.newTest_spin)
         self.newCases_spin = QtWidgets.QSpinBox(self.dailyBox)
         self.newCases_spin.setMinimumSize(QtCore.QSize(170, 0))
         self.newCases_spin.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
-        font.setStrikeOut(False)
-        font.setKerning(True)
+        font.setPointSize(-1)
         self.newCases_spin.setFont(font)
         self.newCases_spin.setWrapping(False)
         self.newCases_spin.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
@@ -370,13 +413,7 @@ class Ui_MainWindow(object):
         self.newDeaths_spin.setMinimumSize(QtCore.QSize(170, 0))
         self.newDeaths_spin.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
-        font.setStrikeOut(False)
-        font.setKerning(True)
+        font.setPointSize(-1)
         self.newDeaths_spin.setFont(font)
         self.newDeaths_spin.setWrapping(False)
         self.newDeaths_spin.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
@@ -396,22 +433,14 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.cumulativeBox.sizePolicy().hasHeightForWidth())
         self.cumulativeBox.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(True)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.cumulativeBox.setFont(font)
         self.cumulativeBox.setObjectName("cumulativeBox")
         self.formLayout_3 = QtWidgets.QFormLayout(self.cumulativeBox)
         self.formLayout_3.setObjectName("formLayout_3")
         self.totTests_label = QtWidgets.QLabel(self.cumulativeBox)
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.totTests_label.setFont(font)
         self.totTests_label.setObjectName("totTests_label")
         self.formLayout_3.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.totTests_label)
@@ -419,13 +448,7 @@ class Ui_MainWindow(object):
         self.totalTests_spin.setMinimumSize(QtCore.QSize(0, 0))
         self.totalTests_spin.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
-        font.setStrikeOut(False)
-        font.setKerning(True)
+        font.setPointSize(-1)
         self.totalTests_spin.setFont(font)
         self.totalTests_spin.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.totalTests_spin.setReadOnly(True)
@@ -436,11 +459,7 @@ class Ui_MainWindow(object):
         self.formLayout_3.setWidget(1, QtWidgets.QFormLayout.SpanningRole, self.totalTests_spin)
         self.totCase_label = QtWidgets.QLabel(self.cumulativeBox)
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.totCase_label.setFont(font)
         self.totCase_label.setObjectName("totCase_label")
         self.formLayout_3.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.totCase_label)
@@ -448,13 +467,7 @@ class Ui_MainWindow(object):
         self.totalCases_spin.setMinimumSize(QtCore.QSize(170, 0))
         self.totalCases_spin.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
-        font.setStrikeOut(False)
-        font.setKerning(True)
+        font.setPointSize(-1)
         self.totalCases_spin.setFont(font)
         self.totalCases_spin.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.totalCases_spin.setReadOnly(True)
@@ -465,11 +478,7 @@ class Ui_MainWindow(object):
         self.formLayout_3.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.totalCases_spin)
         self.totDeaths_label = QtWidgets.QLabel(self.cumulativeBox)
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.totDeaths_label.setFont(font)
         self.totDeaths_label.setObjectName("totDeaths_label")
         self.formLayout_3.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.totDeaths_label)
@@ -477,13 +486,7 @@ class Ui_MainWindow(object):
         self.totalDeaths_spin.setMinimumSize(QtCore.QSize(170, 0))
         self.totalDeaths_spin.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
-        font.setStrikeOut(False)
-        font.setKerning(True)
+        font.setPointSize(-1)
         self.totalDeaths_spin.setFont(font)
         self.totalDeaths_spin.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.totalDeaths_spin.setReadOnly(True)
@@ -501,18 +504,14 @@ class Ui_MainWindow(object):
         self.removeButton = QtWidgets.QPushButton(self.centralwidget)
         self.removeButton.setMinimumSize(QtCore.QSize(0, 40))
         font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setWeight(50)
+        font.setPointSize(-1)
         self.removeButton.setFont(font)
         self.removeButton.setObjectName("removeButton")
         self.btnHLayout.addWidget(self.removeButton)
         self.verticalLayout.addLayout(self.btnHLayout)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 982, 20))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 982, 25))
         self.menubar.setObjectName("menubar")
         self.menu_edit = QtWidgets.QMenu(self.menubar)
         self.menu_edit.setObjectName("menu_edit")
@@ -618,3 +617,4 @@ class Ui_MainWindow(object):
         self.actionSaveJson.setText(_translate("MainWindow", "To Json Format"))
         self.actionHow_data_are_collected.setText(_translate("MainWindow", "&How data are collected?"))
         self.action_About.setText(_translate("MainWindow", "&About"))
+

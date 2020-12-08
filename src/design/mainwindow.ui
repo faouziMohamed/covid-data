@@ -28,11 +28,7 @@
   </property>
   <property name="font">
    <font>
-    <pointsize>10</pointsize>
-    <weight>50</weight>
-    <italic>false</italic>
-    <bold>false</bold>
-    <underline>false</underline>
+    <pointsize>-1</pointsize>
    </font>
   </property>
   <property name="mouseTracking">
@@ -42,7 +38,122 @@
    <string>Covid19 data - Fz</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">QWidget {
+    font-size: 14px;
+}
+
+QWidget#centralwidget {
+    background: qlineargradient(x1:0, y1:0.1, x2:0.5, y2:1,
+            stop: 0 rgb(0, 1, 59),
+            stop: 0.5 rgba(2, 27, 37, 0.931),
+            stop: 1 rgb(8, 47, 25));
+}
+
+QGroupBox {
+    border: 2px solid rgb(37, 90, 81);
+    border-radius: 9px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 0 5px;
+    color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+            stop: 0 #00521b,
+            stop: 0.5 #FFFFFF);
+}
+
+QGroupBox&gt;QLabel {
+    color: #96cccc;
+}
+
+QComboBox {
+    combobox-popup: 0;
+    /*Qt does not provide a better way to resize the pop menu*/
+    color: rgb(0, 2, 33);
+    background-color: rgb(166, 167, 176);
+}
+
+QComboBox QAbstractItemView {
+    border: 1px solid rgb(147, 149, 148);
+    border-radius: 0px 5px;
+    color: rgb(0, 17, 17);
+    selection-color: rgb(0, 0, 80);
+    selection-background-color: rgb(0, 175, 26);
+    background-color: rgba(151, 181, 177);
+}
+
+QLineEdit,
+QSpinBox {
+    selection-color: rgb(0, 0, 80);
+    selection-background-color: rgb(0, 175, 26);
+    background-color: rgb(166, 167, 176);
+}
+
+QPushButton {
+    border-radius: 17px;
+    padding: 6px 8px;
+    border: 1px outset rgb(160, 171, 154);
+    background: qlineargradient(x1: 0, y1: 0.1, x2: 1, y2: 0.5,
+            stop: 0 #f6f7fa,
+            stop: 1 rgb(0, 87, 127));
+}
+
+/*Style for QPushButton*/
+QPushButton:hover {
+    border-color: rgb(141, 141, 70);
+    background: qlineargradient(x1: 0, y1: 0.1, x2: 1, y2: 0.5,
+            stop: 0 #f6f7fa,
+            stop: 0.8 rgb(42, 135, 71));
+}
+
+QPushButton:pressed {
+    background-color: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,
+            stop: 0 rgb(0, 161, 51),
+            stop: 1 #f6f7fa);
+}
+
+/*Style for QQTreeView*/
+QTreeView {
+    show-decoration-selected: 1;
+    background-color: rgb(182, 182, 182);
+    alternate-background-color: rgb(154, 154, 154);
+}
+
+QTreeView::item {
+    margin-left: 0;
+    border: 1px solid rgba(99, 124, 118, 0.795);
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+}
+
+
+QTreeView::item:hover {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+            stop: 0 #8ab6ce,
+            stop: 0.9 #b2c0c2);
+    border: 1px solid #bfcde4;
+}
+
+QTreeView::item:selected {
+    border: 1px solid #567dbc;
+    selection-background-color: #3374ff;
+    color: rgb(0, 12, 12);
+}
+
+QTreeView::item:selected:active {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+            stop: 0 #6ea1f1,
+            stop: 1 #567dbc);
+}
+
+QTreeView::item:selected:!active {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+            stop: 0 #6b9be8,
+            stop: 1 #577fbf);
+}</string>
   </property>
   <property name="documentMode">
    <bool>true</bool>
@@ -119,11 +230,7 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>10</pointsize>
-          <weight>50</weight>
-          <italic>true</italic>
-          <bold>false</bold>
-          <underline>false</underline>
+          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="sizeAdjustPolicy">
@@ -161,8 +268,7 @@
         </property>
         <property name="font">
          <font>
-          <italic>false</italic>
-          <underline>false</underline>
+          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="currentIndex">
@@ -200,11 +306,7 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>10</pointsize>
-          <weight>50</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-          <underline>false</underline>
+          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="toolTip">
@@ -273,11 +375,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
-         <weight>50</weight>
-         <italic>false</italic>
-         <bold>false</bold>
-         <underline>false</underline>
+         <pointsize>-1</pointsize>
         </font>
        </property>
        <property name="frameShape">
@@ -326,11 +424,7 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>10</pointsize>
-            <weight>50</weight>
-            <italic>true</italic>
-            <bold>false</bold>
-            <underline>false</underline>
+            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="title">
@@ -362,11 +456,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>true</italic>
-               <bold>false</bold>
-               <underline>false</underline>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="sizeAdjustPolicy">
@@ -413,11 +503,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>true</italic>
-               <bold>false</bold>
-               <underline>false</underline>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="mouseTracking">
@@ -520,11 +606,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>true</italic>
-               <bold>false</bold>
-               <underline>false</underline>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="layoutDirection">
@@ -596,11 +678,7 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>10</pointsize>
-            <weight>50</weight>
-            <italic>true</italic>
-            <bold>false</bold>
-            <underline>false</underline>
+            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="title">
@@ -611,11 +689,7 @@
             <widget class="QLabel" name="countryLabel">
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-               <underline>false</underline>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="text">
@@ -692,11 +766,7 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>10</pointsize>
-            <weight>50</weight>
-            <italic>true</italic>
-            <bold>false</bold>
-            <underline>false</underline>
+            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="title">
@@ -707,11 +777,7 @@
             <widget class="QLabel" name="tests_label">
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-               <underline>false</underline>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="text">
@@ -726,11 +792,7 @@
             <widget class="QLabel" name="cases_label">
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-               <underline>false</underline>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="text">
@@ -745,11 +807,7 @@
             <widget class="QLabel" name="deaths_label">
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-               <underline>false</underline>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="text">
@@ -776,13 +834,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-               <underline>false</underline>
-               <strikeout>false</strikeout>
-               <kerning>true</kerning>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="wrapping">
@@ -809,9 +861,6 @@
              <property name="maximum">
               <number>999999999</number>
              </property>
-             <property name="stepType">
-              <enum>QAbstractSpinBox::DefaultStepType</enum>
-             </property>
             </widget>
            </item>
            <item row="3" column="0" colspan="2">
@@ -830,13 +879,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-               <underline>false</underline>
-               <strikeout>false</strikeout>
-               <kerning>true</kerning>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="wrapping">
@@ -881,13 +924,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-               <underline>false</underline>
-               <strikeout>false</strikeout>
-               <kerning>true</kerning>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="wrapping">
@@ -929,11 +966,7 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>10</pointsize>
-            <weight>50</weight>
-            <italic>true</italic>
-            <bold>false</bold>
-            <underline>false</underline>
+            <pointsize>-1</pointsize>
            </font>
           </property>
           <property name="title">
@@ -944,11 +977,7 @@
             <widget class="QLabel" name="totTests_label">
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-               <underline>false</underline>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="text">
@@ -975,13 +1004,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-               <underline>false</underline>
-               <strikeout>false</strikeout>
-               <kerning>true</kerning>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="alignment">
@@ -1005,11 +1028,7 @@
             <widget class="QLabel" name="totCase_label">
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-               <underline>false</underline>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="text">
@@ -1036,13 +1055,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-               <underline>false</underline>
-               <strikeout>false</strikeout>
-               <kerning>true</kerning>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="alignment">
@@ -1066,11 +1079,7 @@
             <widget class="QLabel" name="totDeaths_label">
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-               <underline>false</underline>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="text">
@@ -1097,13 +1106,7 @@
              </property>
              <property name="font">
               <font>
-               <pointsize>10</pointsize>
-               <weight>50</weight>
-               <italic>false</italic>
-               <bold>false</bold>
-               <underline>false</underline>
-               <strikeout>false</strikeout>
-               <kerning>true</kerning>
+               <pointsize>-1</pointsize>
               </font>
              </property>
              <property name="alignment">
@@ -1155,11 +1158,7 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>10</pointsize>
-          <weight>50</weight>
-          <italic>false</italic>
-          <bold>false</bold>
-          <underline>false</underline>
+          <pointsize>-1</pointsize>
          </font>
         </property>
         <property name="text">
@@ -1177,7 +1176,7 @@
      <x>0</x>
      <y>0</y>
      <width>982</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_edit">
