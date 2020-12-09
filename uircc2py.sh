@@ -31,7 +31,7 @@ function convert_ui_to_py_file(){
 
 if [ "$#" -gt 0 ]; then
   case "$1" in
-    "-a" | "--all") convert_ui_to_py_file && compile_resource_file;
+    "-a" | "--all") convert_ui_to_py_file || compile_resource_file;
                     exit $?;;
     "-u" | "--ui")  convert_ui_to_py_file; exit $?;;
     "-q" | "--qrc") compile_resource_file; exit $?;;

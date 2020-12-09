@@ -19,39 +19,14 @@ class Ui_MainWindow(object):
         font.setPointSize(-1)
         MainWindow.setFont(font)
         MainWindow.setMouseTracking(True)
-        MainWindow.setStyleSheet("QComboBox, \n"
-"QLineEdit,\n"
-"QSpinBox,\n"
-"QDateEdit {\n"
-"    border:2px double darkgray;\n"
-"    border-radius: 4px;\n"
+        MainWindow.setStyleSheet("QHeaderView::section {\n"
+"    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,\n"
+"                                      stop:0 #616161, stop: 0.5 #505050,\n"
+"                                      stop: 0.6 #434343, stop:1 #656565);\n"
+"    color: white;\n"
+"    padding-left: 4px;\n"
+"    border: 1px solid #6c6c6c;\n"
 "}\n"
-"\n"
-"\n"
-"QComboBox::drop-down,\n"
-"QDateEdit::drop-down\n"
-" {\n"
-"    border:unset;\n"
-"}\n"
-"\n"
-"QDateEdit::drop-down\n"
-" {\n"
-"    border:1px solid rgb(143, 173, 223);\n"
-"    background-color:rgb(154, 184, 239);\n"
-"}\n"
-"\n"
-"QComboBox::down-arrow,\n"
-"QDateEdit::drop-down {\n"
-"    image: url(\":/arrow_down.svg\");\n"
-"    width: 10px;\n"
-"}\n"
-"\n"
-"QComboBox::down-arrow:on,\n"
-"QDateEdit::down-arrow:on {\n"
-"    top: 1px;\n"
-"    left: 1px;\n"
-"}\n"
-"\n"
 "\n"
 "\n"
 "\n"
@@ -88,26 +63,57 @@ class Ui_MainWindow(object):
 "\n"
 "QComboBox {\n"
 "    combobox-popup: 0;\n"
-"    /*Qt does not provide a better way to resize the pop menu*/\n"
 "    color: rgb(0, 2, 33);\n"
-"     background-color:rgb(221, 235, 239);\n"
+"    background-color:rgb(221, 235, 239);\n"
 "}\n"
 "\n"
 "QComboBox QAbstractItemView {\n"
 "    border: 1px solid rgb(147, 149, 148);\n"
 "    border-radius: 0px 5px;\n"
 "    color: rgb(0, 17, 17);\n"
+"    background-color:rgb(221, 235, 239);\n"
 "    selection-color: rgb(0, 0, 80);\n"
-"    \n"
 "    selection-background-color: rgb(51, 175, 93);\n"
-"     background-color:rgb(221, 235, 239);\n"
+"}\n"
+"\n"
+"QComboBox,\n"
+"QLineEdit,\n"
+"QSpinBox,\n"
+"QDateEdit {\n"
+"    border:2px double darkgray;\n"
+"    border-radius: 4px;\n"
 "}\n"
 "\n"
 "QLineEdit,\n"
 "QSpinBox {\n"
 "    selection-color: rgb(0, 0, 80);\n"
 "    selection-background-color: rgb(0, 175, 26);\n"
-"    background-color:  rgb(226, 241, 199) ;\n"
+"    background-color:  rgb(226, 241, 199);\n"
+"}\n"
+"\n"
+"\n"
+"QComboBox::drop-down,\n"
+"QDateEdit::drop-down\n"
+" {\n"
+"    border:unset;\n"
+"}\n"
+"\n"
+"QDateEdit::drop-down\n"
+" {\n"
+"    border:1px solid rgb(143, 173, 223);\n"
+"    background-color:rgb(154, 184, 239);\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow,\n"
+"QDateEdit::drop-down {\n"
+"    image: url(\":/arrow_down.svg\");\n"
+"    width: 10px;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow:on,\n"
+"QDateEdit::down-arrow:on {\n"
+"    top: 1px;\n"
+"    left: 1px;\n"
 "}\n"
 "\n"
 "QPushButton {\n"
@@ -171,16 +177,19 @@ class Ui_MainWindow(object):
 "    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
 "            stop: 0 #6b9be8,\n"
 "            stop: 1 #577fbf);\n"
-"}")
+"}\n"
+"")
         MainWindow.setDocumentMode(True)
-        MainWindow.setTabShape(QtWidgets.QTabWidget.Triangular)
+        MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         MainWindow.setDockNestingEnabled(False)
         MainWindow.setDockOptions(QtWidgets.QMainWindow.AllowTabbedDocks|QtWidgets.QMainWindow.AnimatedDocks)
         MainWindow.setUnifiedTitleAndToolBarOnMac(True)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
-        self.verticalLayout.setContentsMargins(0, -1, -1, -1)
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.centralwidget)
+        self.verticalLayout_3.setContentsMargins(1, -1, 2, -1)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setContentsMargins(6, -1, -1, -1)
@@ -239,7 +248,14 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addItem(spacerItem)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.splitter = QtWidgets.QSplitter(self.centralwidget)
+        self.splitter.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.splitter.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.splitter.setFrameShadow(QtWidgets.QFrame.Plain)
+        self.splitter.setLineWidth(0)
         self.splitter.setOrientation(QtCore.Qt.Vertical)
+        self.splitter.setOpaqueResize(True)
+        self.splitter.setHandleWidth(0)
+        self.splitter.setChildrenCollapsible(True)
         self.splitter.setObjectName("splitter")
         self.treeView = QtWidgets.QTreeView(self.splitter)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -547,6 +563,7 @@ class Ui_MainWindow(object):
         self.removeButton.setObjectName("removeButton")
         self.btnHLayout.addWidget(self.removeButton)
         self.verticalLayout.addLayout(self.btnHLayout)
+        self.verticalLayout_3.addLayout(self.verticalLayout)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 982, 25))
@@ -655,4 +672,3 @@ class Ui_MainWindow(object):
         self.actionHow_data_are_collected.setText(_translate("MainWindow", "&How data are collected?"))
         self.action_About.setText(_translate("MainWindow", "&About"))
 
-import resources_rc

@@ -32,8 +32,8 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.treeView.setAlternatingRowColors(True)
 
     def __setup_event_handler(self):
-        selectionChanged = self.treeView.selectionModel().selectionChanged
-        selectionChanged.connect(self.on_treeView_selectionChanged)
+        selection_changed = self.treeView.selectionModel().selectionChanged
+        selection_changed.connect(self.on_treeView_selectionChanged)
 
         index_changed = self.date_box_2.currentIndexChanged
         index_changed.connect(self.on_dateBox2_currentIndexChanged)
