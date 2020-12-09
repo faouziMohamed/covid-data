@@ -1,7 +1,7 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
     <qresource prefix="/">
-        <file>mainwindow.ui</file>
+        <file alias="ui_file">mainwindow.ui</file>
         <file alias="covid19.sqlite">db/covid19-data.sqlite</file>
         <file alias="arrow_down.svg">icons/arrow_down.svg</file>
         <file alias="style.qss">style/style.qss</file>

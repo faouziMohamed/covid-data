@@ -1,7 +1,7 @@
 from PyQt5.QtCore import (QAbstractTableModel, QModelIndex, Qt, QVariant)
 
 from src.connexion import DbConnexion
-from src.ressource.constant import DB_NAME
+from src.resources.constant import DB_NAME
 
 
 class ModelCovidData(QAbstractTableModel):

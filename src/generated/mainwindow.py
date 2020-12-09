@@ -42,7 +42,7 @@ class Ui_MainWindow(object):
 "\n"
 "QComboBox::down-arrow,\n"
 "QDateEdit::drop-down {\n"
-"    image: url(\"assets/icons/arrow_down.svg\");\n"
+"    image: url(\":/arrow_down.svg\");\n"
 "    width: 10px;\n"
 "}\n"
 "\n"
@@ -585,7 +585,6 @@ class Ui_MainWindow(object):
         self.menu_edit.addSeparator()
         self.menu_edit.addSeparator()
         self.menu_edit.addAction(self.menuDownload.menuAction())
-        self.menu_edit.addAction(self.actionSaveChanges)
         self.menu_edit.addSeparator()
         self.menu_edit.addAction(self.closeAction)
         self.menuHelp.addAction(self.actionHow_data_are_collected)
@@ -656,3 +655,4 @@ class Ui_MainWindow(object):
         self.actionHow_data_are_collected.setText(_translate("MainWindow", "&How data are collected?"))
         self.action_About.setText(_translate("MainWindow", "&About"))
 
+import resources_rc

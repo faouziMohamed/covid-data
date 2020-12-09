@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import (QMainWindow)
 
 from src.generated.mainwindow import Ui_MainWindow
 from src.model import ModelCovidData
-from src.ressource import utils
+from src.resources import utils
 
 
 class CovidView(QMainWindow, Ui_MainWindow):

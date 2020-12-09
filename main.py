@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QApplication
 
 from src.dataView import CovidView
 # noinspection PyUnresolvedReferences
-import src.generated.ressources_rc
+import src.generated.resources_rc
 
 if __name__ == '__main__':
     style_file = QFile(':/style.qss')
