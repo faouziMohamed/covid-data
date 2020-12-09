@@ -107,7 +107,15 @@ QPushButton:pressed {
             stop: 1 #f6f7fa);
 }
 
-/*Style for QQTreeView*/
+/*Style for QQTreeView and QHeaderView*/
+QHeaderView::section {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+						stop:0 #033442cb,
+                         stop: 0.7 rgb(1, 65, 90));
+    color: white;
+    padding-left: 4px;
+    border: 1px solid #6c6c6c;
+}
 QTreeView {
     show-decoration-selected: 1;
     background-color: rgb(182, 182, 182);
