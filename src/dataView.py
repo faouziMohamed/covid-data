@@ -1,12 +1,11 @@
 import pandas as pd
-from PyQt5.QtCore import QDate, QModelIndex, QItemSelectionModel, \
-    QSortFilterProxyModel
+from PyQt5.QtCore import QDate, QModelIndex, QItemSelectionModel
 from PyQt5.QtCore import (QItemSelection)
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import (QMainWindow)
 
 from src.generated.mainwindow import Ui_MainWindow
-from src.model import ModelCovidData
+from src.model import ModelCovidData, SortFilterProxyModel
 from src.resources import utils
 
 
@@ -25,7 +24,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.resize(1050, 654)
 
     def __setup_treeview(self):
-        proxy_model = QSortFilterProxyModel(self)
+        proxy_model = SortFilterProxyModel(self)
         proxy_model.setSourceModel(self.model)
         self.treeView.setModel(proxy_model)
         for this_column_number in range(2):
@@ -35,9 +34,14 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.treeView.setSortingEnabled(True)
 
     def __setup_event_handler(self, is_first_load: bool = True):
+        # model = self.model
         selection_changed = self.treeView.selectionModel().selectionChanged
         selection_changed.connect(self.on_treeView_selectionChanged)
+
         if is_first_load:
+            header = self.treeView.header()
+            header.sortIndicatorChanged.connect(
+                lambda x, y: ...)
             index_changed = self.date_box_2.currentIndexChanged
             index_changed.connect(self.on_dateBox2_currentIndexChanged)
 
@@ -166,7 +170,5 @@ class CovidView(QMainWindow, Ui_MainWindow):
         selected_row = selected.indexes()[0].row()
         self.__display_details_about(selected_row)
 
-    def on
-
-        def closeEvent(self, a0: QCloseEvent) -> None:
-            a0.accept()
+    def closeEvent(self, a0: QCloseEvent) -> None:
+        a0.accept()
