@@ -27,9 +27,7 @@
    </size>
   </property>
   <property name="font">
-   <font>
-    <pointsize>-1</pointsize>
-   </font>
+   <font/>
   </property>
   <property name="mouseTracking">
    <bool>true</bool>
@@ -38,18 +36,7 @@
    <string>Covid19 data - Fz</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QHeaderView::section {
-    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-                                      stop:0 #616161, stop: 0.5 #505050,
-                                      stop: 0.6 #434343, stop:1 #656565);
-    color: white;
-    padding-left: 4px;
-    border: 1px solid #6c6c6c;
-}
-
-
-
-QWidget {
+   <string notr="true">/*QWidget {
     font-size: 14px;
 }
 
@@ -110,7 +97,6 @@ QSpinBox {
     background-color:  rgb(226, 241, 199);
 }
 
-
 QComboBox::drop-down,
 QDateEdit::drop-down
  {
@@ -136,7 +122,6 @@ QDateEdit::down-arrow:on {
 }
 
 QPushButton {
-    border-radius: 17px;
     padding: 6px 8px;
     border: 1px outset rgb(160, 171, 154);
     background: qlineargradient(x1: 0, y1: 0.1, x2: 1, y2: 0.5,
@@ -144,7 +129,7 @@ QPushButton {
             stop: 1 rgb(0, 87, 127));
 }
 
-/*Style for QPushButton*/
+
 QPushButton:hover {
     border-color: rgb(141, 141, 70);
     background: qlineargradient(x1: 0, y1: 0.1, x2: 1, y2: 0.5,
@@ -158,7 +143,33 @@ QPushButton:pressed {
             stop: 1 #f6f7fa);
 }
 
-/*Style for QQTreeView*/
+QHeaderView::section {
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+						stop:0.5 rgb(10, 20, 50),
+						stop:0.8 rgb(1, 20, 70));
+    color: rgb(222,230,255);
+    height:19px;
+    padding-top: 2px;
+    padding-left: 4px;
+    border: 1px solid rgb(20, 50, 100);
+}
+
+QHeaderView::section:hover
+{
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+						stop:0.5 rgb(10, 30, 70),
+                        stop: 0.8 rgb(10, 35, 100));
+}
+
+QHeaderView::down-arrow {
+    image: url(&quot;:/header_arrow_down.svg&quot;);
+}
+
+QHeaderView::up-arrow {
+    image: url(&quot;:/header_arrow_up.svg&quot;);
+    padding-bottom:1px;
+}
+
 QTreeView {
     show-decoration-selected: 1;
     background-color: rgb(182, 182, 182);
@@ -197,7 +208,7 @@ QTreeView::item:selected:!active {
             stop: 0 #6b9be8,
             stop: 1 #577fbf);
 }
-</string>
+*/</string>
   </property>
   <property name="documentMode">
    <bool>true</bool>
@@ -278,9 +289,7 @@ QTreeView::item:selected:!active {
            </size>
           </property>
           <property name="font">
-           <font>
-            <pointsize>-1</pointsize>
-           </font>
+           <font/>
           </property>
           <property name="sizeAdjustPolicy">
            <enum>QComboBox::AdjustToContents</enum>
@@ -316,9 +325,7 @@ QTreeView::item:selected:!active {
            </size>
           </property>
           <property name="font">
-           <font>
-            <pointsize>-1</pointsize>
-           </font>
+           <font/>
           </property>
           <property name="currentIndex">
            <number>0</number>
@@ -354,9 +361,7 @@ QTreeView::item:selected:!active {
            </size>
           </property>
           <property name="font">
-           <font>
-            <pointsize>-1</pointsize>
-           </font>
+           <font/>
           </property>
           <property name="toolTip">
            <string>Select a country to show details</string>
@@ -444,9 +449,7 @@ QTreeView::item:selected:!active {
           </size>
          </property>
          <property name="font">
-          <font>
-           <pointsize>-1</pointsize>
-          </font>
+          <font/>
          </property>
          <property name="frameShape">
           <enum>QFrame::WinPanel</enum>
@@ -493,9 +496,7 @@ QTreeView::item:selected:!active {
              </sizepolicy>
             </property>
             <property name="font">
-             <font>
-              <pointsize>-1</pointsize>
-             </font>
+             <font/>
             </property>
             <property name="title">
              <string>Date</string>
@@ -525,9 +526,7 @@ QTreeView::item:selected:!active {
                 </size>
                </property>
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="sizeAdjustPolicy">
                 <enum>QComboBox::AdjustToContents</enum>
@@ -572,9 +571,7 @@ QTreeView::item:selected:!active {
                 </size>
                </property>
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="mouseTracking">
                 <bool>true</bool>
@@ -675,9 +672,7 @@ QTreeView::item:selected:!active {
                 </size>
                </property>
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="layoutDirection">
                 <enum>Qt::LeftToRight</enum>
@@ -747,9 +742,7 @@ QTreeView::item:selected:!active {
              </size>
             </property>
             <property name="font">
-             <font>
-              <pointsize>-1</pointsize>
-             </font>
+             <font/>
             </property>
             <property name="title">
              <string>Local</string>
@@ -758,9 +751,7 @@ QTreeView::item:selected:!active {
              <item row="0" column="0">
               <widget class="QLabel" name="countryLabel">
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="text">
                 <string>Cou&amp;ntry</string>
@@ -838,9 +829,7 @@ QTreeView::item:selected:!active {
              </sizepolicy>
             </property>
             <property name="font">
-             <font>
-              <pointsize>-1</pointsize>
-             </font>
+             <font/>
             </property>
             <property name="title">
              <string>Daily Report</string>
@@ -849,9 +838,7 @@ QTreeView::item:selected:!active {
              <item row="0" column="0">
               <widget class="QLabel" name="tests_label">
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="text">
                 <string>New &amp;Tests</string>
@@ -864,9 +851,7 @@ QTreeView::item:selected:!active {
              <item row="2" column="0">
               <widget class="QLabel" name="cases_label">
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="text">
                 <string>New &amp;cases</string>
@@ -879,9 +864,7 @@ QTreeView::item:selected:!active {
              <item row="4" column="0">
               <widget class="QLabel" name="deaths_label">
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="text">
                 <string>New &amp;Deaths</string>
@@ -906,9 +889,7 @@ QTreeView::item:selected:!active {
                 </size>
                </property>
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="wrapping">
                 <bool>false</bool>
@@ -951,9 +932,7 @@ QTreeView::item:selected:!active {
                 </size>
                </property>
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="wrapping">
                 <bool>false</bool>
@@ -996,9 +975,7 @@ QTreeView::item:selected:!active {
                 </size>
                </property>
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="wrapping">
                 <bool>false</bool>
@@ -1038,9 +1015,7 @@ QTreeView::item:selected:!active {
              </sizepolicy>
             </property>
             <property name="font">
-             <font>
-              <pointsize>-1</pointsize>
-             </font>
+             <font/>
             </property>
             <property name="title">
              <string>Cumulative Report</string>
@@ -1049,9 +1024,7 @@ QTreeView::item:selected:!active {
              <item row="0" column="0">
               <widget class="QLabel" name="totTests_label">
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="text">
                 <string>T&amp;otal Tests</string>
@@ -1076,9 +1049,7 @@ QTreeView::item:selected:!active {
                 </size>
                </property>
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1100,9 +1071,7 @@ QTreeView::item:selected:!active {
              <item row="2" column="0">
               <widget class="QLabel" name="totCase_label">
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="text">
                 <string>Total Ca&amp;ses</string>
@@ -1127,9 +1096,7 @@ QTreeView::item:selected:!active {
                 </size>
                </property>
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1151,9 +1118,7 @@ QTreeView::item:selected:!active {
              <item row="4" column="0">
               <widget class="QLabel" name="totDeaths_label">
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="text">
                 <string>Tota&amp;l Deaths</string>
@@ -1178,9 +1143,7 @@ QTreeView::item:selected:!active {
                 </size>
                </property>
                <property name="font">
-                <font>
-                 <pointsize>-1</pointsize>
-                </font>
+                <font/>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1230,9 +1193,7 @@ QTreeView::item:selected:!active {
            </size>
           </property>
           <property name="font">
-           <font>
-            <pointsize>-1</pointsize>
-           </font>
+           <font/>
           </property>
           <property name="text">
            <string>&amp;Refresh</string>
@@ -1251,7 +1212,7 @@ QTreeView::item:selected:!active {
      <x>0</x>
      <y>0</y>
      <width>982</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_edit">

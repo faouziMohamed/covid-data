@@ -4,6 +4,8 @@
         <file alias="ui_file">mainwindow.ui</file>
         <file alias="covid19.sqlite">db/covid19-data.sqlite</file>
         <file alias="arrow_down.svg">icons/arrow_down.svg</file>
+        <file alias="header_arrow_down.svg">icons/header_arrow_down.svg</file>
+        <file alias="header_arrow_up.svg">icons/header_arrow_up.svg</file>
         <file alias="style.qss">style/style.qss</file>
     </qresource>
 </RCC>

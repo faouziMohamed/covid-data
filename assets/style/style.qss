@@ -59,7 +59,6 @@ QSpinBox {
     background-color:  rgb(226, 241, 199);
 }
 
-
 QComboBox::drop-down,
 QDateEdit::drop-down
  {
@@ -85,7 +84,6 @@ QDateEdit::down-arrow:on {
 }
 
 QPushButton {
-    border-radius: 17px;
     padding: 6px 8px;
     border: 1px outset rgb(160, 171, 154);
     background: qlineargradient(x1: 0, y1: 0.1, x2: 1, y2: 0.5,
@@ -110,12 +108,31 @@ QPushButton:pressed {
 /*Style for QQTreeView and QHeaderView*/
 QHeaderView::section {
     background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
-						stop:0 #033442cb,
-                         stop: 0.7 rgb(1, 65, 90));
-    color: white;
+						stop:0.5 rgb(10, 20, 50),
+						stop:0.8 rgb(1, 20, 70));
+    color: rgb(222,230,255);
+    height:19px;
+    padding-top: 2px;
     padding-left: 4px;
-    border: 1px solid #6c6c6c;
+    border: 1px solid rgb(20, 50, 100);
 }
+
+QHeaderView::section:hover
+{
+    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+						stop:0.5 rgb(10, 30, 70),
+                        stop: 0.8 rgb(10, 35, 100));
+}
+
+QHeaderView::down-arrow {
+    image: url(":/header_arrow_down.svg");
+}
+
+QHeaderView::up-arrow {
+    image: url(":/header_arrow_up.svg");
+    padding-bottom:1px;
+}
+
 QTreeView {
     show-decoration-selected: 1;
     background-color: rgb(182, 182, 182);
