@@ -3,9 +3,9 @@ import sys
 from PyQt5.QtCore import QFile, QIODevice, QTextStream
 from PyQt5.QtWidgets import QApplication
 
-from src.dataView import CovidView
 # noinspection PyUnresolvedReferences
 import src.generated.resources_rc
+from src.dataView import CovidView
 
 
 def read_stylesheet(file_name: str = ':/style.qss') -> str:
@@ -17,9 +17,9 @@ def read_stylesheet(file_name: str = ':/style.qss') -> str:
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-
     style_sheet = read_stylesheet()
     app.setStyleSheet(style_sheet)
     view = CovidView()
+    view.treeView.setSortingEnabled(True)
     view.show()
     sys.exit(app.exec_())
