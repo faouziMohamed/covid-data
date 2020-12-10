@@ -20,7 +20,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.model = ModelCovidData()
         self.colsCount = self.model.columnCount()
         self.__setup_treeview()
-        self.__setup_event_handler()
+        self.__setup_event_handler(is_first_load=True)
         self.__initialize_fields(is_first_load=True)
         self.resize(1050, 654)
 
@@ -28,23 +28,24 @@ class CovidView(QMainWindow, Ui_MainWindow):
         proxy_model = QSortFilterProxyModel(self)
         proxy_model.setSourceModel(self.model)
         self.treeView.setModel(proxy_model)
-        for this_column_number in (0, 1, 3, 4, 5, 6, 7, 8):
+        for this_column_number in range(2):
             self.treeView.resizeColumnToContents(this_column_number)
+        self.treeView.header().resizeSection(2, 170)
         self.treeView.setAlternatingRowColors(True)
         self.treeView.setSortingEnabled(True)
 
-    def __setup_event_handler(self):
+    def __setup_event_handler(self, is_first_load: bool = True):
         selection_changed = self.treeView.selectionModel().selectionChanged
         selection_changed.connect(self.on_treeView_selectionChanged)
+        if is_first_load:
+            index_changed = self.date_box_2.currentIndexChanged
+            index_changed.connect(self.on_dateBox2_currentIndexChanged)
 
-        index_changed = self.date_box_2.currentIndexChanged
-        index_changed.connect(self.on_dateBox2_currentIndexChanged)
+            index_changed2 = self.date_box.currentIndexChanged
+            index_changed2.connect(self.on_dateBox_currentIndexChanged)
 
-        index_changed2 = self.date_box.currentIndexChanged
-        index_changed2.connect(self.on_dateBox_currentIndexChanged)
-
-        date_changed = self.dateEdit.dateChanged
-        date_changed.connect(self.on_date_edit_dateChanged)
+            date_changed = self.dateEdit.dateChanged
+            date_changed.connect(self.on_date_edit_dateChanged)
 
     def __initialize_fields(self, is_first_load: bool = True):
         if is_first_load:
@@ -99,7 +100,6 @@ class CovidView(QMainWindow, Ui_MainWindow):
             QItemSelectionModel.ClearAndSelect |
             QItemSelectionModel.Rows
         )
-        self.treeView.setRootIndex(index)
 
     def __display_dates_fields(self, the_date: str):
         print(end='')
@@ -156,6 +156,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.model.db.filter_data_by_date(new_date.toString('yyyy-MM-dd'))
         self.treeView.reset()
         self.__setup_treeview()
+        self.__setup_event_handler(is_first_load=False)
         self.__initialize_fields(is_first_load=False)
 
     def on_treeView_selectionChanged(self, selected: QItemSelection,
@@ -165,5 +166,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         selected_row = selected.indexes()[0].row()
         self.__display_details_about(selected_row)
 
-    def closeEvent(self, a0: QCloseEvent) -> None:
-        a0.accept()
+    def on
+
+        def closeEvent(self, a0: QCloseEvent) -> None:
+            a0.accept()
