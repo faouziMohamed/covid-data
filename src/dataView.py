@@ -1,5 +1,6 @@
 import pandas as pd
-from PyQt5.QtCore import QDate, QModelIndex, QItemSelectionModel
+from PyQt5.QtCore import QDate, QModelIndex, QItemSelectionModel, \
+    QSortFilterProxyModel
 from PyQt5.QtCore import (QItemSelection)
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import (QMainWindow)
@@ -10,8 +11,7 @@ from src.resources import utils
 
 
 class CovidView(QMainWindow, Ui_MainWindow):
-    LAST_ROW, FIRST_ROW = -1, 0
-    FIRST_OPTION, COLUMNS_COUNT = 0, 0
+    FIRST_ROW, FIRST_OPTION = 0, 0
     TODAY, YESTERDAY, OTHER_DAY = 1, 2, 3
 
     def __init__(self, parent=None):
@@ -25,11 +25,13 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.resize(1050, 654)
 
     def __setup_treeview(self):
-        self.treeView.setModel(self.model)
-        self.treeView.setSortingEnabled(True)
+        proxy_model = QSortFilterProxyModel(self)
+        proxy_model.setSourceModel(self.model)
+        self.treeView.setModel(proxy_model)
         for this_column_number in (0, 1, 3, 4, 5, 6, 7, 8):
             self.treeView.resizeColumnToContents(this_column_number)
         self.treeView.setAlternatingRowColors(True)
+        self.treeView.setSortingEnabled(True)
 
     def __setup_event_handler(self):
         selection_changed = self.treeView.selectionModel().selectionChanged
@@ -68,13 +70,22 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.dateEdit_text.setMaximumDate(QDate(*today_tuple))
 
     def __display_details_about(self, row_index: int):
-        print('Selected date: ' + self.dateEdit_text.text())
         view = self.model.db.view
         row = view.iloc[row_index]
         self.__set_current_country(str(row.location))
         self.__set_current_continent(str(row.continent))
         self.__display_dates_fields(str(row.dates))
         self.__display_numerical_fields(row)
+
+        self.print_selectedRow_to_console(row)
+
+    def print_selectedRow_to_console(self, row):
+        data = [self.dateEdit_text.text(), row.continent, row.location,
+                row.new_tests, row.new_cases, row.new_deaths, row.total_tests,
+                row.total_cases, row.total_deaths]
+        for value in data[:-1]:
+            print(f"{value}, ", end='')
+        print(data[-1])
 
     def select_first_row(self):
         index = self.model.index(
@@ -88,8 +99,10 @@ class CovidView(QMainWindow, Ui_MainWindow):
             QItemSelectionModel.ClearAndSelect |
             QItemSelectionModel.Rows
         )
+        self.treeView.setRootIndex(index)
 
     def __display_dates_fields(self, the_date: str):
+        print(end='')
         a_date_tuple = utils.year_mon_day(the_date)
         selected_date = QDate(*a_date_tuple)
         for date_edit in (self.dateEdit, self.dateEdit_text):

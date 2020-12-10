@@ -21,10 +21,10 @@ class ModelCovidData(QAbstractTableModel):
             return self.tr(self.columnTitles[section])
         return QVariant()
 
-    def data(self, index: QModelIndex, role: int = ...) -> [QVariant, str]:
+    def data(self, index: QModelIndex, role: int = ...):
         if role == Qt.TextAlignmentRole and index.isValid():
             if index.column() > 2:
-                return Qt.AlignRight
+                return Qt.AlignVCenter + Qt.AlignRight
         if (role == Qt.DisplayRole) and index.isValid():
             data = self._db.view.iloc[index.row(), index.column()]
             data = int(data) if index.column() > 2 else self.tr(data)
