@@ -1,6 +1,10 @@
 from typing import Tuple
 
 
+def ignore():
+    ...
+
+
 def today(as_string=True):
     from datetime import date
     today_ = date.today()
