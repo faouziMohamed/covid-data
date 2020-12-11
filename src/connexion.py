@@ -163,9 +163,9 @@ class DbConnexion:
         return self._view
 
     def filter_data_by_continent(self, a_continent) -> pd.DataFrame:
-        continent = self.get_table('continent', MetaData())
-        select_query = select([continent])
-        select_query.where(continent.columns.continent == a_continent)
+        model_view = self.get_table('model_view', MetaData())
+        select_query = select([model_view])
+        select_query.where(model_view.columns.continent == a_continent)
         self._view = pd.read_sql_query(select_query, con=self._engine)
         return self._view
 
