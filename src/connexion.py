@@ -1,5 +1,4 @@
 import os
-from operator import or_
 
 import pandas as pd
 import sqlalchemy
@@ -83,8 +82,8 @@ class DbConnexion:
             yesterday = utils.yesterday()
             query = select([model_view])
 
-            query = query.where(or_(model_view.columns.dates == today,
-                                    model_view.columns.dates == yesterday))
+            # query = query.where(or_(model_view.columns.dates == today,
+            #                        model_view.columns.dates == yesterday))
             self._view = pd.read_sql_query(query, con=self._engine)
             # self._view = pd.read_sql_query("select * from model_view",
             #                              con=self._engine)

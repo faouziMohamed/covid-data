@@ -1,5 +1,5 @@
 import pandas as pd
-from PyQt5.QtCore import QDate, QModelIndex, QItemSelectionModel
+from PyQt5.QtCore import QDate, QModelIndex, QItemSelectionModel, QRegExp, Qt
 from PyQt5.QtCore import (QItemSelection)
 from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import (QMainWindow)
@@ -17,6 +17,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         super(CovidView, self).__init__(parent)
         self.setupUi(self)
         self.model = ModelCovidData()
+        self.proxy_model = SortFilterProxyModel(self)
         self.colsCount = self.model.columnCount()
         self.__setup_treeview()
         self.__setup_event_handler(is_first_load=True)
@@ -24,9 +25,8 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.resize(1050, 654)
 
     def __setup_treeview(self):
-        proxy_model = SortFilterProxyModel(self)
-        proxy_model.setSourceModel(self.model)
-        self.treeView.setModel(proxy_model)
+        self.proxy_model.setSourceModel(self.model)
+        self.treeView.setModel(self.proxy_model)
         for this_column_number in range(2):
             self.treeView.resizeColumnToContents(this_column_number)
         self.treeView.header().resizeSection(2, 170)
@@ -39,9 +39,6 @@ class CovidView(QMainWindow, Ui_MainWindow):
         selection_changed.connect(self.on_treeView_selectionChanged)
 
         if is_first_load:
-            header = self.treeView.header()
-            header.sortIndicatorChanged.connect(
-                lambda x, y: ...)
             index_changed = self.date_box_2.currentIndexChanged
             index_changed.connect(self.on_dateBox2_currentIndexChanged)
 
@@ -157,11 +154,17 @@ class CovidView(QMainWindow, Ui_MainWindow):
             self.dateEdit.setReadOnly(False)
 
     def on_date_edit_dateChanged(self, new_date: QDate):
-        self.model.db.filter_data_by_date(new_date.toString('yyyy-MM-dd'))
-        self.treeView.reset()
-        self.__setup_treeview()
-        self.__setup_event_handler(is_first_load=False)
-        self.__initialize_fields(is_first_load=False)
+        # self.model.db.filter_data_by_date(new_date.toString('yyyy-MM-dd'))
+        # self.treeView.reset()
+        # self.__setup_treeview()
+        # self.__setup_event_handler(is_first_load=False)
+        # self.__initialize_fields(is_first_load=False)
+
+        the_date = new_date.toString('yyyy-MM-dd')
+        self.proxy_model.date = the_date
+        self.proxy_model.filter_by_date = True
+        regexp = QRegExp(the_date, Qt.CaseInsensitive, QRegExp.RegExp)
+        self.proxy_model.setFilterRegExp(regexp)
 
     def on_treeView_selectionChanged(self, selected: QItemSelection,
                                      deselected: QItemSelection):
