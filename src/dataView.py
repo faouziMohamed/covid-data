@@ -38,11 +38,8 @@ class CovidView(QMainWindow, Ui_MainWindow):
         selection_changed.connect(self.on_treeView_selectionChanged)
 
         if is_first_load:
-            index_changed = self.date_box_2.currentIndexChanged
-            index_changed.connect(self.on_dateBox2_currentIndexChanged)
-
-            index_changed2 = self.date_box.currentIndexChanged
-            index_changed2.connect(self.on_dateBox_currentIndexChanged)
+            index_changed = self.date_box.currentIndexChanged
+            index_changed.connect(self.on_dateBox_currentIndexChanged)
 
             date_changed = self.dateEdit.dateChanged
             date_changed.connect(self.on_date_edit_dateChanged)
@@ -113,9 +110,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
             day_option = CovidView.YESTERDAY
         else:
             day_option = CovidView.OTHER_DAY
-
         self.date_box.setCurrentIndex(day_option)
-        self.date_box_2.setCurrentIndex(day_option)
 
     def __display_numerical_fields(self, row: pd.Series):
         fields = (self.newTest_spin, self.newCases_spin,
@@ -145,9 +140,6 @@ class CovidView(QMainWindow, Ui_MainWindow):
 
     # Reimplemented functions and event handlers
     def on_dateBox_currentIndexChanged(self, index: int) -> None:
-        print(f'Box : Ok changed, new index : {index}, {type(index)}')
-
-    def on_dateBox2_currentIndexChanged(self, index: int) -> None:
         if index in [1, 2]:
             self.dateEdit.setCalendarPopup(False)
             self.dateEdit.setReadOnly(True)

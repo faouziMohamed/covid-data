@@ -20,7 +20,179 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         MainWindow.setFont(font)
         MainWindow.setMouseTracking(True)
-        MainWindow.setStyleSheet("")
+        MainWindow.setStyleSheet("/*QWidget {\n"
+"    font-size: 14px;\n"
+"}\n"
+"\n"
+"QWidget#centralwidget {\n"
+"    background: qlineargradient(x1:0, y1:0.1, x2:0.5, y2:1,\n"
+"            stop: 0 rgb(0, 1, 59),\n"
+"            stop: 0.5 rgba(2, 27, 37, 0.931),\n"
+"            stop: 1 rgb(8, 47, 25));\n"
+"}\n"
+"\n"
+"QGroupBox {\n"
+"    border: 2px solid rgb(37, 90, 81);\n"
+"    border-radius: 9px;\n"
+"    margin-top: 10px;\n"
+"    margin-left: 5px;\n"
+"}\n"
+"\n"
+"QGroupBox::title {\n"
+"    subcontrol-origin: margin;\n"
+"    subcontrol-position: top left;\n"
+"    padding: 0 5px;\n"
+"    color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"            stop: 0 #00521b,\n"
+"            stop: 0.5 #FFFFFF);\n"
+"}\n"
+"\n"
+"QGroupBox>QLabel {\n"
+"    color: #96cccc;\n"
+"}\n"
+"\n"
+"QComboBox {\n"
+"    combobox-popup: 0;\n"
+"    color: rgb(0, 2, 33);\n"
+"    background-color:rgb(221, 235, 239);\n"
+"}\n"
+"\n"
+"QComboBox QAbstractItemView {\n"
+"    border: 1px solid rgb(147, 149, 148);\n"
+"    border-radius: 0px 5px;\n"
+"    color: rgb(0, 17, 17);\n"
+"    background-color:rgb(221, 235, 239);\n"
+"    selection-color: rgb(0, 0, 80);\n"
+"    selection-background-color: rgb(51, 175, 93);\n"
+"}\n"
+"\n"
+"QComboBox,\n"
+"QLineEdit,\n"
+"QSpinBox,\n"
+"QDateEdit {\n"
+"    border:2px double darkgray;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QLineEdit,\n"
+"QSpinBox {\n"
+"    selection-color: rgb(0, 0, 80);\n"
+"    selection-background-color: rgb(0, 175, 26);\n"
+"    background-color:  rgb(226, 241, 199);\n"
+"}\n"
+"\n"
+"QComboBox::drop-down,\n"
+"QDateEdit::drop-down\n"
+" {\n"
+"    border:unset;\n"
+"}\n"
+"\n"
+"QDateEdit::drop-down\n"
+" {\n"
+"    border:1px solid rgb(143, 173, 223);\n"
+"    background-color:rgb(154, 184, 239);\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow,\n"
+"QDateEdit::drop-down {\n"
+"    image: url(\":/arrow_down.svg\");\n"
+"    width: 10px;\n"
+"}\n"
+"\n"
+"QComboBox::down-arrow:on,\n"
+"QDateEdit::down-arrow:on {\n"
+"    top: 1px;\n"
+"    left: 1px;\n"
+"}\n"
+"\n"
+"QPushButton {\n"
+"    padding: 6px 8px;\n"
+"    border: 1px outset rgb(160, 171, 154);\n"
+"    background: qlineargradient(x1: 0, y1: 0.1, x2: 1, y2: 0.5,\n"
+"            stop: 0 #f6f7fa,\n"
+"            stop: 1 rgb(0, 87, 127));\n"
+"}\n"
+"\n"
+"\n"
+"QPushButton:hover {\n"
+"    border-color: rgb(141, 141, 70);\n"
+"    background: qlineargradient(x1: 0, y1: 0.1, x2: 1, y2: 0.5,\n"
+"            stop: 0 #f6f7fa,\n"
+"            stop: 0.8 rgb(42, 135, 71));\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1,\n"
+"            stop: 0 rgb(0, 161, 51),\n"
+"            stop: 1 #f6f7fa);\n"
+"}\n"
+"\n"
+"QHeaderView::section {\n"
+"    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,\n"
+"                        stop:0.5 rgb(10, 20, 50),\n"
+"                        stop:0.8 rgb(1, 20, 70));\n"
+"    color: rgb(222,230,255);\n"
+"    height:19px;\n"
+"    padding-top: 2px;\n"
+"    padding-left: 4px;\n"
+"    border: 1px solid rgb(20, 50, 100);\n"
+"}\n"
+"\n"
+"QHeaderView::section:hover\n"
+"{\n"
+"    background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1,\n"
+"                        stop:0.5 rgb(10, 30, 70),\n"
+"                        stop: 0.8 rgb(10, 35, 100));\n"
+"}\n"
+"\n"
+"QHeaderView::down-arrow {\n"
+"    image: url(\":/header_arrow_down.svg\");\n"
+"}\n"
+"\n"
+"QHeaderView::up-arrow {\n"
+"    image: url(\":/header_arrow_up.svg\");\n"
+"    padding-bottom:1px;\n"
+"}\n"
+"\n"
+"QTreeView {\n"
+"    show-decoration-selected: 1;\n"
+"    background-color: rgb(182, 182, 182);\n"
+"    alternate-background-color: rgb(154, 154, 154);\n"
+"}\n"
+"\n"
+"QTreeView::item {\n"
+"    margin-left: 0;\n"
+"    border: 1px solid rgba(99, 124, 118, 0.795);\n"
+"    border-top-color: transparent;\n"
+"    border-bottom-color: transparent;\n"
+"}\n"
+"\n"
+"\n"
+"QTreeView::item:hover {\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"            stop: 0 #8ab6ce,\n"
+"            stop: 0.9 #b2c0c2);\n"
+"    border: 1px solid #bfcde4;\n"
+"}\n"
+"\n"
+"QTreeView::item:selected {\n"
+"    border: 1px solid #567dbc;\n"
+"    selection-background-color: #3374ff;\n"
+"    color: rgb(0, 12, 12);\n"
+"}\n"
+"\n"
+"QTreeView::item:selected:active {\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"            stop: 0 #6ea1f1,\n"
+"            stop: 1 #567dbc);\n"
+"}\n"
+"\n"
+"QTreeView::item:selected:!active {\n"
+"    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"            stop: 0 #6b9be8,\n"
+"            stop: 1 #577fbf);\n"
+"}\n"
+"*/")
         MainWindow.setDocumentMode(True)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         MainWindow.setDockNestingEnabled(False)
@@ -45,18 +217,6 @@ class Ui_MainWindow(object):
         self.comboBox.addItem("")
         self.comboBox.addItem("")
         self.horizontalLayout_2.addWidget(self.comboBox)
-        self.date_box = QtWidgets.QComboBox(self.centralwidget)
-        self.date_box.setMinimumSize(QtCore.QSize(0, 0))
-        self.date_box.setMaximumSize(QtCore.QSize(16777215, 16777215))
-        font = QtGui.QFont()
-        self.date_box.setFont(font)
-        self.date_box.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToContents)
-        self.date_box.setObjectName("date_box")
-        self.date_box.addItem("")
-        self.date_box.addItem("")
-        self.date_box.addItem("")
-        self.date_box.addItem("")
-        self.horizontalLayout_2.addWidget(self.date_box)
         self.continent_box = QtWidgets.QComboBox(self.centralwidget)
         self.continent_box.setMinimumSize(QtCore.QSize(0, 0))
         font = QtGui.QFont()
@@ -136,18 +296,18 @@ class Ui_MainWindow(object):
         self.filter1Box.setObjectName("filter1Box")
         self.formLayout_4 = QtWidgets.QFormLayout(self.filter1Box)
         self.formLayout_4.setObjectName("formLayout_4")
-        self.date_box_2 = QtWidgets.QComboBox(self.filter1Box)
-        self.date_box_2.setMinimumSize(QtCore.QSize(0, 30))
-        self.date_box_2.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.date_box = QtWidgets.QComboBox(self.filter1Box)
+        self.date_box.setMinimumSize(QtCore.QSize(0, 30))
+        self.date_box.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
-        self.date_box_2.setFont(font)
-        self.date_box_2.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToContents)
-        self.date_box_2.setObjectName("date_box_2")
-        self.date_box_2.addItem("")
-        self.date_box_2.addItem("")
-        self.date_box_2.addItem("")
-        self.date_box_2.addItem("")
-        self.formLayout_4.setWidget(0, QtWidgets.QFormLayout.SpanningRole, self.date_box_2)
+        self.date_box.setFont(font)
+        self.date_box.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToContents)
+        self.date_box.setObjectName("date_box")
+        self.date_box.addItem("")
+        self.date_box.addItem("")
+        self.date_box.addItem("")
+        self.date_box.addItem("")
+        self.formLayout_4.setWidget(0, QtWidgets.QFormLayout.SpanningRole, self.date_box)
         self.dateEdit = QtWidgets.QDateEdit(self.filter1Box)
         self.dateEdit.setEnabled(True)
         self.dateEdit.setMinimumSize(QtCore.QSize(170, 30))
@@ -170,7 +330,7 @@ class Ui_MainWindow(object):
         self.dateEdit.setMaximumDate(QtCore.QDate(2050, 12, 31))
         self.dateEdit.setMinimumDate(QtCore.QDate(2019, 9, 30))
         self.dateEdit.setCurrentSection(QtWidgets.QDateTimeEdit.DaySection)
-        self.dateEdit.setCalendarPopup(True)
+        self.dateEdit.setCalendarPopup(False)
         self.dateEdit.setTimeSpec(QtCore.Qt.LocalTime)
         self.dateEdit.setDate(QtCore.QDate(2020, 11, 23))
         self.dateEdit.setObjectName("dateEdit")
@@ -445,19 +605,15 @@ class Ui_MainWindow(object):
         self.comboBox.setItemText(0, _translate("MainWindow", "Filter by date"))
         self.comboBox.setItemText(1, _translate("MainWindow", "Filter by continent"))
         self.comboBox.setItemText(2, _translate("MainWindow", "Filter by country"))
-        self.date_box.setItemText(0, _translate("MainWindow", "Select a date"))
-        self.date_box.setItemText(1, _translate("MainWindow", "Today"))
-        self.date_box.setItemText(2, _translate("MainWindow", "Yesterday"))
-        self.date_box.setItemText(3, _translate("MainWindow", "An other day"))
         self.continent_box.setItemText(0, _translate("MainWindow", "Select a continent"))
         self.country_box.setToolTip(_translate("MainWindow", "Select a country to show details"))
         self.country_box.setCurrentText(_translate("MainWindow", "Select a country"))
         self.country_box.setItemText(0, _translate("MainWindow", "Select a country"))
         self.filter1Box.setTitle(_translate("MainWindow", "Date"))
-        self.date_box_2.setItemText(0, _translate("MainWindow", "Select a date"))
-        self.date_box_2.setItemText(1, _translate("MainWindow", "Today"))
-        self.date_box_2.setItemText(2, _translate("MainWindow", "Yesterday"))
-        self.date_box_2.setItemText(3, _translate("MainWindow", "An other day"))
+        self.date_box.setItemText(0, _translate("MainWindow", "Select a date"))
+        self.date_box.setItemText(1, _translate("MainWindow", "Today"))
+        self.date_box.setItemText(2, _translate("MainWindow", "Yesterday"))
+        self.date_box.setItemText(3, _translate("MainWindow", "An other day"))
         self.dateEdit.setDisplayFormat(_translate("MainWindow", "dd-MM-yyyy"))
         self.dateEdit_text.setDisplayFormat(_translate("MainWindow", "ddd. dd MMM. yyyy"))
         self.queryBox.setTitle(_translate("MainWindow", "Local"))

@@ -275,48 +275,6 @@ QTreeView::item:selected:!active {
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="date_box">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="font">
-           <font/>
-          </property>
-          <property name="sizeAdjustPolicy">
-           <enum>QComboBox::AdjustToContents</enum>
-          </property>
-          <item>
-           <property name="text">
-            <string>Select a date</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Today</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Yesterday</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>An other day</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
          <widget class="QComboBox" name="continent_box">
           <property name="minimumSize">
            <size>
@@ -512,7 +470,7 @@ QTreeView::item:selected:!active {
             </property>
             <layout class="QFormLayout" name="formLayout_4">
              <item row="0" column="0" colspan="2">
-              <widget class="QComboBox" name="date_box_2">
+              <widget class="QComboBox" name="date_box">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -640,7 +598,7 @@ QTreeView::item:selected:!active {
                 <string>dd-MM-yyyy</string>
                </property>
                <property name="calendarPopup">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
                <property name="timeSpec">
                 <enum>Qt::LocalTime</enum>
