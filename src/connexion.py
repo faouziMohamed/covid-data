@@ -55,7 +55,7 @@ class DbConnexion:
         if not db_exists:
             self.__create_new_db()
         self.__insert_data_for_first_time()
-        self.__create_data_view()
+        self.__create_modelView_and_table()
 
     def __create_new_db(self):
         self._engine = create_database(self._db_name)
@@ -63,7 +63,7 @@ class DbConnexion:
     def get_table(self, t_name: str, meta: MetaData) -> Table:
         return Table(t_name, meta, autoload=True, autoload_with=self._engine)
 
-    def __create_data_view(self):
+    def __create_modelView_and_table(self):
         with self._engine.connect() as con:
             con.execute("""
                 CREATE VIEW model_view AS
@@ -77,17 +77,13 @@ class DbConnexion:
                     total_cases DESC, 
                     total_deaths DESC;
                 """)
-            metadata = MetaData()
-            model_view = self.get_table('model_view', metadata)
-            today = utils.today()
-            yesterday = utils.yesterday()
-            query = select([model_view])
-
-            query = query.where(or_(model_view.columns.dates == today,
-                                    model_view.columns.dates == yesterday))
-            self._view = pd.read_sql_query(query, con=self._engine)
-            # self._view = pd.read_sql_query("select * from model_view",
-            #                              con=self._engine)
+            model_view = self.get_table('model_view', MetaData())
+            select_query = select([model_view])
+            select_query = select_query.where(
+                or_(model_view.columns.dates == utils.today(),
+                    model_view.columns.dates == utils.yesterday())
+            )
+            self._view = pd.read_sql_query(select_query, con=self._engine)
         return self.view
 
     def __insert_data_for_first_time(self):
@@ -161,10 +157,16 @@ class DbConnexion:
         return int(continents_df.loc[query].index[0])
 
     def filter_data_by_date(self, a_date: str) -> pd.DataFrame:
-        metadata = MetaData()
-        model_view = self.get_table('model_view', metadata)
+        model_view = self.get_table('model_view', MetaData())
         query = select([model_view]).where(model_view.columns.dates == a_date)
         self._view = pd.read_sql_query(query, con=self._engine)
+        return self._view
+
+    def filter_data_by_continent(self, a_continent) -> pd.DataFrame:
+        continent = self.get_table('continent', MetaData())
+        select_query = select([continent])
+        select_query.where(continent.columns.continent == a_continent)
+        self._view = pd.read_sql_query(select_query, con=self._engine)
         return self._view
 
     @property
