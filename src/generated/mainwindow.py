@@ -597,6 +597,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.continent_box.setCurrentIndex(0)
         self.country_box.setCurrentIndex(0)
+        self.closeAction.triggered['bool'].connect(MainWindow.close)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

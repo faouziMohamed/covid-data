@@ -19,23 +19,27 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.model = ModelCovidData()
         self.colsCount = self.model.columnCount()
         self.__setup_treeview()
-        self.__initialize_fields(is_first_load=True)
+        self.initialize_fields(is_first_load=True)
         self.__setup_event_handler(is_first_load=True)
         self.resize(1050, 654)
 
     def __setup_treeview(self):
         self.treeView.setModel(self.model)
+        self.resize_header_data()
+        self.treeView.setAlternatingRowColors(True)
+        self.treeView.setSortingEnabled(True)
+        self.treeView.setRootIsDecorated(False)
+
+    def resize_header_data(self):
         if self.model.rowCount() > 0:
             for this_column_number in range(2):
                 self.treeView.resizeColumnToContents(this_column_number)
         self.treeView.header().resizeSection(2, 170)
-        self.treeView.setAlternatingRowColors(True)
-        self.treeView.setSortingEnabled(True)
 
     def __setup_event_handler(self, is_first_load: bool = True):
         # model = self.model
         selection_changed = self.treeView.selectionModel().selectionChanged
-        selection_changed.connect(self.on_treeView_selectionChanged)
+        selection_changed.connect(self.on_treeview_selectionChanged)
 
         if is_first_load:
             index_changed = self.date_box.currentIndexChanged
@@ -44,7 +48,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
             date_changed = self.dateEdit.dateChanged
             date_changed.connect(self.on_date_edit_dateChanged)
 
-    def __initialize_fields(self, is_first_load: bool = True):
+    def initialize_fields(self, is_first_load: bool = True):
         if is_first_load:
             self.__fill_country_continent_combobox()
         try:  # handle the case where the view table is empty
@@ -94,7 +98,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         selection_model = self.treeView.selectionModel()
         selection_model.select(
             index,
-            QItemSelectionModel.ClearAndSelect |
+            QItemSelectionModel.Select |
             QItemSelectionModel.Rows
         )
 
@@ -131,7 +135,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.continent_box.setCurrentIndex(continent_id + 1)
         self.continent_edit.setText(continent)
 
-    def on_treeView_selectionChanged(self, selected: QItemSelection,
+    def on_treeview_selectionChanged(self, selected: QItemSelection,
                                      deselected: QItemSelection):
         if len(selected.indexes()) == 0:
             return
@@ -151,11 +155,9 @@ class CovidView(QMainWindow, Ui_MainWindow):
             self.dateEdit.setReadOnly(False)
 
     def on_date_edit_dateChanged(self, new_date: QDate):
-        self.model.db.filter_data_by_date(new_date.toString('yyyy-MM-dd'))
-        self.treeView.reset()
-        self.__setup_treeview()
-        self.__initialize_fields(is_first_load=False)
-        # self.__setup_event_handler(is_first_load=False)
+        self.model.filter_by_date(new_date.toString('yyyy-MM-dd'))
+        self.initialize_fields(is_first_load=False)
+        self.resize_header_data()
 
     def closeEvent(self, a0: QCloseEvent) -> None:
         a0.accept()

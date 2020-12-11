@@ -117,7 +117,6 @@ class DbConnexion:
         continent = self.__create_table_for('continent', id_name='idc')
         return continent
 
-    # DtFrame is pd.DataFrame
     def __get_countries_by_continent(self) -> pd.DataFrame:
         cols = ['location', 'continent']
         countries = self._df.loc[:, cols]

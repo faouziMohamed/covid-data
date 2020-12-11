@@ -1,3 +1,4 @@
+import pandas as pd
 from PyQt5 import QtCore
 from PyQt5.QtCore import (QModelIndex, Qt, QVariant)
 
@@ -6,6 +7,8 @@ from src.resources.constant import DB_NAME
 
 
 class ModelCovidData(QtCore.QAbstractTableModel):
+    FIRST_ROW = 0
+
     def __init__(self):
         super(ModelCovidData, self).__init__()
         tr = self.tr
@@ -42,6 +45,13 @@ class ModelCovidData(QtCore.QAbstractTableModel):
         col = self._db.view.columns[column]
         sort_order = True if order == Qt.DescendingOrder else False
         self._db.view.sort_values(by=col, ascending=sort_order, inplace=True)
+        self.dataChanged.emit(QModelIndex(), QModelIndex())
+
+    def filter_by_date(self, a_date: str) -> pd.DataFrame:
+        self.beginResetModel()
+        new_data = self._db.filter_data_by_date(a_date)
+        self.endResetModel()
+        return new_data
 
     @property
     def db(self):
