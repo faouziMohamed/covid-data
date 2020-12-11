@@ -1,4 +1,5 @@
 import os
+from operator import or_
 
 import pandas as pd
 import sqlalchemy
@@ -82,8 +83,8 @@ class DbConnexion:
             yesterday = utils.yesterday()
             query = select([model_view])
 
-            # query = query.where(or_(model_view.columns.dates == today,
-            #                        model_view.columns.dates == yesterday))
+            query = query.where(or_(model_view.columns.dates == today,
+                                    model_view.columns.dates == yesterday))
             self._view = pd.read_sql_query(query, con=self._engine)
             # self._view = pd.read_sql_query("select * from model_view",
             #                              con=self._engine)
@@ -96,8 +97,6 @@ class DbConnexion:
         self._continents = self.__create_continents_table()
         self._countries = self.__create_countries_table(self._continents)
         self._cases = self.__create_cases_table(countries=self._countries)
-
-        print(type(self._continents.to_sql))
 
         engine = self._engine
         self._continents.to_sql('continents', con=engine, if_exists='append')

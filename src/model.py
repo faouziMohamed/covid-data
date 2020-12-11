@@ -1,8 +1,7 @@
 from PyQt5 import QtCore
-from PyQt5.QtCore import (QModelIndex, Qt, QVariant, QObject)
+from PyQt5.QtCore import (QModelIndex, Qt, QVariant)
 
 from src.connexion import DbConnexion
-from src.resources import utils
 from src.resources.constant import DB_NAME
 
 
@@ -23,7 +22,7 @@ class ModelCovidData(QtCore.QAbstractTableModel):
             return self.tr(self.columnTitles[section])
         return QVariant()
 
-    def data(self, index: QModelIndex, role: int = Qt.DisplayRole):
+    def data(self, index: QModelIndex, role: int = ...):
         if role == Qt.TextAlignmentRole and index.isValid():
             if index.column() > 2:
                 return Qt.AlignVCenter + Qt.AlignRight
@@ -51,33 +50,3 @@ class ModelCovidData(QtCore.QAbstractTableModel):
     @property
     def database(self):
         return self.db
-
-
-class SortFilterProxyModel(QtCore.QSortFilterProxyModel):
-    def __init__(self, parent: QObject):
-        super(SortFilterProxyModel, self).__init__(parent)
-        self.filter_by_date = True
-        self.filter_by_country = False
-        self.filter_by_continent = False
-        self.date = utils.today(as_string=True)
-        self.country = "Morocco"
-        self.continent = 'Africa'
-
-    def sort(self, column: int, order: Qt.SortOrder = Qt.AscendingOrder):
-        self.sourceModel().sort(column, order)
-        # self.dataChanged.emit(QModelIndex(), QModelIndex())
-
-    def filterAcceptsRow(self, source_row: int,
-                         source_parent: QModelIndex) -> bool:
-        if self.filter_by_date:
-            return self.filter_by(self.date, source_parent, source_row, 0)
-        elif self.filter_by_continent:
-            return self.filter_by(self.continent, source_parent, source_row, 1)
-        else:  # filter country
-            return self.filter_by(self.country, source_parent, source_row, 2)
-
-    def filter_by(self, by, source_parent, source_row, source_column) -> bool:
-        model, index = self.sourceModel(), self.sourceModel().index
-        item_index = index(source_row, source_column, source_parent)
-        print(f"filter by {by}--- {model.data(item_index)}")
-        return model.data(item_index) == by
