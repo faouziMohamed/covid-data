@@ -1,15 +1,15 @@
 import pandas as pd
+from PyQt5 import QtWidgets
 from PyQt5.QtCore import (QDate, QModelIndex, QItemSelectionModel,
                           QItemSelection, pyqtSlot)
 from PyQt5.QtGui import QCloseEvent
-from PyQt5.QtWidgets import (QMainWindow)
 
 from src.generated.mainwindow import Ui_MainWindow
 from src.model import ModelCovidData
 from src.resources import utils
 
 
-class CovidView(QMainWindow, Ui_MainWindow):
+class CovidView(QtWidgets.QMainWindow, Ui_MainWindow):
     FIRST_ROW, FIRST_OPTION = 0, 0
     TODAY, YESTERDAY, OTHER_DAY = 1, 2, 3
 
@@ -20,8 +20,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.colsCount = self.model.columnCount()
         self.__setup_treeview()
         self.initialize_fields(is_first_load=True)
-        self.__setup_event_handler(is_first_load=True)
-        self.resize(1050, 654)
+        self.resize(1030, 654)
 
     def __setup_treeview(self):
         self.treeView.setModel(self.model)
@@ -35,11 +34,6 @@ class CovidView(QMainWindow, Ui_MainWindow):
             for this_column_number in range(2):
                 self.treeView.resizeColumnToContents(this_column_number)
         self.treeView.header().resizeSection(2, 170)
-
-    def __setup_event_handler(self, is_first_load: bool = True):
-        # model = self.model
-        selection_changed = self.treeView.selectionModel().selectionChanged
-        selection_changed.connect(self.on_treeview_selectionChanged)
 
     def initialize_fields(self, is_first_load: bool = True):
         if is_first_load:
@@ -69,7 +63,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         row = view.iloc[row_index]
         self.__set_current_country(str(row.location))
         self.__set_current_continent(str(row.continent))
-        self.__display_dates_fields(str(row.dates))
+        self.__display_dates_fields(str(row.date))
         self.__display_numerical_fields(row)
 
         self.print_selectedRow_to_console(row)
@@ -128,8 +122,10 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.continent_box.setCurrentIndex(continent_id + 1)
         self.continent_edit.setText(continent)
 
-    def on_treeview_selectionChanged(self, selected: QItemSelection,
+    @pyqtSlot(QItemSelection, QItemSelection)
+    def on_treeView_selectionChanged(self, selected: QItemSelection,
                                      deselected: QItemSelection):
+        utils.ignore(deselected)
         if len(selected.indexes()) == 0:
             return
         selected_row = selected.indexes()[0].row()
@@ -148,7 +144,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
             self.dateEdit.setCalendarPopup(True)
             self.dateEdit.setReadOnly(False)
 
-    @pyqtSlot()
+    @pyqtSlot(QDate)
     def on_dateEdit_dateChanged(self, new_date: QDate):
         self.model.filter_by_date(new_date.toString('yyyy-MM-dd'))
         self.initialize_fields(is_first_load=False)
@@ -161,6 +157,5 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.initialize_fields(is_first_load=False)
         self.resize_header_data()
 
-
-def closeEvent(self, a0: QCloseEvent) -> None:
-    a0.accept()
+    def closeEvent(self, a0: QCloseEvent) -> None:
+        a0.accept()
