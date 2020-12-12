@@ -49,7 +49,21 @@ class ModelCovidData(QtCore.QAbstractTableModel):
 
     def filter_by_date(self, a_date: str) -> pd.DataFrame:
         self.beginResetModel()
-        new_data = self._db.filter_data_by_date(a_date)
+        new_data = self._db.filter_data_by(by="date", rows_pattern=a_date)
+        self.endResetModel()
+        return new_data
+
+    def filter_by_continent(self, a_continent: str) -> pd.DataFrame:
+        self.beginResetModel()
+        db = self._db
+        new_data = db.filter_data_by(by="continent", rows_pattern=a_continent)
+        self.endResetModel()
+        return new_data
+
+    def filter_by_country(self, a_country: str) -> pd.DataFrame:
+        self.beginResetModel()
+        db = self._db
+        new_data = db.filter_data_by(by="country", rows_pattern=a_country)
         self.endResetModel()
         return new_data
 

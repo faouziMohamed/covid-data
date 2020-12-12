@@ -22,13 +22,14 @@ class DbConnexion:
         self._metadata = ...  # type: MetaData
         self.cols = ['date', 'location', 'new_tests', 'new_cases', 'new_deaths',
                      'total_tests', 'total_cases', 'total_deaths', 'continent']
-        self._db_name = db_name
-        self.get_online_data(URL_CSV_FILE)
+        utils.ignore(db_name)
+        self._db_name = DB_NAME
+        self.get_online_data(CSV_FILE)
         self.__config_database()
 
     def get_online_data(self, url: str = URL_CSV_FILE):
         self._df = pd.read_csv(url, usecols=self.cols)
-        return self.__prepare_data(save_data=False)
+        return self.__prepare_data(save_data=True)
 
     # Prepare local database
 
@@ -55,15 +56,15 @@ class DbConnexion:
         if not db_exists:
             self.__create_new_db()
         self.__insert_data_for_first_time()
-        self.__create_data_view()
+        self.__create_modelView_and_table()
 
     def __create_new_db(self):
-        self._engine = create_database(self._db_name)
+        self._engine = create_database(self._db_name, echo=False)
 
     def get_table(self, t_name: str, meta: MetaData) -> Table:
         return Table(t_name, meta, autoload=True, autoload_with=self._engine)
 
-    def __create_data_view(self):
+    def __create_modelView_and_table(self):
         with self._engine.connect() as con:
             con.execute("""
                 CREATE VIEW model_view AS
@@ -77,18 +78,15 @@ class DbConnexion:
                     total_cases DESC, 
                     total_deaths DESC;
                 """)
-            metadata = MetaData()
-            model_view = self.get_table('model_view', metadata)
-            today = utils.today()
-            yesterday = utils.yesterday()
-            query = select([model_view])
-
-            query = query.where(or_(model_view.columns.date == today,
-                                    model_view.columns.date == yesterday))
-            self._view = pd.read_sql_query(query, con=self._engine)
-            # self._view = pd.read_sql_query("select * from model_view",
-            #                              con=self._engine)
-        return self.view
+            model_view = self.get_table('model_view', MetaData())
+            today, yesterday = utils.today(), utils.yesterday()
+            select_query = select([model_view])
+            select_query = select_query.where(
+                or_(model_view.columns.date == today,
+                    model_view.columns.date == yesterday)
+            )
+        self._view = pd.read_sql_query(select_query, con=self._engine)
+        return self._view
 
     def __insert_data_for_first_time(self):
         """
@@ -159,13 +157,6 @@ class DbConnexion:
         continents_df = self._continents
         query = (continents_df.continent == continent)
         return int(continents_df.loc[query].index[0])
-
-    def filter_data_by_date(self, a_date: str) -> pd.DataFrame:
-        metadata = MetaData()
-        model_view = self.get_table('model_view', metadata)
-        query = select([model_view]).where(model_view.columns.date == a_date)
-        self._view = pd.read_sql_query(query, con=self._engine)
-        return self._view
 
     def filter_data_by(self, by: str, rows_pattern: str) -> pd.DataFrame:
         """

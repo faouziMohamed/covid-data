@@ -18,9 +18,10 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.model = ModelCovidData()
         self.colsCount = self.model.columnCount()
+        self.dateEdit_is_connected = False
         self.__setup_treeview()
-        self.__setup_event_handler(is_first_load=True)
         self.initialize_fields(is_first_load=True)
+        self.__setup_event_handler(is_first_load=True)
         self.resize(1050, 654)
 
     def __setup_treeview(self):
@@ -38,18 +39,20 @@ class CovidView(QMainWindow, Ui_MainWindow):
 
     def __setup_event_handler(self, is_first_load: bool = True):
         # model = self.model
-        selection_changed = self.treeView.selectionModel().selectionChanged
-        selection_changed.connect(self.on_treeview_selectionChanged)
+        self.treeView.selectionModel().selectionChanged.connect(
+            self.on_treeview_selectionChanged)
 
         if is_first_load:
-            index_changed = self.date_box.currentIndexChanged
-            index_changed.connect(self.on_dateBox_currentIndexChanged)
+            self.dateEdit.dateChanged.connect(self.on_date_edit_dateChanged)
+
+            self.date_box.currentIndexChanged.connect(
+                self.on_dateBox_currentIndexChanged)
+
+            self.continent_box.currentIndexChanged.connect(
+                self.on_continentBox_currentIndexChanged)
 
             self.country_box.currentIndexChanged.connect(
                 self.on_countryBox_currentIndexChanged)
-
-            date_changed = self.dateEdit.dateChanged
-            date_changed.connect(self.on_date_edit_dateChanged)
 
     def initialize_fields(self, is_first_load: bool = True):
         if is_first_load:
@@ -140,14 +143,13 @@ class CovidView(QMainWindow, Ui_MainWindow):
 
     def on_treeview_selectionChanged(self, selected: QItemSelection,
                                      deselected: QItemSelection):
+        utils.ignore(deselected)
         if len(selected.indexes()) == 0:
             return
         selected_row = selected.indexes()[0].row()
-        self.country_box.currentIndexChanged.disconnect(
-            self.on_countryBox_currentIndexChanged)
+        self.beginFilteringRows()
         self.__display_details_about(selected_row)
-        self.country_box.currentIndexChanged.connect(
-            self.on_countryBox_currentIndexChanged)
+        self.endFilteringRows()
 
     # Reimplemented functions and event handlers
     def on_dateBox_currentIndexChanged(self, index: int) -> None:
@@ -156,22 +158,81 @@ class CovidView(QMainWindow, Ui_MainWindow):
             self.dateEdit.setReadOnly(True)
             new_date = utils.today() if index == 1 else utils.yesterday()
             new_date_tuple = utils.year_mon_day(new_date)
-            self.on_date_edit_dateChanged(QDate(*new_date_tuple))
+            if self.dateEdit_is_connected:
+                self.on_date_edit_dateChanged(QDate(*new_date_tuple))
         else:
             self.dateEdit.setCalendarPopup(True)
             self.dateEdit.setReadOnly(False)
 
     def on_date_edit_dateChanged(self, new_date: QDate):
+        self.beginFilteringRows()
+        print(f"-----|| The date is {new_date.toString('yyyy-MM-dd')} ||-----")
         self.model.filter_by_date(new_date.toString('yyyy-MM-dd'))
         self.initialize_fields(is_first_load=False)
         self.resize_header_data()
+        self.endFilteringRows()
+
+    def on_continentBox_currentIndexChanged(self, index: int) -> None:
+        if index > 0:
+            a_continent = self.continent_box.itemText(index)
+            print(f"-------|| Continent is {a_continent} ||--------")
+            self.beginFilteringRows()
+            self.model.filter_by_continent(a_continent)
+            self.initialize_fields(is_first_load=False)
+            self.resize_header_data()
+            self.endFilteringRows()
 
     def on_countryBox_currentIndexChanged(self, index: int) -> None:
         if index > 0:
             a_country = self.country_box.itemText(index)
+            print(f"-------|| Country is {a_country} ||--------")
+
+            self.beginFilteringRows()
             self.model.filter_by_country(a_country)
             self.initialize_fields(is_first_load=False)
             self.resize_header_data()
+            self.endFilteringRows()
+
+    def disconnect_dateEdit_connection(self, must_disconnect):
+        if must_disconnect:
+            self.dateEdit.dateChanged.disconnect(self.on_date_edit_dateChanged)
+            self.dateEdit_is_connected = False
+        else:
+            self.dateEdit.dateChanged.connect(self.on_date_edit_dateChanged)
+            self.dateEdit_is_connected = True
+
+    def disconnect_continentBox_connection(self, must_disconnect):
+        if must_disconnect:
+            self.continent_box.currentIndexChanged.disconnect(
+                self.on_continentBox_currentIndexChanged)
+        else:
+            self.continent_box.currentIndexChanged.connect(
+                self.on_continentBox_currentIndexChanged)
+
+    def disconnect_countryBox_connection(self, must_disconnect):
+        if must_disconnect:
+            self.country_box.currentIndexChanged.disconnect(
+                self.on_countryBox_currentIndexChanged)
+        else:
+            self.country_box.currentIndexChanged.connect(
+                self.on_countryBox_currentIndexChanged)
+
+    def disconnect_treeView_connection(self, must_disconnect):
+        if must_disconnect:
+            self.treeView.selectionModel().selectionChanged.disconnect(
+                self.on_treeview_selectionChanged)
+        else:
+            self.treeView.selectionModel().selectionChanged.connect(
+                self.on_treeview_selectionChanged)
+
+    def beginFilteringRows(self, dt=True, ct=True, cr=True, tree=True):
+        self.disconnect_dateEdit_connection(dt)
+        self.disconnect_continentBox_connection(ct)
+        self.disconnect_countryBox_connection(cr)
+        self.disconnect_treeView_connection(tree)
+
+    def endFilteringRows(self, dt=False, ct=False, cr=False, tree=False):
+        self.beginFilteringRows(dt, ct, cr, tree)
 
     def closeEvent(self, a0: QCloseEvent) -> None:
         a0.accept()
