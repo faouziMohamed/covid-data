@@ -53,6 +53,12 @@ class ModelCovidData(QtCore.QAbstractTableModel):
         self.endResetModel()
         return new_data
 
+    def filter_by_country(self, a_country: str) -> pd.DataFrame:
+        self.beginResetModel()
+        new_data = self._db.filter_data_by('location', a_country)
+        self.endResetModel()
+        return new_data
+
     @property
     def db(self):
         return self._db

@@ -19,8 +19,8 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.model = ModelCovidData()
         self.colsCount = self.model.columnCount()
         self.__setup_treeview()
-        self.initialize_fields(is_first_load=True)
         self.__setup_event_handler(is_first_load=True)
+        self.initialize_fields(is_first_load=True)
         self.resize(1050, 654)
 
     def __setup_treeview(self):
@@ -44,6 +44,9 @@ class CovidView(QMainWindow, Ui_MainWindow):
         if is_first_load:
             index_changed = self.date_box.currentIndexChanged
             index_changed.connect(self.on_dateBox_currentIndexChanged)
+
+            self.country_box.currentIndexChanged.connect(
+                self.on_countryBox_currentIndexChanged)
 
             date_changed = self.dateEdit.dateChanged
             date_changed.connect(self.on_date_edit_dateChanged)
@@ -76,7 +79,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         row = view.iloc[row_index]
         self.__set_current_country(str(row.location))
         self.__set_current_continent(str(row.continent))
-        self.__display_dates_fields(str(row.dates))
+        self.__display_dates_fields(str(row.date))
         self.__display_numerical_fields(row)
 
         self.print_selectedRow_to_console(row)
@@ -140,7 +143,11 @@ class CovidView(QMainWindow, Ui_MainWindow):
         if len(selected.indexes()) == 0:
             return
         selected_row = selected.indexes()[0].row()
+        self.country_box.currentIndexChanged.disconnect(
+            self.on_countryBox_currentIndexChanged)
         self.__display_details_about(selected_row)
+        self.country_box.currentIndexChanged.connect(
+            self.on_countryBox_currentIndexChanged)
 
     # Reimplemented functions and event handlers
     def on_dateBox_currentIndexChanged(self, index: int) -> None:
@@ -158,6 +165,13 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.model.filter_by_date(new_date.toString('yyyy-MM-dd'))
         self.initialize_fields(is_first_load=False)
         self.resize_header_data()
+
+    def on_countryBox_currentIndexChanged(self, index: int) -> None:
+        if index > 0:
+            a_country = self.country_box.itemText(index)
+            self.model.filter_by_country(a_country)
+            self.initialize_fields(is_first_load=False)
+            self.resize_header_data()
 
     def closeEvent(self, a0: QCloseEvent) -> None:
         a0.accept()
