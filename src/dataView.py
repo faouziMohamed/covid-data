@@ -1,4 +1,5 @@
 import pandas as pd
+from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import (QDate, QModelIndex, QItemSelectionModel,
                           QItemSelection)
 from PyQt5.QtGui import QCloseEvent
@@ -57,6 +58,10 @@ class CovidView(QMainWindow, Ui_MainWindow):
     def initialize_fields(self, is_first_load: bool = True):
         if is_first_load:
             self.__fill_country_continent_combobox()
+            today_tuple = utils.today(as_string=False)
+            for date_edit in (self.dateEdit, self.dateEdit_text):
+                date_edit.setMaximumDate(QDate(*today_tuple))
+
         try:  # handle the case where the view table is empty
             self.__display_details_about(CovidView.FIRST_ROW)
             self.select_first_row()
@@ -67,15 +72,23 @@ class CovidView(QMainWindow, Ui_MainWindow):
             self.__display_numerical_fields(self.model.db.empty_view)
 
     def __fill_country_continent_combobox(self):
-        countries = self.model.db.countries
-        continents = self.model.db.continents
+        countries = list(self.model.db.countries.location)
+        continents = list(self.model.db.continents.continent)
 
-        self.country_box.addItems(list(countries.location))
-        self.continent_box.addItems(list(continents.continent))
+        continents_completer = QtWidgets.QCompleter(continents)
+        countries_completer = QtWidgets.QCompleter(countries)
+        for completer in (continents_completer, countries_completer):
+            completer.setCaseSensitivity(QtCore.Qt.CaseInsensitive)
+            completer.setFilterMode(QtCore.Qt.MatchContains)
 
-        today_tuple = utils.today(as_string=False)
-        self.dateEdit.setMaximumDate(QDate(*today_tuple))
-        self.dateEdit_text.setMaximumDate(QDate(*today_tuple))
+        for combobox in (self.continent_box, self.country_box):
+            combobox.setInsertPolicy(QtWidgets.QComboBox.NoInsert)
+
+        self.country_box.addItems(countries)
+        self.continent_box.addItems(continents)
+
+        self.country_box.setCompleter(countries_completer)
+        self.continent_box.setCompleter(continents_completer)
 
     def __display_details_about(self, row_index: int):
         view = self.model.db.view
