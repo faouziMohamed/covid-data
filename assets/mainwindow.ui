@@ -331,7 +331,7 @@ QTreeView::item:selected:!active {
            <enum>QDateTimeEdit::DaySection</enum>
           </property>
           <property name="displayFormat">
-           <string>dd-MM-yyyy</string>
+           <string>dd/MM/yyyy</string>
           </property>
           <property name="calendarPopup">
            <bool>true</bool>
@@ -587,7 +587,7 @@ QTreeView::item:selected:!active {
               </widget>
              </item>
              <item>
-              <widget class="QDateEdit" name="dateEdit_2">
+              <widget class="QDateEdit" name="dateEdit_ro">
                <property name="enabled">
                 <bool>true</bool>
                </property>
@@ -670,7 +670,7 @@ QTreeView::item:selected:!active {
                 <enum>QDateTimeEdit::DaySection</enum>
                </property>
                <property name="displayFormat">
-                <string>dd-MM-yyyy</string>
+                <string>dd/MM/yyyy</string>
                </property>
                <property name="calendarPopup">
                 <bool>false</bool>
@@ -737,7 +737,7 @@ QTreeView::item:selected:!active {
                 </date>
                </property>
                <property name="displayFormat">
-                <string>ddd. dd MMM. yyyy</string>
+                <string>dddd dd MMMM yyyy</string>
                </property>
                <property name="timeSpec">
                 <enum>Qt::LocalTime</enum>
