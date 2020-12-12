@@ -12,7 +12,7 @@ from src.resources import utils
 
 class CovidView(QMainWindow, Ui_MainWindow):
     FIRST_ROW, FIRST_OPTION = 0, 0
-    TODAY, YESTERDAY, OTHER_DAY = 1, 2, 3
+    TODAY, YESTERDAY, OTHER_DAY = 0, 1, 2
 
     def __init__(self, parent=None):
         super(CovidView, self).__init__(parent)
@@ -23,7 +23,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.__setup_treeview()
         self.initialize_fields(is_first_load=True)
         self.__setup_event_handler(is_first_load=True)
-        self.resize(1050, 654)
+        self.resize(1030, 654)
 
     def __setup_treeview(self):
         self.treeView.setModel(self.model)
@@ -166,10 +166,10 @@ class CovidView(QMainWindow, Ui_MainWindow):
 
     # Reimplemented functions and event handlers
     def on_dateBox_currentIndexChanged(self, index: int) -> None:
-        if index in [1, 2]:
+        if index in [0, 1]:
             self.dateEdit.setCalendarPopup(False)
             self.dateEdit.setReadOnly(True)
-            new_date = utils.today() if index == 1 else utils.yesterday()
+            new_date = utils.today() if index == 0 else utils.yesterday()
             new_date_tuple = utils.year_mon_day(new_date)
             if self.dateEdit_is_connected:
                 self.on_date_edit_dateChanged(QDate(*new_date_tuple))
