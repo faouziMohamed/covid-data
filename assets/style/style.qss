@@ -1,5 +1,6 @@
 QWidget {
-    font-size: 14px;
+    font-size: 15px;
+	font:  12pt "ubuntu","Serif", "arial";
 }
 
 QWidget#centralwidget {
@@ -25,8 +26,13 @@ QGroupBox::title {
             stop: 0.5 #FFFFFF);
 }
 
-QGroupBox>QLabel {
+QLabel {
     color: #96cccc;
+}
+
+QLabel#filter_label{
+    color: rgb(165, 255, 213);
+	font-size: 14px;
 }
 
 QComboBox {
@@ -37,7 +43,7 @@ QComboBox {
 
 QComboBox QAbstractItemView {
     border: 1px solid rgb(147, 149, 148);
-    border-radius: 0px 5px;
+    border-radius: 0 5px;
     color: rgb(0, 17, 17);
     background-color:rgb(221, 235, 239);
     selection-color: rgb(0, 0, 80);
@@ -74,6 +80,12 @@ QDateEdit::drop-down
 QComboBox::down-arrow,
 QDateEdit::drop-down {
 	image: url(":/arrow_down.svg");
+	width: 10px;
+}
+
+QComboBox::down-arrow:on,
+QDateEdit::drop-down:on {
+	image: url(":/header_arrow_up.svg");
 	width: 10px;
 }
 

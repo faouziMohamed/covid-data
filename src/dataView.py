@@ -22,7 +22,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.__setup_treeview()
         self.initialize_fields(is_first_load=True)
         self.__setup_event_handler(is_first_load=True)
-        self.resize(1050, 654)
+        self.resize(1030, 654)
 
     def __setup_treeview(self):
         self.treeView.setModel(self.model)
