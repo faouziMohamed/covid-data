@@ -22,13 +22,14 @@ class DbConnexion:
         self._metadata = ...  # type: MetaData
         self.cols = ['date', 'location', 'new_tests', 'new_cases', 'new_deaths',
                      'total_tests', 'total_cases', 'total_deaths', 'continent']
-        self._db_name = db_name
-        self.get_online_data(URL_CSV_FILE)
+        utils.ignore(db_name)
+        self._db_name = DB_NAME
+        self.get_online_data(CSV_FILE)
         self.__config_database()
 
     def get_online_data(self, url: str = URL_CSV_FILE):
         self._df = pd.read_csv(url, usecols=self.cols)
-        return self.__prepare_data(save_data=False)
+        return self.__prepare_data(save_data=True)
 
     # Prepare local database
 
@@ -173,8 +174,8 @@ class DbConnexion:
         :return: Pandas.DataFrame Table
         """
         model_view = self.get_table('model_view', MetaData())
-        select_query = select([model_view])
-        select_query.where(model_view.columns[by] == rows_pattern)
+        select_query = select([model_view]).where(
+            model_view.columns[by] == rows_pattern)
         self._view = pd.read_sql_query(select_query, con=self._engine)
         return self._view
 
