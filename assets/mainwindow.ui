@@ -241,49 +241,126 @@ QTreeView::item:selected:!active {
          <number>6</number>
         </property>
         <item>
-         <widget class="QComboBox" name="comboBox">
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>24</height>
-           </size>
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Select a filter</string>
           </property>
-          <property name="baseSize">
+         </widget>
+        </item>
+        <item>
+         <widget class="QDateEdit" name="dateEdit">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="minimumSize">
            <size>
-            <width>0</width>
+            <width>170</width>
             <height>0</height>
            </size>
           </property>
-          <property name="sizeAdjustPolicy">
-           <enum>QComboBox::AdjustToContents</enum>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
           </property>
-          <item>
-           <property name="text">
-            <string>Filter by date</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Filter by continent</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Filter by country</string>
-           </property>
-          </item>
+          <property name="font">
+           <font/>
+          </property>
+          <property name="mouseTracking">
+           <bool>true</bool>
+          </property>
+          <property name="autoFillBackground">
+           <bool>true</bool>
+          </property>
+          <property name="inputMethodHints">
+           <set>Qt::ImhNone</set>
+          </property>
+          <property name="wrapping">
+           <bool>true</bool>
+          </property>
+          <property name="frame">
+           <bool>true</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="readOnly">
+           <bool>false</bool>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+          <property name="specialValueText">
+           <string notr="true"/>
+          </property>
+          <property name="correctionMode">
+           <enum>QAbstractSpinBox::CorrectToPreviousValue</enum>
+          </property>
+          <property name="keyboardTracking">
+           <bool>true</bool>
+          </property>
+          <property name="showGroupSeparator" stdset="0">
+           <bool>true</bool>
+          </property>
+          <property name="dateTime">
+           <datetime>
+            <hour>0</hour>
+            <minute>0</minute>
+            <second>0</second>
+            <year>2020</year>
+            <month>11</month>
+            <day>23</day>
+           </datetime>
+          </property>
+          <property name="maximumDate">
+           <date>
+            <year>2050</year>
+            <month>12</month>
+            <day>31</day>
+           </date>
+          </property>
+          <property name="minimumDate">
+           <date>
+            <year>2019</year>
+            <month>9</month>
+            <day>30</day>
+           </date>
+          </property>
+          <property name="currentSection">
+           <enum>QDateTimeEdit::DaySection</enum>
+          </property>
+          <property name="displayFormat">
+           <string>dd-MM-yyyy</string>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+          <property name="timeSpec">
+           <enum>Qt::LocalTime</enum>
+          </property>
+          <property name="date">
+           <date>
+            <year>2020</year>
+            <month>11</month>
+            <day>23</day>
+           </date>
+          </property>
          </widget>
         </item>
         <item>
          <widget class="QComboBox" name="continent_box">
           <property name="minimumSize">
            <size>
-            <width>0</width>
+            <width>160</width>
             <height>0</height>
            </size>
           </property>
           <property name="font">
            <font/>
+          </property>
+          <property name="editable">
+           <bool>true</bool>
           </property>
           <property name="currentIndex">
            <number>0</number>
@@ -326,6 +403,9 @@ QTreeView::item:selected:!active {
           </property>
           <property name="styleSheet">
            <string notr="true"/>
+          </property>
+          <property name="editable">
+           <bool>true</bool>
           </property>
           <property name="currentText">
            <string>Select a country</string>
@@ -468,8 +548,8 @@ QTreeView::item:selected:!active {
             <property name="checkable">
              <bool>false</bool>
             </property>
-            <layout class="QFormLayout" name="formLayout_4">
-             <item row="0" column="0" colspan="2">
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
               <widget class="QComboBox" name="date_box">
                <property name="minimumSize">
                 <size>
@@ -491,11 +571,6 @@ QTreeView::item:selected:!active {
                </property>
                <item>
                 <property name="text">
-                 <string>Select a date</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
                  <string>Today</string>
                 </property>
                </item>
@@ -511,8 +586,8 @@ QTreeView::item:selected:!active {
                </item>
               </widget>
              </item>
-             <item row="1" column="0" colspan="2">
-              <widget class="QDateEdit" name="dateEdit">
+             <item>
+              <widget class="QDateEdit" name="dateEdit_2">
                <property name="enabled">
                 <bool>true</bool>
                </property>
@@ -612,7 +687,7 @@ QTreeView::item:selected:!active {
                </property>
               </widget>
              </item>
-             <item row="2" column="0" colspan="2">
+             <item>
               <widget class="QDateEdit" name="dateEdit_text">
                <property name="enabled">
                 <bool>true</bool>
