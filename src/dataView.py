@@ -1,15 +1,15 @@
 import pandas as pd
-from PyQt5 import QtWidgets
 from PyQt5.QtCore import (QDate, QModelIndex, QItemSelectionModel,
-                          QItemSelection, pyqtSlot)
+                          QItemSelection)
 from PyQt5.QtGui import QCloseEvent
+from PyQt5.QtWidgets import (QMainWindow)
 
 from src.generated.mainwindow import Ui_MainWindow
 from src.model import ModelCovidData
 from src.resources import utils
 
 
-class CovidView(QtWidgets.QMainWindow, Ui_MainWindow):
+class CovidView(QMainWindow, Ui_MainWindow):
     FIRST_ROW, FIRST_OPTION = 0, 0
     TODAY, YESTERDAY, OTHER_DAY = 1, 2, 3
 
@@ -18,9 +18,11 @@ class CovidView(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.model = ModelCovidData()
         self.colsCount = self.model.columnCount()
+        self.dateEdit_is_connected = False
         self.__setup_treeview()
         self.initialize_fields(is_first_load=True)
-        self.resize(1030, 654)
+        self.__setup_event_handler(is_first_load=True)
+        self.resize(1050, 654)
 
     def __setup_treeview(self):
         self.treeView.setModel(self.model)
@@ -35,12 +37,26 @@ class CovidView(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.treeView.resizeColumnToContents(this_column_number)
         self.treeView.header().resizeSection(2, 170)
 
+    def __setup_event_handler(self, is_first_load: bool = True):
+        # model = self.model
+        selection_changed = self.treeView.selectionModel().selectionChanged
+        selection_changed.connect(self.on_treeview_selectionChanged)
+
+        if is_first_load:
+            self.date_box.currentIndexChanged.connect(
+                self.on_dateBox_currentIndexChanged)
+
+            self.continent_box.currentIndexChanged.connect(
+                self.on_continentBox_currentIndexChanged)
+
+            self.dateEdit.dateChanged.connect(self.on_date_edit_dateChanged)
+
     def initialize_fields(self, is_first_load: bool = True):
         if is_first_load:
             self.__fill_country_continent_combobox()
         try:  # handle the case where the view table is empty
-            self.select_first_row()
             self.__display_details_about(CovidView.FIRST_ROW)
+            self.select_first_row()
         except IndexError:
             for box in (self.country_box, self.continent_box):
                 box.setCurrentIndex(CovidView.FIRST_OPTION)
@@ -122,40 +138,45 @@ class CovidView(QtWidgets.QMainWindow, Ui_MainWindow):
         self.continent_box.setCurrentIndex(continent_id + 1)
         self.continent_edit.setText(continent)
 
-    @pyqtSlot(QItemSelection, QItemSelection)
-    def on_treeView_selectionChanged(self, selected: QItemSelection,
+    def on_treeview_selectionChanged(self, selected: QItemSelection,
                                      deselected: QItemSelection):
-        utils.ignore(deselected)
         if len(selected.indexes()) == 0:
             return
         selected_row = selected.indexes()[0].row()
+        self.dateEdit.dateChanged.disconnect(self.on_date_edit_dateChanged)
+        self.continent_box.currentIndexChanged.disconnect(
+            self.on_continentBox_currentIndexChanged)
+        self.dateEdit_is_connected = False
         self.__display_details_about(selected_row)
+        self.dateEdit.dateChanged.connect(self.on_date_edit_dateChanged)
+        self.continent_box.currentIndexChanged.connect(
+            self.on_continentBox_currentIndexChanged)
+        self.dateEdit_is_connected = True
 
     # Reimplemented functions and event handlers
-    @pyqtSlot(int)
-    def on_date_box_currentIndexChanged(self, index: int) -> None:
+    def on_dateBox_currentIndexChanged(self, index: int) -> None:
         if index in [1, 2]:
             self.dateEdit.setCalendarPopup(False)
             self.dateEdit.setReadOnly(True)
             new_date = utils.today() if index == 1 else utils.yesterday()
             new_date_tuple = utils.year_mon_day(new_date)
-            self.on_dateEdit_dateChanged(QDate(*new_date_tuple))
+            if self.dateEdit_is_connected:
+                self.on_date_edit_dateChanged(QDate(*new_date_tuple))
         else:
             self.dateEdit.setCalendarPopup(True)
             self.dateEdit.setReadOnly(False)
 
-    @pyqtSlot(QDate)
-    def on_dateEdit_dateChanged(self, new_date: QDate):
+    def on_date_edit_dateChanged(self, new_date: QDate):
         self.model.filter_by_date(new_date.toString('yyyy-MM-dd'))
         self.initialize_fields(is_first_load=False)
         self.resize_header_data()
 
-    @pyqtSlot(str)
-    def on_continent_box_currentIndexChanged(self, a_continent: str) -> None:
-        if a_continent != self.continent_box.itemText(0):
-            self.model.filter_by_continent(a_continent)
-        self.initialize_fields(is_first_load=False)
-        self.resize_header_data()
+    def on_continentBox_currentIndexChanged(self, index: int) -> None:
+        if index > 0:
+            continent = self.continent_box.itemText(index)
+            self.model.filter_by_continent(continent)
+            self.initialize_fields(is_first_load=False)
+            self.resize_header_data()
 
     def closeEvent(self, a0: QCloseEvent) -> None:
         a0.accept()

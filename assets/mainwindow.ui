@@ -1205,38 +1205,12 @@ QTreeView::item:selected:!active {
     <bool>true</bool>
    </property>
   </widget>
-  <action name="openAction">
-   <property name="text">
-    <string>&amp;Open</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+O</string>
-   </property>
-  </action>
-  <action name="saveAction">
-   <property name="text">
-    <string>&amp;Save</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+S</string>
-   </property>
-  </action>
-  <action name="action_Quit">
-   <property name="text">
-    <string>&amp;Quit</string>
-   </property>
-  </action>
   <action name="closeAction">
    <property name="text">
     <string>&amp;Close</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
-   </property>
-  </action>
-  <action name="actionSaveChanges">
-   <property name="text">
-    <string>&amp;Save changes</string>
    </property>
   </action>
   <action name="actionSaveCSV">
