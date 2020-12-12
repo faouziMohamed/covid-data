@@ -1,12 +1,8 @@
+from datetime import date
 from typing import Tuple
 
 
-def ignore():
-    ...
-
-
 def today(as_string=True):
-    from datetime import date
     today_ = date.today()
     if as_string:
         return str(today_)
@@ -65,3 +61,24 @@ def day_after(a_date: str = today(), as_string=True):
 
 def yesterday(as_string=True):
     return day_after(today(), as_string=as_string)
+
+
+def ignore(*_) -> ...:
+    """
+    This is a helper function which is used to ignore some statements.
+    Usually this function does nothing.
+
+    ** Disable some not mandatory warning warning withing your IDE linter, like
+    PyCharm,... **
+
+    - It can be used in a try except bloc to ignore the exception rather than
+      the use of the keyword `pass`
+    - It can be used to ignore unused parameters which are mandatory
+      to the function.
+    - It can be used to be the body of a empty function rather than
+      the use the keyword `pass`
+    - ...
+    :param _: parameters to ignore
+    :return: Ellipse object
+    """
+    return ...
