@@ -24,7 +24,7 @@ class DbConnexion:
                      'total_tests', 'total_cases', 'total_deaths', 'continent']
         utils.ignore(db_name)
         self._db_name = DB_NAME
-        self.get_online_data(CSV_FILE)
+        self.get_online_data(URL_CSV_FILE)
         self.__config_database()
 
     def get_online_data(self, url: str = URL_CSV_FILE):
