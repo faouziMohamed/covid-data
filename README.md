@@ -7,7 +7,7 @@ Desktop application that shows data for the Covid 19 (cases, deaths, tests,....)
 |Preview |Preview |
 |:-:|:-:|
 |![screenshot1](assets/screenshots/covid-data-1.png)|![screenshot1](assets/screenshots/covid-data-2.png) |
-|![screenshot1](assets/screenshots/covid-data-3.png)||
+|![screenshot1](assets/screenshots/covid-data-3.png)|![screenshot1](assets/screenshots/covid-data-4.png)|
 
 
 
