@@ -96,14 +96,6 @@ class CovidView(QMainWindow, Ui_MainWindow):
 
         self.print_selectedRow_to_console(row)
 
-    def print_selectedRow_to_console(self, row):
-        data = [self.dateEdit_text.text(), row.continent, row.location,
-                row.new_tests, row.new_cases, row.new_deaths, row.total_tests,
-                row.total_cases, row.total_deaths]
-        for value in data[:-1]:
-            print(f"{value}, ", end='')
-        print(data[-1])
-
     def select_first_row(self):
         index = self.model.index(
             CovidView.FIRST_ROW,
@@ -163,7 +155,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
     # Reimplemented functions and event handlers
     def on_date_edit_dateChanged(self, new_date: QDate):
         self.beginFilteringRows()
-        print(f"-----|| The date is {new_date.toString('yyyy-MM-dd')} ||-----")
+        self.echo_to_console("date", new_date.toString('yyyy-MM-dd'))
         self.model.filter_by_date(new_date.toString('yyyy-MM-dd'))
         self.initialize_fields(is_first_load=False)
         self.resize_header_data()
@@ -172,7 +164,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
     def on_continentBox_currentIndexChanged(self, index: int) -> None:
         if index > 0:
             a_continent = self.continent_box.itemText(index)
-            print(f"-------|| Continent is {a_continent} ||--------")
+            self.echo_to_console("Continent", a_continent)
             self.beginFilteringRows()
             self.model.filter_by_continent(a_continent)
             self.initialize_fields(is_first_load=False)
@@ -182,13 +174,23 @@ class CovidView(QMainWindow, Ui_MainWindow):
     def on_countryBox_currentIndexChanged(self, index: int) -> None:
         if index > 0:
             a_country = self.country_box.itemText(index)
-            print(f"-------|| Country is {a_country} ||--------")
-
+            self.echo_to_console("Country", a_country)
             self.beginFilteringRows()
             self.model.filter_by_country(a_country)
             self.initialize_fields(is_first_load=False)
             self.resize_header_data()
             self.endFilteringRows()
+
+    def echo_to_console(self, text: str, value):
+        print(f"-------|| The {text} is {value} ||--------")
+
+    def print_selectedRow_to_console(self, row):
+        data = [self.dateEdit_text.text(), row.continent, row.location,
+                row.new_tests, row.new_cases, row.new_deaths, row.total_tests,
+                row.total_cases, row.total_deaths]
+        for value in data[:-1]:
+            print(f"{value}, ", end='')
+        print(data[-1])
 
     def disconnect_dateEdit_connection(self, must_disconnect):
         if must_disconnect:
