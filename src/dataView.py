@@ -157,6 +157,9 @@ class CovidView(QMainWindow, Ui_MainWindow):
 
     # Reimplemented functions and event handlers
     def on_date_edit_dateChanged(self, new_date: QDate):
+        calendar = self.dateEdit.calendarWidget()
+        calendar.setCurrentPage(new_date.year(), new_date.month())
+
         self.beginFilteringRows()
         self.echo_to_console("date", new_date.toString('yyyy-MM-dd'))
         self.model.filter_by_date(new_date.toString('yyyy-MM-dd'))
