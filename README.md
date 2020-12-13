@@ -13,7 +13,7 @@ Desktop application that shows data for the Covid 19 (cases, deaths, tests,....)
 
 ## Source, credit and license
 
-Data used in this program are provided from the [owid (Our World in Data )](https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv) Github :octocat: repository.
+Data used in this program are provided from the [owid (Our World in Data )](https://github.com/internall/covid-19-data/tree/master/public/data) Github :octocat: repository.
 
 > All visualizations, data, and code produced by *Our World in Data* are completely open access under the [Creative Commons BY license](https://creativecommons.org/licenses/by/4.0/). You have the permission to use, distribute, and reproduce these in any medium, provided the source and authors are credited.
 >
