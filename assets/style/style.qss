@@ -59,6 +59,17 @@ QSpinBox {
     background-color:  rgb(226, 241, 199);
 }
 
+QLineEdit#day_edit {
+	border:2px solid #404040;
+	height:25px;
+	color:black;
+	padding-left:2px;
+	background: qlineargradient(x1:0, y1:0.01,x2:0.6,y2:1.1,
+	                                stop: 0 #808080,
+	                                stop: 0.5 #a0a0c0,
+	                                stop: 1 #a0a0a0);
+}
+
 QComboBox::drop-down,
 QDateEdit::drop-down
  {
