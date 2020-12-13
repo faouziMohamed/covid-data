@@ -33,10 +33,9 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.treeView.setRootIsDecorated(False)
 
     def resize_header_data(self):
-        if self.model.rowCount() > 0:
-            for this_column_number in range(2):
-                self.treeView.resizeColumnToContents(this_column_number)
-        self.treeView.header().resizeSection(2, 170)
+        header = self.treeView.header()
+        for section, size in zip([0, 1, 2], [120, 120, 170]):
+            header.resizeSection(section, size)
 
     def __setup_event_handler(self, is_first_load: bool = True):
         # model = self.model

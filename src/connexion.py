@@ -22,8 +22,7 @@ class DbConnexion:
         self._metadata = ...  # type: MetaData
         self.cols = ['date', 'location', 'new_tests', 'new_cases', 'new_deaths',
                      'total_tests', 'total_cases', 'total_deaths', 'continent']
-        utils.ignore(db_name)
-        self._db_name = DB_NAME
+        self._db_name = db_name
         self.get_online_data(URL_CSV_FILE)
         self.__config_database()
 
