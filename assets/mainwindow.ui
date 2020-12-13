@@ -11,7 +11,7 @@
     <x>0</x>
     <y>0</y>
     <width>982</width>
-    <height>589</height>
+    <height>605</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -28,7 +28,11 @@
   </property>
   <property name="font">
    <font>
-    <pointsize>-1</pointsize>
+    <family>ubuntu,Serif,arial</family>
+    <pointsize>12</pointsize>
+    <weight>50</weight>
+    <italic>false</italic>
+    <bold>false</bold>
    </font>
   </property>
   <property name="mouseTracking">
@@ -38,8 +42,16 @@
    <string>Covid19 data - Fz</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget {
-    font-size: 14px;
+   <string notr="true">QLabel {
+    color: #96cccc;
+}
+
+QLabel#filter_label{
+    color: rgb(165, 255, 213);
+	font-size: 14px;
+}
+QWidget {
+	font:  12pt &quot;ubuntu&quot;,&quot;Serif&quot;, &quot;arial&quot;;
 }
 
 QWidget#centralwidget {
@@ -65,10 +77,6 @@ QGroupBox::title {
             stop: 0.5 #FFFFFF);
 }
 
-QGroupBox&gt;QLabel {
-    color: #96cccc;
-}
-
 QComboBox {
     combobox-popup: 0;
     color: rgb(0, 2, 33);
@@ -88,10 +96,11 @@ QComboBox,
 QLineEdit,
 QSpinBox,
 QDateEdit {
-	border:2px double darkgray;
+	border:2px double gray;
 	border-radius: 4px;
 }
 
+QDateEdit ,
 QLineEdit,
 QSpinBox {
     selection-color: rgb(0, 0, 80);
@@ -124,10 +133,15 @@ QDateEdit::drop-down
 
 QComboBox::down-arrow,
 QDateEdit::drop-down {
-	image: url(&quot;:/arrow_down.svg&quot;);
+	image: url(&quot;assets/icons/arrow_down.svg&quot;);
 	width: 10px;
 }
 
+QComboBox::down-arrow:on,
+QDateEdit::drop-down:on {
+	image: url(&quot;assets/icons/header_arrow_up.svg&quot;);
+	width: 10px;
+}
 QComboBox::down-arrow:on,
 QDateEdit::down-arrow:on {
     top: 1px;
@@ -175,11 +189,11 @@ QHeaderView::section:hover
 }
 
 QHeaderView::down-arrow {
-    image: url(&quot;:/header_arrow_down.svg&quot;);
+    image: url(&quot;assets/icons/header_arrow_down.svg&quot;);
 }
 
 QHeaderView::up-arrow {
-    image: url(&quot;:/header_arrow_up.svg&quot;);
+    image: url(&quot;assets/icons/header_arrow_up.svg&quot;);
     padding-bottom:1px;
 }
 
@@ -248,7 +262,7 @@ QTreeView::item:selected:!active {
          <number>6</number>
         </property>
         <item>
-         <widget class="QLabel" name="label_2">
+         <widget class="QLabel" name="filter_label">
           <property name="text">
            <string>Select a filter</string>
           </property>
@@ -273,7 +287,11 @@ QTreeView::item:selected:!active {
           </property>
           <property name="font">
            <font>
-            <pointsize>-1</pointsize>
+            <family>ubuntu,Serif,arial</family>
+            <pointsize>12</pointsize>
+            <weight>50</weight>
+            <italic>false</italic>
+            <bold>false</bold>
            </font>
           </property>
           <property name="mouseTracking">
@@ -367,7 +385,11 @@ QTreeView::item:selected:!active {
           </property>
           <property name="font">
            <font>
-            <pointsize>-1</pointsize>
+            <family>ubuntu,Serif,arial</family>
+            <pointsize>12</pointsize>
+            <weight>50</weight>
+            <italic>false</italic>
+            <bold>false</bold>
            </font>
           </property>
           <property name="editable">
@@ -408,7 +430,11 @@ QTreeView::item:selected:!active {
           </property>
           <property name="font">
            <font>
-            <pointsize>-1</pointsize>
+            <family>ubuntu,Serif,arial</family>
+            <pointsize>12</pointsize>
+            <weight>50</weight>
+            <italic>false</italic>
+            <bold>false</bold>
            </font>
           </property>
           <property name="toolTip">
@@ -507,7 +533,11 @@ QTreeView::item:selected:!active {
          </property>
          <property name="font">
           <font>
-           <pointsize>-1</pointsize>
+           <family>ubuntu,Serif,arial</family>
+           <pointsize>12</pointsize>
+           <weight>50</weight>
+           <italic>false</italic>
+           <bold>false</bold>
           </font>
          </property>
          <property name="frameShape">
@@ -562,7 +592,11 @@ QTreeView::item:selected:!active {
             </property>
             <property name="font">
              <font>
-              <pointsize>-1</pointsize>
+              <family>ubuntu,Serif,arial</family>
+              <pointsize>12</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
              </font>
             </property>
             <property name="title">
@@ -597,7 +631,11 @@ QTreeView::item:selected:!active {
                </property>
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="mouseTracking">
@@ -700,7 +738,11 @@ QTreeView::item:selected:!active {
                </property>
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="layoutDirection">
@@ -779,7 +821,11 @@ QTreeView::item:selected:!active {
               <widget class="QLabel" name="countryLabel_2">
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -815,7 +861,11 @@ QTreeView::item:selected:!active {
             </property>
             <property name="font">
              <font>
-              <pointsize>-1</pointsize>
+              <family>ubuntu,Serif,arial</family>
+              <pointsize>12</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
              </font>
             </property>
             <property name="title">
@@ -826,7 +876,11 @@ QTreeView::item:selected:!active {
               <widget class="QLabel" name="countryLabel">
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -834,16 +888,6 @@ QTreeView::item:selected:!active {
                </property>
                <property name="buddy">
                 <cstring>country_edit</cstring>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label">
-               <property name="text">
-                <string>Cont&amp;inent</string>
-               </property>
-               <property name="buddy">
-                <cstring>continent_edit</cstring>
                </property>
               </widget>
              </item>
@@ -860,6 +904,16 @@ QTreeView::item:selected:!active {
                </property>
                <property name="cursorMoveStyle">
                 <enum>Qt::VisualMoveStyle</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Cont&amp;inent</string>
+               </property>
+               <property name="buddy">
+                <cstring>continent_edit</cstring>
                </property>
               </widget>
              </item>
@@ -912,7 +966,11 @@ QTreeView::item:selected:!active {
             </property>
             <property name="font">
              <font>
-              <pointsize>-1</pointsize>
+              <family>ubuntu,Serif,arial</family>
+              <pointsize>12</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
              </font>
             </property>
             <property name="title">
@@ -923,7 +981,11 @@ QTreeView::item:selected:!active {
               <widget class="QLabel" name="tests_label">
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -938,7 +1000,11 @@ QTreeView::item:selected:!active {
               <widget class="QLabel" name="cases_label">
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -953,7 +1019,11 @@ QTreeView::item:selected:!active {
               <widget class="QLabel" name="deaths_label">
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -980,7 +1050,11 @@ QTreeView::item:selected:!active {
                </property>
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="wrapping">
@@ -1025,7 +1099,11 @@ QTreeView::item:selected:!active {
                </property>
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="wrapping">
@@ -1070,7 +1148,11 @@ QTreeView::item:selected:!active {
                </property>
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="wrapping">
@@ -1112,7 +1194,11 @@ QTreeView::item:selected:!active {
             </property>
             <property name="font">
              <font>
-              <pointsize>-1</pointsize>
+              <family>ubuntu,Serif,arial</family>
+              <pointsize>12</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
              </font>
             </property>
             <property name="title">
@@ -1123,7 +1209,11 @@ QTreeView::item:selected:!active {
               <widget class="QLabel" name="totTests_label">
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -1150,7 +1240,11 @@ QTreeView::item:selected:!active {
                </property>
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="alignment">
@@ -1174,7 +1268,11 @@ QTreeView::item:selected:!active {
               <widget class="QLabel" name="totCase_label">
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -1201,7 +1299,11 @@ QTreeView::item:selected:!active {
                </property>
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="alignment">
@@ -1225,7 +1327,11 @@ QTreeView::item:selected:!active {
               <widget class="QLabel" name="totDeaths_label">
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="text">
@@ -1252,7 +1358,11 @@ QTreeView::item:selected:!active {
                </property>
                <property name="font">
                 <font>
-                 <pointsize>-1</pointsize>
+                 <family>ubuntu,Serif,arial</family>
+                 <pointsize>12</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
                 </font>
                </property>
                <property name="alignment">
@@ -1304,7 +1414,11 @@ QTreeView::item:selected:!active {
           </property>
           <property name="font">
            <font>
-            <pointsize>-1</pointsize>
+            <family>ubuntu,Serif,arial</family>
+            <pointsize>12</pointsize>
+            <weight>50</weight>
+            <italic>false</italic>
+            <bold>false</bold>
            </font>
           </property>
           <property name="text">
@@ -1324,7 +1438,7 @@ QTreeView::item:selected:!active {
      <x>0</x>
      <y>0</y>
      <width>982</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_edit">
