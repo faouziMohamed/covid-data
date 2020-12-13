@@ -12,7 +12,7 @@ from src.resources import utils
 
 class CovidView(QMainWindow, Ui_MainWindow):
     FIRST_ROW, FIRST_OPTION = 0, 0
-    Today, Yesterday, Other_day = "Today", "Tomorrow", "Other day"
+    Today, Yesterday, Other_day = "Today", "Yesterday", "Other day"
 
     def __init__(self, parent=None):
         super(CovidView, self).__init__(parent)
@@ -115,7 +115,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
     def __display_dates_fields(self, the_date: str):
         a_date_tuple = utils.year_mon_day(the_date)
         selected_date = QDate(*a_date_tuple)
-        for date_edit in (self.dateEdit, self.dateEdit_text):
+        for date_edit in (self.dateEdit, self.dateEdit_ro, self.dateEdit_text):
             date_edit.setDate(selected_date)
 
         if the_date == utils.today():
@@ -159,7 +159,6 @@ class CovidView(QMainWindow, Ui_MainWindow):
     def on_date_edit_dateChanged(self, new_date: QDate):
         calendar = self.dateEdit.calendarWidget()
         calendar.setCurrentPage(new_date.year(), new_date.month())
-
         self.beginFilteringRows()
         self.echo_to_console("date", new_date.toString('yyyy-MM-dd'))
         self.model.filter_by_date(new_date.toString('yyyy-MM-dd'))
