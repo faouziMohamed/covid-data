@@ -77,8 +77,6 @@ QGroupBox::title {
             stop: 0.5 #FFFFFF);
 }
 
-
-
 QComboBox {
     combobox-popup: 0;
     color: rgb(0, 2, 33);
@@ -87,7 +85,7 @@ QComboBox {
 
 QComboBox QAbstractItemView {
     border: 1px solid rgb(147, 149, 148);
-    border-radius: 0 5px;
+    border-radius: 0px 5px;
     color: rgb(0, 17, 17);
     background-color:rgb(221, 235, 239);
     selection-color: rgb(0, 0, 80);
@@ -110,9 +108,15 @@ QSpinBox {
     background-color:  rgb(226, 241, 199);
 }
 
-QDateEdit{
-	border:2px solid gray;
-	border-radius:4px;
+QLineEdit#day_edit {
+	border:2px solid #404040;
+	height:25px;
+	color:black;
+	padding-left:2px;
+	background: qlineargradient(x1:0, y1:0.01,x2:0.6,y2:1.1,
+	                                stop: 0 #808080,
+	                                stop: 0.5 #a0a0c0,
+	                                stop: 1 #a0a0a0);
 }
 
 QComboBox::drop-down,
@@ -138,7 +142,6 @@ QDateEdit::drop-down:on {
 	image: url(&quot;assets/icons/header_arrow_up.svg&quot;);
 	width: 10px;
 }
-
 QComboBox::down-arrow:on,
 QDateEdit::down-arrow:on {
     top: 1px;
@@ -232,7 +235,7 @@ QTreeView::item:selected:!active {
             stop: 0 #6b9be8,
             stop: 1 #577fbf);
 }
-</string>
+*/</string>
   </property>
   <property name="documentMode">
    <bool>true</bool>
@@ -251,19 +254,10 @@ QTreeView::item:selected:!active {
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout_3">
-    <property name="leftMargin">
-     <number>1</number>
-    </property>
-    <property name="rightMargin">
-     <number>2</number>
-    </property>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <property name="leftMargin">
-         <number>6</number>
-        </property>
         <item>
          <widget class="QLabel" name="filter_label">
           <property name="text">
@@ -302,9 +296,6 @@ QTreeView::item:selected:!active {
           </property>
           <property name="autoFillBackground">
            <bool>true</bool>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
           </property>
           <property name="inputMethodHints">
            <set>Qt::ImhNone</set>
@@ -364,7 +355,7 @@ QTreeView::item:selected:!active {
            <enum>QDateTimeEdit::DaySection</enum>
           </property>
           <property name="displayFormat">
-           <string>dd-MM-yyyy</string>
+           <string>dd/MM/yyyy</string>
           </property>
           <property name="calendarPopup">
            <bool>true</bool>
@@ -494,29 +485,8 @@ QTreeView::item:selected:!active {
       </item>
       <item>
        <widget class="QSplitter" name="splitter">
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <property name="lineWidth">
-         <number>0</number>
-        </property>
         <property name="orientation">
          <enum>Qt::Vertical</enum>
-        </property>
-        <property name="opaqueResize">
-         <bool>true</bool>
-        </property>
-        <property name="handleWidth">
-         <number>0</number>
-        </property>
-        <property name="childrenCollapsible">
-         <bool>true</bool>
         </property>
         <widget class="QTreeView" name="treeView">
          <property name="sizePolicy">
@@ -605,21 +575,9 @@ QTreeView::item:selected:!active {
             <property name="checkable">
              <bool>false</bool>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_4">
-             <item>
-              <widget class="QComboBox" name="date_box">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
+            <layout class="QFormLayout" name="formLayout_4">
+             <item row="0" column="0">
+              <widget class="QLabel" name="countryLabel_2">
                <property name="font">
                 <font>
                  <family>ubuntu,Serif,arial</family>
@@ -629,35 +587,23 @@ QTreeView::item:selected:!active {
                  <bold>false</bold>
                 </font>
                </property>
-               <property name="sizeAdjustPolicy">
-                <enum>QComboBox::AdjustToContents</enum>
+               <property name="text">
+                <string/>
                </property>
-               <item>
-                <property name="text">
-                 <string>Today</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Yesterday</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>An other day</string>
-                </property>
-               </item>
+               <property name="buddy">
+                <cstring>country_edit</cstring>
+               </property>
               </widget>
              </item>
-             <item>
-              <widget class="QDateEdit" name="dateEdit_2">
+             <item row="2" column="0" colspan="2">
+              <widget class="QDateEdit" name="dateEdit_ro">
                <property name="enabled">
                 <bool>true</bool>
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>170</width>
-                 <height>30</height>
+                 <width>0</width>
+                 <height>33</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -739,7 +685,7 @@ QTreeView::item:selected:!active {
                 <enum>QDateTimeEdit::DaySection</enum>
                </property>
                <property name="displayFormat">
-                <string>dd-MM-yyyy</string>
+                <string>dd/MM/yyyy</string>
                </property>
                <property name="calendarPopup">
                 <bool>false</bool>
@@ -756,15 +702,15 @@ QTreeView::item:selected:!active {
                </property>
               </widget>
              </item>
-             <item>
+             <item row="3" column="0" colspan="2">
               <widget class="QDateEdit" name="dateEdit_text">
                <property name="enabled">
                 <bool>true</bool>
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>170</width>
-                 <height>30</height>
+                 <width>0</width>
+                 <height>33</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -812,7 +758,7 @@ QTreeView::item:selected:!active {
                 </date>
                </property>
                <property name="displayFormat">
-                <string>ddd. dd MMM. yyyy</string>
+                <string>dddd dd MMMM yyyy</string>
                </property>
                <property name="timeSpec">
                 <enum>Qt::LocalTime</enum>
@@ -823,6 +769,34 @@ QTreeView::item:selected:!active {
                  <month>11</month>
                  <day>23</day>
                 </date>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0" colspan="2">
+              <widget class="QLineEdit" name="day_edit">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <property name="text">
+                <string>Today</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+               <property name="readOnly">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -881,16 +855,6 @@ QTreeView::item:selected:!active {
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label">
-               <property name="text">
-                <string>Cont&amp;inent</string>
-               </property>
-               <property name="buddy">
-                <cstring>continent_edit</cstring>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="0" colspan="2">
               <widget class="QLineEdit" name="country_edit">
                <property name="minimumSize">
@@ -904,6 +868,16 @@ QTreeView::item:selected:!active {
                </property>
                <property name="cursorMoveStyle">
                 <enum>Qt::VisualMoveStyle</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Cont&amp;inent</string>
+               </property>
+               <property name="buddy">
+                <cstring>continent_edit</cstring>
                </property>
               </widget>
              </item>
