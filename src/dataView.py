@@ -34,7 +34,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
 
     def resize_header_data(self):
         header = self.treeView.header()
-        for section, size in zip([0, 1, 2], [120, 120, 170]):
+        for section, size in zip([0, 1, 2], [100, 120, 170]):
             header.resizeSection(section, size)
 
     def __setup_event_handler(self, is_first_load: bool = True):
@@ -54,6 +54,9 @@ class CovidView(QMainWindow, Ui_MainWindow):
     def initialize_fields(self, is_first_load: bool = True):
         if is_first_load:
             self.__fill_country_continent_combobox()
+            calendar = self.dateEdit.calendarWidget()
+            calendar.setGridVisible(True)
+            calendar.setContentsMargins(0, 0, 0, 0)
             today_tuple = utils.today(as_string=False)
             for date_edit in (self.dateEdit, self.dateEdit_text):
                 date_edit.setMaximumDate(QDate(*today_tuple))

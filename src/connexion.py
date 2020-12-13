@@ -31,7 +31,6 @@ class DbConnexion:
         return self.__prepare_data(save_data=True)
 
     # Prepare local database
-
     def __prepare_data(self, save_data: bool = True):
         if save_data:
             self.save_data_to_local()
@@ -49,11 +48,9 @@ class DbConnexion:
 
     def __config_database(self):
         os.makedirs(DB_PATH, exist_ok=True)
-        os.remove(self._db_name)
-        db_exists = os.path.exists(self._db_name)
-
-        if not db_exists:
-            self.__create_new_db()
+        if os.path.exists(self._db_name):
+            os.remove(self._db_name)
+        self.__create_new_db()
         self.__insert_data_for_first_time()
         self.__create_modelView_and_table()
 
