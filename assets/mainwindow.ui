@@ -226,13 +226,7 @@ QTreeView::item:selected:!active {
    <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_3">
-    <property name="leftMargin">
-     <number>1</number>
-    </property>
-    <property name="rightMargin">
-     <number>2</number>
-    </property>
+   <layout class="QVBoxLayout" name="verticalLayout_4">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
@@ -449,6 +443,12 @@ QTreeView::item:selected:!active {
       </item>
       <item>
        <widget class="QSplitter" name="splitter">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="layoutDirection">
          <enum>Qt::LeftToRight</enum>
         </property>
@@ -483,7 +483,7 @@ QTreeView::item:selected:!active {
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>225</height>
+           <height>260</height>
           </size>
          </property>
          <property name="font">
@@ -533,6 +533,12 @@ QTreeView::item:selected:!active {
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="font">
              <font/>
             </property>
@@ -548,45 +554,8 @@ QTreeView::item:selected:!active {
             <property name="checkable">
              <bool>false</bool>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_4">
-             <item>
-              <widget class="QComboBox" name="date_box">
-               <property name="minimumSize">
-                <size>
-                 <width>0</width>
-                 <height>30</height>
-                </size>
-               </property>
-               <property name="maximumSize">
-                <size>
-                 <width>16777215</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="font">
-                <font/>
-               </property>
-               <property name="sizeAdjustPolicy">
-                <enum>QComboBox::AdjustToContents</enum>
-               </property>
-               <item>
-                <property name="text">
-                 <string>Today</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Yesterday</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>An other day</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-             <item>
+            <layout class="QFormLayout" name="formLayout_4">
+             <item row="1" column="0" colspan="2">
               <widget class="QDateEdit" name="dateEdit_ro">
                <property name="enabled">
                 <bool>true</bool>
@@ -594,7 +563,7 @@ QTreeView::item:selected:!active {
                <property name="minimumSize">
                 <size>
                  <width>170</width>
-                 <height>30</height>
+                 <height>33</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -687,7 +656,7 @@ QTreeView::item:selected:!active {
                </property>
               </widget>
              </item>
-             <item>
+             <item row="2" column="0" colspan="2">
               <widget class="QDateEdit" name="dateEdit_text">
                <property name="enabled">
                 <bool>true</bool>
@@ -695,7 +664,7 @@ QTreeView::item:selected:!active {
                <property name="minimumSize">
                 <size>
                  <width>170</width>
-                 <height>30</height>
+                 <height>33</height>
                 </size>
                </property>
                <property name="maximumSize">
@@ -748,6 +717,42 @@ QTreeView::item:selected:!active {
                  <month>11</month>
                  <day>23</day>
                 </date>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0" colspan="2">
+              <widget class="QLineEdit" name="day_edit">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>30</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border:1px solid #666;
+height:25px;
+color:black;
+padding-left:2px;
+background:qlineargradient(x1:0.1, y1:0.3,x2:0.6,y2:1.1,
+					stop: 0 #888,
+					stop: 0.5 #aac,
+					stop: 1 #888);
+text-align: center;</string>
+               </property>
+               <property name="text">
+                <string>Today</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+               <property name="readOnly">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -860,6 +865,12 @@ QTreeView::item:selected:!active {
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>80</height>
+             </size>
             </property>
             <property name="font">
              <font/>

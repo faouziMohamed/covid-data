@@ -12,7 +12,7 @@ from src.resources import utils
 
 class CovidView(QMainWindow, Ui_MainWindow):
     FIRST_ROW, FIRST_OPTION = 0, 0
-    TODAY, YESTERDAY, OTHER_DAY = 0, 1, 2
+    Today, Yesterday, Other_day = "Today", "Tomorrow", "Other day"
 
     def __init__(self, parent=None):
         super(CovidView, self).__init__(parent)
@@ -45,9 +45,6 @@ class CovidView(QMainWindow, Ui_MainWindow):
 
         if is_first_load:
             self.dateEdit.dateChanged.connect(self.on_date_edit_dateChanged)
-
-            self.date_box.currentIndexChanged.connect(
-                self.on_dateBox_currentIndexChanged)
 
             self.continent_box.currentIndexChanged.connect(
                 self.on_continentBox_currentIndexChanged)
@@ -128,12 +125,12 @@ class CovidView(QMainWindow, Ui_MainWindow):
             date_edit.setDate(selected_date)
 
         if the_date == utils.today():
-            day_option = CovidView.TODAY
+            day_option = CovidView.Today
         elif the_date == utils.yesterday():
-            day_option = CovidView.YESTERDAY
+            day_option = CovidView.Yesterday
         else:
-            day_option = CovidView.OTHER_DAY
-        self.date_box.setCurrentIndex(day_option)
+            day_option = CovidView.Other_day
+        self.day_edit.setText(day_option)
 
     def __display_numerical_fields(self, row: pd.Series):
         fields = (self.newTest_spin, self.newCases_spin,
@@ -165,18 +162,6 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.endFilteringRows()
 
     # Reimplemented functions and event handlers
-    def on_dateBox_currentIndexChanged(self, index: int) -> None:
-        if index in [0, 1]:
-            self.dateEdit.setCalendarPopup(False)
-            self.dateEdit.setReadOnly(True)
-            new_date = utils.today() if index == 0 else utils.yesterday()
-            new_date_tuple = utils.year_mon_day(new_date)
-            if self.dateEdit_is_connected:
-                self.on_date_edit_dateChanged(QDate(*new_date_tuple))
-        else:
-            self.dateEdit.setCalendarPopup(True)
-            self.dateEdit.setReadOnly(False)
-
     def on_date_edit_dateChanged(self, new_date: QDate):
         self.beginFilteringRows()
         print(f"-----|| The date is {new_date.toString('yyyy-MM-dd')} ||-----")
