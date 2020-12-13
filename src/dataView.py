@@ -1,4 +1,5 @@
 import pandas as pd
+from PyQt5 import QtWidgets, QtCore
 from PyQt5.QtCore import (QDate, QModelIndex, QItemSelectionModel,
                           QItemSelection)
 from PyQt5.QtGui import QCloseEvent
@@ -11,7 +12,7 @@ from src.resources import utils
 
 class CovidView(QMainWindow, Ui_MainWindow):
     FIRST_ROW, FIRST_OPTION = 0, 0
-    TODAY, YESTERDAY, OTHER_DAY = 1, 2, 3
+    Today, Yesterday, Other_day = "Today", "Tomorrow", "Other day"
 
     def __init__(self, parent=None):
         super(CovidView, self).__init__(parent)
@@ -45,9 +46,6 @@ class CovidView(QMainWindow, Ui_MainWindow):
         if is_first_load:
             self.dateEdit.dateChanged.connect(self.on_date_edit_dateChanged)
 
-            self.date_box.currentIndexChanged.connect(
-                self.on_dateBox_currentIndexChanged)
-
             self.continent_box.currentIndexChanged.connect(
                 self.on_continentBox_currentIndexChanged)
 
@@ -57,6 +55,10 @@ class CovidView(QMainWindow, Ui_MainWindow):
     def initialize_fields(self, is_first_load: bool = True):
         if is_first_load:
             self.__fill_country_continent_combobox()
+            today_tuple = utils.today(as_string=False)
+            for date_edit in (self.dateEdit, self.dateEdit_text):
+                date_edit.setMaximumDate(QDate(*today_tuple))
+
         try:  # handle the case where the view table is empty
             self.__display_details_about(CovidView.FIRST_ROW)
             self.select_first_row()
@@ -67,15 +69,23 @@ class CovidView(QMainWindow, Ui_MainWindow):
             self.__display_numerical_fields(self.model.db.empty_view)
 
     def __fill_country_continent_combobox(self):
-        countries = self.model.db.countries
-        continents = self.model.db.continents
+        countries = list(self.model.db.countries.location)
+        continents = list(self.model.db.continents.continent)
 
-        self.country_box.addItems(list(countries.location))
-        self.continent_box.addItems(list(continents.continent))
+        continents_completer = QtWidgets.QCompleter(continents)
+        countries_completer = QtWidgets.QCompleter(countries)
+        for completer in (continents_completer, countries_completer):
+            completer.setCaseSensitivity(QtCore.Qt.CaseInsensitive)
+            completer.setFilterMode(QtCore.Qt.MatchContains)
 
-        today_tuple = utils.today(as_string=False)
-        self.dateEdit.setMaximumDate(QDate(*today_tuple))
-        self.dateEdit_text.setMaximumDate(QDate(*today_tuple))
+        for combobox in (self.continent_box, self.country_box):
+            combobox.setInsertPolicy(QtWidgets.QComboBox.NoInsert)
+
+        self.country_box.addItems(countries)
+        self.continent_box.addItems(continents)
+
+        self.country_box.setCompleter(countries_completer)
+        self.continent_box.setCompleter(continents_completer)
 
     def __display_details_about(self, row_index: int):
         view = self.model.db.view
@@ -115,12 +125,12 @@ class CovidView(QMainWindow, Ui_MainWindow):
             date_edit.setDate(selected_date)
 
         if the_date == utils.today():
-            day_option = CovidView.TODAY
+            day_option = CovidView.Today
         elif the_date == utils.yesterday():
-            day_option = CovidView.YESTERDAY
+            day_option = CovidView.Yesterday
         else:
-            day_option = CovidView.OTHER_DAY
-        self.date_box.setCurrentIndex(day_option)
+            day_option = CovidView.Other_day
+        self.day_edit.setText(day_option)
 
     def __display_numerical_fields(self, row: pd.Series):
         fields = (self.newTest_spin, self.newCases_spin,
@@ -152,18 +162,6 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.endFilteringRows()
 
     # Reimplemented functions and event handlers
-    def on_dateBox_currentIndexChanged(self, index: int) -> None:
-        if index in [1, 2]:
-            self.dateEdit.setCalendarPopup(False)
-            self.dateEdit.setReadOnly(True)
-            new_date = utils.today() if index == 1 else utils.yesterday()
-            new_date_tuple = utils.year_mon_day(new_date)
-            if self.dateEdit_is_connected:
-                self.on_date_edit_dateChanged(QDate(*new_date_tuple))
-        else:
-            self.dateEdit.setCalendarPopup(True)
-            self.dateEdit.setReadOnly(False)
-
     def on_date_edit_dateChanged(self, new_date: QDate):
         self.beginFilteringRows()
         print(f"-----|| The date is {new_date.toString('yyyy-MM-dd')} ||-----")

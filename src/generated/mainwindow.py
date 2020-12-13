@@ -60,8 +60,6 @@ class Ui_MainWindow(object):
 "            stop: 0.5 #FFFFFF);\n"
 "}\n"
 "\n"
-"\n"
-"\n"
 "QComboBox {\n"
 "    combobox-popup: 0;\n"
 "    color: rgb(0, 2, 33);\n"
@@ -70,7 +68,7 @@ class Ui_MainWindow(object):
 "\n"
 "QComboBox QAbstractItemView {\n"
 "    border: 1px solid rgb(147, 149, 148);\n"
-"    border-radius: 0 5px;\n"
+"    border-radius: 0px 5px;\n"
 "    color: rgb(0, 17, 17);\n"
 "    background-color:rgb(221, 235, 239);\n"
 "    selection-color: rgb(0, 0, 80);\n"
@@ -93,9 +91,15 @@ class Ui_MainWindow(object):
 "    background-color:  rgb(226, 241, 199);\n"
 "}\n"
 "\n"
-"QDateEdit{\n"
-"    border:2px solid gray;\n"
-"    border-radius:4px;\n"
+"QLineEdit#day_edit {\n"
+"    border:2px solid #404040;\n"
+"    height:25px;\n"
+"    color:black;\n"
+"    padding-left:2px;\n"
+"    background: qlineargradient(x1:0, y1:0.01,x2:0.6,y2:1.1,\n"
+"                                    stop: 0 #808080,\n"
+"                                    stop: 0.5 #a0a0c0,\n"
+"                                    stop: 1 #a0a0a0);\n"
 "}\n"
 "\n"
 "QComboBox::drop-down,\n"
@@ -121,7 +125,6 @@ class Ui_MainWindow(object):
 "    image: url(\"assets/icons/header_arrow_up.svg\");\n"
 "    width: 10px;\n"
 "}\n"
-"\n"
 "QComboBox::down-arrow:on,\n"
 "QDateEdit::down-arrow:on {\n"
 "    top: 1px;\n"
@@ -215,7 +218,7 @@ class Ui_MainWindow(object):
 "            stop: 0 #6b9be8,\n"
 "            stop: 1 #577fbf);\n"
 "}\n"
-"")
+"*/")
         MainWindow.setDocumentMode(True)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         MainWindow.setDockNestingEnabled(False)
@@ -224,12 +227,10 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.centralwidget)
-        self.verticalLayout_3.setContentsMargins(1, -1, 2, -1)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setContentsMargins(6, -1, -1, -1)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.filter_label = QtWidgets.QLabel(self.centralwidget)
         self.filter_label.setObjectName("filter_label")
@@ -247,7 +248,6 @@ class Ui_MainWindow(object):
         self.dateEdit.setFont(font)
         self.dateEdit.setMouseTracking(True)
         self.dateEdit.setAutoFillBackground(True)
-        self.dateEdit.setStyleSheet("")
         self.dateEdit.setInputMethodHints(QtCore.Qt.ImhNone)
         self.dateEdit.setWrapping(True)
         self.dateEdit.setFrame(True)
@@ -309,14 +309,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addItem(spacerItem)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
         self.splitter = QtWidgets.QSplitter(self.centralwidget)
-        self.splitter.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.splitter.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.splitter.setFrameShadow(QtWidgets.QFrame.Plain)
-        self.splitter.setLineWidth(0)
         self.splitter.setOrientation(QtCore.Qt.Vertical)
-        self.splitter.setOpaqueResize(True)
-        self.splitter.setHandleWidth(0)
-        self.splitter.setChildrenCollapsible(True)
         self.splitter.setObjectName("splitter")
         self.treeView = QtWidgets.QTreeView(self.splitter)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
@@ -366,59 +359,54 @@ class Ui_MainWindow(object):
         self.filter1Box.setFlat(False)
         self.filter1Box.setCheckable(False)
         self.filter1Box.setObjectName("filter1Box")
-        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.filter1Box)
-        self.verticalLayout_4.setObjectName("verticalLayout_4")
-        self.date_box = QtWidgets.QComboBox(self.filter1Box)
-        self.date_box.setMinimumSize(QtCore.QSize(0, 30))
-        self.date_box.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.formLayout_4 = QtWidgets.QFormLayout(self.filter1Box)
+        self.formLayout_4.setObjectName("formLayout_4")
+        self.countryLabel_2 = QtWidgets.QLabel(self.filter1Box)
         font = QtGui.QFont()
         font.setFamily("ubuntu,Serif,arial")
         font.setPointSize(12)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.date_box.setFont(font)
-        self.date_box.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToContents)
-        self.date_box.setObjectName("date_box")
-        self.date_box.addItem("")
-        self.date_box.addItem("")
-        self.date_box.addItem("")
-        self.verticalLayout_4.addWidget(self.date_box)
-        self.dateEdit_2 = QtWidgets.QDateEdit(self.filter1Box)
-        self.dateEdit_2.setEnabled(True)
-        self.dateEdit_2.setMinimumSize(QtCore.QSize(170, 30))
-        self.dateEdit_2.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.countryLabel_2.setFont(font)
+        self.countryLabel_2.setText("")
+        self.countryLabel_2.setObjectName("countryLabel_2")
+        self.formLayout_4.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.countryLabel_2)
+        self.dateEdit_ro = QtWidgets.QDateEdit(self.filter1Box)
+        self.dateEdit_ro.setEnabled(True)
+        self.dateEdit_ro.setMinimumSize(QtCore.QSize(0, 33))
+        self.dateEdit_ro.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
         font.setFamily("ubuntu,Serif,arial")
         font.setPointSize(12)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.dateEdit_2.setFont(font)
-        self.dateEdit_2.setMouseTracking(True)
-        self.dateEdit_2.setAutoFillBackground(True)
-        self.dateEdit_2.setInputMethodHints(QtCore.Qt.ImhNone)
-        self.dateEdit_2.setWrapping(True)
-        self.dateEdit_2.setFrame(True)
-        self.dateEdit_2.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
-        self.dateEdit_2.setReadOnly(False)
-        self.dateEdit_2.setButtonSymbols(QtWidgets.QAbstractSpinBox.NoButtons)
-        self.dateEdit_2.setSpecialValueText("")
-        self.dateEdit_2.setCorrectionMode(QtWidgets.QAbstractSpinBox.CorrectToPreviousValue)
-        self.dateEdit_2.setKeyboardTracking(True)
-        self.dateEdit_2.setProperty("showGroupSeparator", True)
-        self.dateEdit_2.setDateTime(QtCore.QDateTime(QtCore.QDate(2020, 11, 23), QtCore.QTime(0, 0, 0)))
-        self.dateEdit_2.setMaximumDate(QtCore.QDate(2050, 12, 31))
-        self.dateEdit_2.setMinimumDate(QtCore.QDate(2019, 9, 30))
-        self.dateEdit_2.setCurrentSection(QtWidgets.QDateTimeEdit.DaySection)
-        self.dateEdit_2.setCalendarPopup(False)
-        self.dateEdit_2.setTimeSpec(QtCore.Qt.LocalTime)
-        self.dateEdit_2.setDate(QtCore.QDate(2020, 11, 23))
-        self.dateEdit_2.setObjectName("dateEdit_2")
-        self.verticalLayout_4.addWidget(self.dateEdit_2)
+        self.dateEdit_ro.setFont(font)
+        self.dateEdit_ro.setMouseTracking(True)
+        self.dateEdit_ro.setAutoFillBackground(True)
+        self.dateEdit_ro.setInputMethodHints(QtCore.Qt.ImhNone)
+        self.dateEdit_ro.setWrapping(True)
+        self.dateEdit_ro.setFrame(True)
+        self.dateEdit_ro.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
+        self.dateEdit_ro.setReadOnly(False)
+        self.dateEdit_ro.setButtonSymbols(QtWidgets.QAbstractSpinBox.NoButtons)
+        self.dateEdit_ro.setSpecialValueText("")
+        self.dateEdit_ro.setCorrectionMode(QtWidgets.QAbstractSpinBox.CorrectToPreviousValue)
+        self.dateEdit_ro.setKeyboardTracking(True)
+        self.dateEdit_ro.setProperty("showGroupSeparator", True)
+        self.dateEdit_ro.setDateTime(QtCore.QDateTime(QtCore.QDate(2020, 11, 23), QtCore.QTime(0, 0, 0)))
+        self.dateEdit_ro.setMaximumDate(QtCore.QDate(2050, 12, 31))
+        self.dateEdit_ro.setMinimumDate(QtCore.QDate(2019, 9, 30))
+        self.dateEdit_ro.setCurrentSection(QtWidgets.QDateTimeEdit.DaySection)
+        self.dateEdit_ro.setCalendarPopup(False)
+        self.dateEdit_ro.setTimeSpec(QtCore.Qt.LocalTime)
+        self.dateEdit_ro.setDate(QtCore.QDate(2020, 11, 23))
+        self.dateEdit_ro.setObjectName("dateEdit_ro")
+        self.formLayout_4.setWidget(2, QtWidgets.QFormLayout.SpanningRole, self.dateEdit_ro)
         self.dateEdit_text = QtWidgets.QDateEdit(self.filter1Box)
         self.dateEdit_text.setEnabled(True)
-        self.dateEdit_text.setMinimumSize(QtCore.QSize(170, 30))
+        self.dateEdit_text.setMinimumSize(QtCore.QSize(0, 33))
         self.dateEdit_text.setMaximumSize(QtCore.QSize(16777215, 16777215))
         font = QtGui.QFont()
         font.setFamily("ubuntu,Serif,arial")
@@ -437,7 +425,19 @@ class Ui_MainWindow(object):
         self.dateEdit_text.setTimeSpec(QtCore.Qt.LocalTime)
         self.dateEdit_text.setDate(QtCore.QDate(2020, 11, 23))
         self.dateEdit_text.setObjectName("dateEdit_text")
-        self.verticalLayout_4.addWidget(self.dateEdit_text)
+        self.formLayout_4.setWidget(3, QtWidgets.QFormLayout.SpanningRole, self.dateEdit_text)
+        self.day_edit = QtWidgets.QLineEdit(self.filter1Box)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.day_edit.sizePolicy().hasHeightForWidth())
+        self.day_edit.setSizePolicy(sizePolicy)
+        self.day_edit.setMinimumSize(QtCore.QSize(0, 30))
+        self.day_edit.setStyleSheet("")
+        self.day_edit.setAlignment(QtCore.Qt.AlignCenter)
+        self.day_edit.setReadOnly(True)
+        self.day_edit.setObjectName("day_edit")
+        self.formLayout_4.setWidget(1, QtWidgets.QFormLayout.SpanningRole, self.day_edit)
         self.horizontalLayout.addWidget(self.filter1Box)
         self.queryBox = QtWidgets.QGroupBox(self.layoutWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
@@ -467,15 +467,15 @@ class Ui_MainWindow(object):
         self.countryLabel.setFont(font)
         self.countryLabel.setObjectName("countryLabel")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.countryLabel)
-        self.label = QtWidgets.QLabel(self.queryBox)
-        self.label.setObjectName("label")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label)
         self.country_edit = QtWidgets.QLineEdit(self.queryBox)
         self.country_edit.setMinimumSize(QtCore.QSize(170, 30))
         self.country_edit.setReadOnly(True)
         self.country_edit.setCursorMoveStyle(QtCore.Qt.VisualMoveStyle)
         self.country_edit.setObjectName("country_edit")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.SpanningRole, self.country_edit)
+        self.label = QtWidgets.QLabel(self.queryBox)
+        self.label.setObjectName("label")
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.continent_edit = QtWidgets.QLineEdit(self.queryBox)
@@ -748,6 +748,7 @@ class Ui_MainWindow(object):
         self.menuHelp.addAction(self.action_About)
         self.menubar.addAction(self.menu_edit.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
+        self.countryLabel_2.setBuddy(self.country_edit)
         self.countryLabel.setBuddy(self.country_edit)
         self.label.setBuddy(self.continent_edit)
         self.tests_label.setBuddy(self.newTest_spin)
@@ -767,17 +768,15 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Covid19 data - Fz"))
         self.filter_label.setText(_translate("MainWindow", "Select a filter"))
-        self.dateEdit.setDisplayFormat(_translate("MainWindow", "dd-MM-yyyy"))
+        self.dateEdit.setDisplayFormat(_translate("MainWindow", "dd/MM/yyyy"))
         self.continent_box.setItemText(0, _translate("MainWindow", "Select a continent"))
         self.country_box.setToolTip(_translate("MainWindow", "Select a country to show details"))
         self.country_box.setCurrentText(_translate("MainWindow", "Select a country"))
         self.country_box.setItemText(0, _translate("MainWindow", "Select a country"))
         self.filter1Box.setTitle(_translate("MainWindow", "Date"))
-        self.date_box.setItemText(0, _translate("MainWindow", "Today"))
-        self.date_box.setItemText(1, _translate("MainWindow", "Yesterday"))
-        self.date_box.setItemText(2, _translate("MainWindow", "An other day"))
-        self.dateEdit_2.setDisplayFormat(_translate("MainWindow", "dd-MM-yyyy"))
-        self.dateEdit_text.setDisplayFormat(_translate("MainWindow", "ddd. dd MMM. yyyy"))
+        self.dateEdit_ro.setDisplayFormat(_translate("MainWindow", "dd/MM/yyyy"))
+        self.dateEdit_text.setDisplayFormat(_translate("MainWindow", "dddd dd MMMM yyyy"))
+        self.day_edit.setText(_translate("MainWindow", "Today"))
         self.queryBox.setTitle(_translate("MainWindow", "Local"))
         self.countryLabel.setText(_translate("MainWindow", "Cou&ntry"))
         self.label.setText(_translate("MainWindow", "Cont&inent"))
