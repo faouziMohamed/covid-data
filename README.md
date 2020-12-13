@@ -2,6 +2,15 @@
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/faouziMohamed/covid-data)    
 Desktop application that shows data for the Covid 19 (cases, deaths, tests,....)
 
+## Preview
+
+|Preview |Preview |
+|:-:|:-:|
+|![screenshot1](assets/screenshots/covid-data-1.png)|![screenshot1](assets/screenshots/covid-data-2.png) |
+|![screenshot1](assets/screenshots/covid-data-3.png)|![screenshot1](assets/screenshots/covid-data-4.png)|
+
+
+
 ## Source, credit and license
 
 Data used in this program are provided from the [owid (Our World in Data )](https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-data.csv) Github :octocat: repository.
