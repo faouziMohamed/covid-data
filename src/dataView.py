@@ -53,6 +53,8 @@ class CovidView(QMainWindow, Ui_MainWindow):
 
     def initialize_fields(self, is_first_load: bool = True):
         if is_first_load:
+            print('Date, Continent, Country, New Tests, New cases,',
+                  'New Deaths, Total tests, Total cases, Total deaths')
             self.__fill_country_continent_combobox()
             calendar = self.dateEdit.calendarWidget()
             calendar.setGridVisible(True)
@@ -191,8 +193,9 @@ class CovidView(QMainWindow, Ui_MainWindow):
 
     def print_selectedRow_to_console(self, row):
         data = [self.dateEdit_text.text(), row.continent, row.location,
-                row.new_tests, row.new_cases, row.new_deaths, row.total_tests,
-                row.total_cases, row.total_deaths]
+                int(row.new_tests), int(row.new_cases), int(row.new_deaths),
+                int(row.total_tests), int(row.total_cases),
+                int(row.total_deaths)]
         for value in data[:-1]:
             print(f"{value}, ", end='')
         print(data[-1])
