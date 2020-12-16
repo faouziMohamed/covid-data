@@ -37,7 +37,7 @@ class DbConnexion:
         self._df = self._df.fillna(0)
         row_filter = (self._df.location == 'World') | (self._df.continent != 0)
         self._df = self._df.loc[row_filter]
-        self._df.loc[self._df.continent == 0, ['continent']] = 'Earth'
+        self._df.loc[self._df.continent == 0, ['continent']] = 'The World'
         return self.dataframe
 
     def save_data_to_local(self):
@@ -111,26 +111,21 @@ class DbConnexion:
         continent = self.__create_table_for('continent', id_name='idc')
         return continent
 
-    def __get_countries_by_continent(self) -> pd.DataFrame:
-        cols = ['location', 'continent']
-        countries = self._df.loc[:, cols]
-        countries = countries.set_index(cols)
-        unique_rows = list(countries.index.unique())
-        return pd.DataFrame(unique_rows, columns=cols)
-
     def __create_countries_table(self, continent: pd.DataFrame) -> pd.DataFrame:
-        index_name = 'idl'
-        countries = self.__get_countries_by_continent()
-
-        # creating index (the id of the relational table)
-        index_id_location = sorted(countries.location.argsort())
-        countries.index = index_id_location
-        countries.index.name = index_name
-
+        # shape of the table (idl, location, continent as `idc`)
+        index_name, columns = 'idl', ['location', 'continent']
+        continent_names = list(continent.continent)
+        by_continent_id = continent.index
+        # get countries by continent as multi index and create a empty dataframe
+        multi_idx = pd.MultiIndex.from_frame(self._df.loc[:, columns])
+        countries = pd.DataFrame(index=multi_idx.unique())
+        # Then convert the indexes into columns
+        countries = countries.reset_index()
         countries = countries.rename(columns={'continent': 'idc'})
-        cont = list(continent.continent)
-        countries = countries.replace(cont, continent.index)
+        countries = countries.replace(continent_names, by_continent_id)
+        countries.index.name = index_name
         return countries
+        # return countries
 
     def __create_cases_table(self, countries: pd.DataFrame) -> pd.DataFrame:
         columns = ['location', 'date', 'new_tests', 'new_cases', 'new_deaths',
