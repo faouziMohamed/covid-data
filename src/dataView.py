@@ -53,8 +53,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
 
     def initialize_fields(self, is_first_load: bool = True):
         if is_first_load:
-            print('Date, Continent, Country, New Tests, New cases,',
-                  'New Deaths, Total tests, Total cases, Total deaths')
+            self.print_data_columns_to_console()
             self.__fill_country_continent_combobox()
             calendar = self.dateEdit.calendarWidget()
             calendar.setGridVisible(True)
@@ -147,6 +146,7 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.continent_box.setCurrentIndex(continent_id + 1)
         self.continent_edit.setText(continent)
 
+    # Reimplemented functions and event handlers
     def on_treeview_selectionChanged(self, selected: QItemSelection,
                                      deselected: QItemSelection):
         utils.ignore(deselected)
@@ -157,7 +157,6 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.__display_details_about(selected_row)
         self.endFilteringRows()
 
-    # Reimplemented functions and event handlers
     def on_date_edit_dateChanged(self, new_date: QDate):
         calendar = self.dateEdit.calendarWidget()
         calendar.setCurrentPage(new_date.year(), new_date.month())
@@ -187,18 +186,6 @@ class CovidView(QMainWindow, Ui_MainWindow):
             self.initialize_fields(is_first_load=False)
             self.resize_header_data()
             self.endFilteringRows()
-
-    def echo_to_console(self, text: str, value):
-        print(f"-------|| The {text} is {value} ||--------")
-
-    def print_selectedRow_to_console(self, row):
-        data = [self.dateEdit_text.text(), row.continent, row.location,
-                int(row.new_tests), int(row.new_cases), int(row.new_deaths),
-                int(row.total_tests), int(row.total_cases),
-                int(row.total_deaths)]
-        for value in data[:-1]:
-            print(f"{value}, ", end='')
-        print(data[-1])
 
     def disconnect_dateEdit_connection(self, must_disconnect):
         if must_disconnect:
@@ -240,6 +227,22 @@ class CovidView(QMainWindow, Ui_MainWindow):
 
     def endFilteringRows(self, dt=False, ct=False, cr=False, tree=False):
         self.beginFilteringRows(dt, ct, cr, tree)
+
+    def print_data_columns_to_console(self):
+        print('Date, Continent, Country, New Tests, New cases,',
+              'New Deaths, Total tests, Total cases, Total deaths')
+
+    def echo_to_console(self, text: str, value):
+        print(f"-------|| The {text} is {value} ||--------")
+
+    def print_selectedRow_to_console(self, row):
+        data = [self.dateEdit_text.text(), row.continent, row.location,
+                int(row.new_tests), int(row.new_cases), int(row.new_deaths),
+                int(row.total_tests), int(row.total_cases),
+                int(row.total_deaths)]
+        for value in data[:-1]:
+            print(f"{value}, ", end='')
+        print(data[-1])
 
     def closeEvent(self, a0: QCloseEvent) -> None:
         a0.accept()

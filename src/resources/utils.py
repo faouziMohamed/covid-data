@@ -10,8 +10,7 @@ def today(as_string=True):
 
 
 def is_leap_year(y):
-    return (y % 4 == 0 and y % 100 != 0) or 
-           (y % 400 == 0)
+    return (y % 4 == 0 and y % 100 != 0) or (y % 400 == 0)
 
 
 def year_mon_day(a_date: str = today()) -> Tuple[int, int, int]:
