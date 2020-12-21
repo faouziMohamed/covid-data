@@ -1,5 +1,16 @@
 # Covid19  data  
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/faouziMohamed/covid-data)    
+
+<p>
+    <a href="https://github.com/owid/covid-19-data/tree/master/public/data">
+        <img src="https://img.shields.io/badge/Data%20source-owid-c6ff00.svg?&style=for-the-badge" alt="Owid data source"/>  
+    </a>
+    <button>
+        <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/faouzimohamed/covid-data?color=%2390e0c0&style=for-the-badge">
+    </button>
+    <a href="https://gitpod.io/#https://github.com/faouziMohamed/covid-data">
+        <img src="https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod&style=for-the-badge" alt="Gitpod ready-to-code"/>
+    </a>  
+</p>  
 Desktop application that shows data for the Covid 19 (cases, deaths, tests,....)
 
 ## Preview
@@ -20,9 +31,3 @@ Data used in this program are provided from the [owid (Our World in Data )](http
 > In the case of our testing dataset, please give the following citation:
 >
 > Hasell, J., Mathieu, E., Beltekian, D. *et al.* A cross-country database of COVID-19 testing. *Sci Data* **7**, 345 (2020). https://doi.org/10.1038/s41597-020-00688-8
-
-
-
-## :warning: ​Warning
-
-The main branch is no longer named `master` but it's `main`.
