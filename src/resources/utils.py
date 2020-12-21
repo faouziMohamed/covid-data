@@ -10,16 +10,14 @@ def today(as_string=True):
 
 
 def is_leap_year(y):
-    leap = False
-    if (y % 4 == 0 and y % 100 != 0) or (y % 400 == 0):
-        leap = True
-    return leap
+    return (y % 4 == 0 and y % 100 != 0) or 
+           (y % 400 == 0)
 
 
 def year_mon_day(a_date: str = today()) -> Tuple[int, int, int]:
     """
     Take a date as string in the format : yyy-mm-dd and
-    return the respectively the date yyyy, mm and dd as int in a tuple
+    return the respectively the date yyyy, mm and dd as int in a tuple.
     :param a_date:
     :return: Respectively the date yyyy, mm and dd as int in a tuple
     """
