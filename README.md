@@ -4,9 +4,9 @@
     <a href="https://github.com/owid/covid-19-data/tree/master/public/data">
         <img src="https://img.shields.io/badge/Data%20source-owid-c6ff00.svg?&style=for-the-badge" alt="Owid data source"/>  
     </a>
-    <button>
+    <a href="https://github.com/faouziMohamed/covid-data/commits/">
         <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/faouzimohamed/covid-data?color=%2390e0c0&style=for-the-badge">
-    </button>
+    </a>
     <a href="https://gitpod.io/#https://github.com/faouziMohamed/covid-data">
         <img src="https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod&style=for-the-badge" alt="Gitpod ready-to-code"/>
     </a>  
