@@ -1,9 +1,8 @@
 import pandas as pd
 from PyQt5 import QtWidgets, QtCore
-from PyQt5.QtCore import (QDate, QModelIndex, QItemSelectionModel,
-                          QItemSelection)
+from PyQt5.QtCore import QDate, QModelIndex, QItemSelectionModel, QItemSelection
 from PyQt5.QtGui import QCloseEvent
-from PyQt5.QtWidgets import (QMainWindow)
+from PyQt5.QtWidgets import QMainWindow
 
 from src.generated.mainwindow import Ui_MainWindow
 from src.model import ModelCovidData
@@ -40,16 +39,19 @@ class CovidView(QMainWindow, Ui_MainWindow):
     def __setup_event_handler(self, is_first_load: bool = True):
         # model = self.model
         self.treeView.selectionModel().selectionChanged.connect(
-            self.on_treeview_selectionChanged)
+            self.on_treeview_selectionChanged
+        )
 
         if is_first_load:
             self.dateEdit.dateChanged.connect(self.on_date_edit_dateChanged)
 
             self.continent_box.currentIndexChanged.connect(
-                self.on_continentBox_currentIndexChanged)
+                self.on_continentBox_currentIndexChanged
+            )
 
             self.country_box.currentIndexChanged.connect(
-                self.on_countryBox_currentIndexChanged)
+                self.on_countryBox_currentIndexChanged
+            )
 
     def initialize_fields(self, is_first_load: bool = True):
         if is_first_load:
@@ -102,15 +104,11 @@ class CovidView(QMainWindow, Ui_MainWindow):
 
     def select_first_row(self):
         index = self.model.index(
-            CovidView.FIRST_ROW,
-            self.colsCount - 1,
-            QModelIndex()
+            CovidView.FIRST_ROW, self.colsCount - 1, QModelIndex()
         )
         selection_model = self.treeView.selectionModel()
         selection_model.select(
-            index,
-            QItemSelectionModel.Select |
-            QItemSelectionModel.Rows
+            index, QItemSelectionModel.Select | QItemSelectionModel.Rows
         )
 
     def __display_dates_fields(self, the_date: str):
@@ -128,11 +126,22 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.day_edit.setText(day_option)
 
     def __display_numerical_fields(self, row: pd.Series):
-        fields = (self.newTest_spin, self.newCases_spin,
-                  self.newDeaths_spin, self.totalTests_spin,
-                  self.totalCases_spin, self.totalDeaths_spin)
-        values = (row.new_tests, row.new_cases, row.new_deaths,
-                  row.total_tests, row.total_cases, row.total_deaths)
+        fields = (
+            self.newTest_spin,
+            self.newCases_spin,
+            self.newDeaths_spin,
+            self.totalTests_spin,
+            self.totalCases_spin,
+            self.totalDeaths_spin,
+        )
+        values = (
+            row.new_tests,
+            row.new_cases,
+            row.new_deaths,
+            row.total_tests,
+            row.total_cases,
+            row.total_deaths,
+        )
         for field, value in zip(fields, values):
             field.setValue(int(value))
 
@@ -147,8 +156,9 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.continent_edit.setText(continent)
 
     # Reimplemented functions and event handlers
-    def on_treeview_selectionChanged(self, selected: QItemSelection,
-                                     deselected: QItemSelection):
+    def on_treeview_selectionChanged(
+        self, selected: QItemSelection, deselected: QItemSelection
+    ):
         utils.ignore(deselected)
         if len(selected.indexes()) == 0:
             return
@@ -161,8 +171,8 @@ class CovidView(QMainWindow, Ui_MainWindow):
         calendar = self.dateEdit.calendarWidget()
         calendar.setCurrentPage(new_date.year(), new_date.month())
         self.beginFilteringRows()
-        self.echo_to_console("date", new_date.toString('yyyy-MM-dd'))
-        self.model.filter_by_date(new_date.toString('yyyy-MM-dd'))
+        self.echo_to_console("date", new_date.toString("yyyy-MM-dd"))
+        self.model.filter_by_date(new_date.toString("yyyy-MM-dd"))
         self.initialize_fields(is_first_load=False)
         self.resize_header_data()
         self.endFilteringRows()
@@ -198,26 +208,32 @@ class CovidView(QMainWindow, Ui_MainWindow):
     def disconnect_continentBox_connection(self, must_disconnect):
         if must_disconnect:
             self.continent_box.currentIndexChanged.disconnect(
-                self.on_continentBox_currentIndexChanged)
+                self.on_continentBox_currentIndexChanged
+            )
         else:
             self.continent_box.currentIndexChanged.connect(
-                self.on_continentBox_currentIndexChanged)
+                self.on_continentBox_currentIndexChanged
+            )
 
     def disconnect_countryBox_connection(self, must_disconnect):
         if must_disconnect:
             self.country_box.currentIndexChanged.disconnect(
-                self.on_countryBox_currentIndexChanged)
+                self.on_countryBox_currentIndexChanged
+            )
         else:
             self.country_box.currentIndexChanged.connect(
-                self.on_countryBox_currentIndexChanged)
+                self.on_countryBox_currentIndexChanged
+            )
 
     def disconnect_treeView_connection(self, must_disconnect):
         if must_disconnect:
             self.treeView.selectionModel().selectionChanged.disconnect(
-                self.on_treeview_selectionChanged)
+                self.on_treeview_selectionChanged
+            )
         else:
             self.treeView.selectionModel().selectionChanged.connect(
-                self.on_treeview_selectionChanged)
+                self.on_treeview_selectionChanged
+            )
 
     def beginFilteringRows(self, dt=True, ct=True, cr=True, tree=True):
         self.disconnect_dateEdit_connection(dt)
@@ -229,19 +245,28 @@ class CovidView(QMainWindow, Ui_MainWindow):
         self.beginFilteringRows(dt, ct, cr, tree)
 
     def print_data_columns_to_console(self):
-        print('Date, Continent, Country, New Tests, New cases,',
-              'New Deaths, Total tests, Total cases, Total deaths')
+        print(
+            "Date, Continent, Country, New Tests, New cases,",
+            "New Deaths, Total tests, Total cases, Total deaths",
+        )
 
     def echo_to_console(self, text: str, value):
         print(f"-------|| The {text} is {value} ||--------")
 
     def print_selectedRow_to_console(self, row):
-        data = [self.dateEdit_text.text(), row.continent, row.location,
-                int(row.new_tests), int(row.new_cases), int(row.new_deaths),
-                int(row.total_tests), int(row.total_cases),
-                int(row.total_deaths)]
+        data = [
+            self.dateEdit_text.text(),
+            row.continent,
+            row.location,
+            int(row.new_tests),
+            int(row.new_cases),
+            int(row.new_deaths),
+            int(row.total_tests),
+            int(row.total_cases),
+            int(row.total_deaths),
+        ]
         for value in data[:-1]:
-            print(f"{value}, ", end='')
+            print(f"{value}, ", end="")
         print(data[-1])
 
     def closeEvent(self, a0: QCloseEvent) -> None:

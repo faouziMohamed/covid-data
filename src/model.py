@@ -1,6 +1,6 @@
 import pandas as pd
 from PyQt5 import QtCore
-from PyQt5.QtCore import (QModelIndex, Qt, QVariant)
+from PyQt5.QtCore import QModelIndex, Qt, QVariant
 
 from src.connexion import DbConnexion
 from src.resources.constant import DB_NAME
@@ -12,15 +12,23 @@ class ModelCovidData(QtCore.QAbstractTableModel):
     def __init__(self):
         super(ModelCovidData, self).__init__()
         tr = self.tr
-        self.columnTitles = [tr('Date'), tr('Continent'), tr('Country'),
-                             tr('New tests'), tr('New cases'), tr('New deaths'),
-                             tr('Total tests'), tr('Total cases'),
-                             tr('Total deaths')]
+        self.columnTitles = [
+            tr("Date"),
+            tr("Continent"),
+            tr("Country"),
+            tr("New tests"),
+            tr("New cases"),
+            tr("New deaths"),
+            tr("Total tests"),
+            tr("Total cases"),
+            tr("Total deaths"),
+        ]
 
         self._db = DbConnexion(DB_NAME)
 
-    def headerData(self, section: int, orientation: Qt.Orientation,
-                   role: int = ...):
+    def headerData(
+        self, section: int, orientation: Qt.Orientation, role: int = ...
+    ):
         if (role == Qt.DisplayRole) and (orientation == Qt.Horizontal):
             return self.tr(self.columnTitles[section])
         return QVariant()

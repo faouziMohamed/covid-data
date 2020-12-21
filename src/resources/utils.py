@@ -20,7 +20,7 @@ def year_mon_day(a_date: str = today()) -> Tuple[int, int, int]:
     :param a_date:
     :return: Respectively the date yyyy, mm and dd as int in a tuple
     """
-    y, m, d = str(a_date).split('-')
+    y, m, d = str(a_date).split("-")
     return int(y), int(m), int(d)
 
 
@@ -46,12 +46,12 @@ def day_after(a_date: str = today(), as_string=True):
             year = year - 1
             month = 12
             day = 31
-        day = days_in_month(f'{year}-{month}-{day}')
+        day = days_in_month(f"{year}-{month}-{day}")
 
     if as_string:
-        month = month if month > 10 else f'0{month}'
-        day = day if day > 10 else f'0{day}'
-        return f'{year}-{month}-{day}'
+        month = month if month > 10 else f"0{month}"
+        day = day if day > 10 else f"0{day}"
+        return f"{year}-{month}-{day}"
     else:
         return year, month, day
 
