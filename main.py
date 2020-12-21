@@ -20,6 +20,5 @@ if __name__ == '__main__':
     style_sheet = read_stylesheet()
     app.setStyleSheet(style_sheet)
     view = CovidView()
-    view.treeView.setSortingEnabled(True)
     view.show()
     sys.exit(app.exec_())
