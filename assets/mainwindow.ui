@@ -11,7 +11,7 @@
     <x>0</x>
     <y>0</y>
     <width>982</width>
-    <height>589</height>
+    <height>590</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -42,7 +42,7 @@
    <string>Covid19 data - Fz</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QLabel {
+   <string notr="true">/*QLabel {
     color: #96cccc;
 }
 
@@ -1383,7 +1383,7 @@ QTreeView::item:selected:!active {
      <x>0</x>
      <y>0</y>
      <width>982</width>
-     <height>24</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_edit">

@@ -14,7 +14,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setWindowModality(QtCore.Qt.NonModal)
-        MainWindow.resize(982, 589)
+        MainWindow.resize(982, 590)
         MainWindow.setMinimumSize(QtCore.QSize(0, 0))
         MainWindow.setMaximumSize(QtCore.QSize(10000, 1000))
         font = QtGui.QFont()
@@ -25,7 +25,7 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         MainWindow.setFont(font)
         MainWindow.setMouseTracking(True)
-        MainWindow.setStyleSheet("QLabel {\n"
+        MainWindow.setStyleSheet("/*QLabel {\n"
 "    color: #96cccc;\n"
 "}\n"
 "\n"
@@ -710,7 +710,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.addLayout(self.verticalLayout)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 982, 24))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 982, 20))
         self.menubar.setObjectName("menubar")
         self.menu_edit = QtWidgets.QMenu(self.menubar)
         self.menu_edit.setObjectName("menu_edit")
